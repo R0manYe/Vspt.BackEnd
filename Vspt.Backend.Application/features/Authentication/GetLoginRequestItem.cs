@@ -1,38 +1,33 @@
-﻿using AngularAuthAPI.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Vspt.BackEnd.Domain.Entity;
 
-namespace Vspt.BackEnd.Application.Authentication.Auth
+namespace Vspt.BackEnd.Application.features.Authentication
 {
-    public sealed record GetLoginRequestItem
+    public record GetLoginRequestItem
     {
-        public int id { get; set; }
+        public required Guid id { get; init; }
 
-        public string FirstName { get; set; }
+        public required string FirstName { get; init; }
 
-        public string LastName { get; set; }
+        public required string LastName { get; init; }
 
-        public string Username { get; set; }
+        public required string Username { get; init; }
 
-        public string Password { get; set; }
+        public required string Password { get; set; }
 
-        public string Token { get; set; }
+        public required string Token { get; set; }
 
-        public string Email { get; set; }
+        public required string Email { get; init; }
 
-        public string Role { get; set; }
+        public required string Role { get; set; }
 
-        public string RefreshToken { get; set; }
+        public required string RefreshToken { get; init; }
 
-        public DateTime RefreshTokenExpiryTime { get; set; }
+        public DateTime RefreshTokenExpiryTime { get; init; }
 
     }
     public record GetLoginRequestItemDto
     {
-        public required List<GetLoginRequestItem> Items { get; init; }
+        public required GetLoginRequestItem Item { get; init; }
     }
 
 }

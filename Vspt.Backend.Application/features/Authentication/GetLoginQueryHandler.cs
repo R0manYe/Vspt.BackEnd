@@ -1,27 +1,32 @@
-﻿using MediatR;
+﻿using AutoMapper;
+using Microsoft.IdentityModel.Tokens;
+using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Security.Cryptography;
-using System.Text;
-using Vspt.BackEnd.Application.Authentication.Auth;
 
-namespace Vspt.Backend.Application.features.Authentication
+using System.Text;
+using Vspt.BackEnd.Application.features.Authentication.Helpers;
+using Vspt.Box.MediatR;
+using Vspt.BackEnd.Domain.Contract;
+using Vspt.BackEnd.Domain.Entity;
+using Vspt.BackEnd.Application.features.Authentication;
+
+namespace Vspt.BackEnd.Application.Authentication.Auth
 {
-    public sealed record GetLoginRequest : IRequest<GetLoginRequestItem, GetLoginResponse>
+    public sealed record GetLoginRequest : BaseRequest<GetLoginRequestItem, GetLoginResponse>
     {
     }
-
-
-    internal sealed class GetLoginQueryHandler : IRequestHandler<GetLoginRequest, GetLoginRequestItem, GetLoginResponse>
+    internal sealed class GetLoginQueryHandler : BaseRequestHandler<GetLoginRequest, GetLoginRequestItem, GetLoginResponse>
     {
-        private readonly IDbContext _dbContext;
+        private readonly IUsersRepository _usersRepository;
         private readonly IMapper _mapper;
+      
 
-
-        public GetLoginQueryHandler(IMapper mapper, IDbContext dbContext)
+        public GetLoginQueryHandler(IMapper mapper,  IUsersRepository usersRepository)
         {
-            _dbContext = dbContext;
+            _usersRepository = usersRepository;
             _mapper = mapper;
-
+         
         }
 
         protected override async Task<GetLoginResponse> HandleData(GetLoginRequestItem request, CancellationToken cancellationToken)
@@ -30,8 +35,9 @@ namespace Vspt.Backend.Application.features.Authentication
             {
                 throw new ArgumentNullException(nameof(request));
             }
-            // var user= await _dbContext.Users.ProjectTo<GetLoginRequestItem>(_mapper.ConfigurationProvider).ToListAsync();
-            var user = await _dbContext.Users.Where(x => x.Username == request.Username).FirstOrDefaultAsync();
+            //  var user= await _dbConte.ProjectTo<GetLoginRequestItem>(_mapper.ConfigurationProvider).ToListAsync();
+            var user = await _usersRepository.GetByUserName(request.Username, cancellationToken);         
+           
             if (user == null)
             {
                 throw new ArgumentNullException("user not found");
@@ -47,7 +53,7 @@ namespace Vspt.Backend.Application.features.Authentication
             var newRefreshToken = CreateRefreshtoken();
             user.RefreshToken = newRefreshToken;
             user.RefreshTokenExpiryTime = DateTime.Now.AddDays(5);
-            await _dbContext.SaveToDbAsync();
+           // await _d.SaveToDbAsync();
 
             return new GetLoginResponse
             {
@@ -63,7 +69,7 @@ namespace Vspt.Backend.Application.features.Authentication
                 var key = Encoding.ASCII.GetBytes("Verisecret1234567890fdsf/");
                 var identity = new ClaimsIdentity(new Claim[]
                 {
-                new Claim(ClaimTypes.Role, user.Role),
+             //   new Claim(ClaimTypes.Role, user.Role),
                 new Claim(ClaimTypes.Name,$"{user.Username}"),
                 });
                 var credentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256);
@@ -82,12 +88,11 @@ namespace Vspt.Backend.Application.features.Authentication
                 var tokenBytes = RandomNumberGenerator.GetBytes(64);
                 var refreshToken = Convert.ToBase64String(tokenBytes);
 
-                var tokenUser = _dbContext.Users
-                    .Any(a => a.RefreshToken == refreshToken);
-                if (tokenUser)
-                {
-                    return CreateRefreshtoken();
-                }
+                var tokenUser = _usersRepository.GetByToken(request.Token, cancellationToken);
+                //if (tokenUser)
+                //{
+                //    return CreateRefreshtoken();
+                //}
                 return refreshToken;
             }
             ClaimsPrincipal GetPrincipalFromExpiriedToken(string token)

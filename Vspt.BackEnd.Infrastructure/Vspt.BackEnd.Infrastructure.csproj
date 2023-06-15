@@ -22,6 +22,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Vspt.BackEnd.Domain\Vspt.BackEnd.Domain.csproj" />
+    <ProjectReference Include="..\Vspt.Box.Data.EfCore\Vspt.Box.Data.EfCore.csproj" />
+    <ProjectReference Include="..\Vspt.Shared.EfCore\Vspt.Box.EfCore.csproj" />
   </ItemGroup>
 
 </Project>

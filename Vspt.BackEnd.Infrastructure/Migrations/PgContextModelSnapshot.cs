@@ -58,18 +58,13 @@ namespace Vspt.BackEnd.Infrastructure.Migrations
 
             modelBuilder.Entity("Vspt.BackEnd.Domain.Entity.User", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("id"));
+                        .HasColumnType("uuid");
 
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasColumnType("text");
-
-                    b.Property<int>("FilterId")
-                        .HasColumnType("integer");
 
                     b.Property<string>("FirstName")
                         .IsRequired()
@@ -90,8 +85,9 @@ namespace Vspt.BackEnd.Infrastructure.Migrations
                     b.Property<DateTime>("RefreshTokenExpiryTime")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<int>("RoleId")
-                        .HasColumnType("integer");
+                    b.Property<string>("Role")
+                        .IsRequired()
+                        .HasColumnType("text");
 
                     b.Property<string>("Token")
                         .IsRequired()
@@ -101,32 +97,9 @@ namespace Vspt.BackEnd.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.HasKey("id");
-
-                    b.HasIndex("FilterId");
-
-                    b.HasIndex("RoleId");
+                    b.HasKey("Id");
 
                     b.ToTable("Users");
-                });
-
-            modelBuilder.Entity("Vspt.BackEnd.Domain.Entity.User", b =>
-                {
-                    b.HasOne("Vspt.BackEnd.Domain.Entity.Filter", "Filter")
-                        .WithMany()
-                        .HasForeignKey("FilterId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Vspt.BackEnd.Domain.Entity.Role", "Role")
-                        .WithMany()
-                        .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Filter");
-
-                    b.Navigation("Role");
                 });
 #pragma warning restore 612, 618
         }

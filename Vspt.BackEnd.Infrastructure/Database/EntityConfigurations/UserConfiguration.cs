@@ -12,24 +12,24 @@ internal sealed class UserConfiguration : IEntityTypeConfiguration<User>
             .ToTable("Users");
 
         builder
-            .HasKey(x => x.id);
+            .HasKey(x => x.Id);
 
         builder
             .Property(x => x.LastName)
             .IsRequired()
             .HasMaxLength(50);
 
-        builder
-        .HasOne(x => x.Role)
-            .WithMany()
-            .HasForeignKey(x => x.Role.Id)
-            .OnDelete(DeleteBehavior.Restrict);
+        //builder
+        //.HasOne(x => x.Role)
+        //    .WithMany()
+        //    .HasForeignKey(x => x.Role.Id)
+        //    .OnDelete(DeleteBehavior.Restrict);
 
-        builder
-       .HasOne(x => x.Filter)
-           .WithMany()
-           .HasForeignKey(x => x.Filter.Id)
-           .OnDelete(DeleteBehavior.Restrict);
+       // builder
+       //.HasOne(x => x.Filter)
+       //    .WithMany()
+       //    .HasForeignKey(x => x.Filter.Id)
+       //    .OnDelete(DeleteBehavior.Restrict);
 
     }
 }

@@ -1,11 +1,10 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Vspt.Box.Data.Entities;
 
 namespace Vspt.BackEnd.Domain.Entity
 {
-    public class User
+    public sealed class User : IEntityWithId
     {
-        [Key]
-        public int id { get; set; }
+        public Guid Id { get; set; }
 
         public string FirstName { get; set; }
 
@@ -19,10 +18,9 @@ namespace Vspt.BackEnd.Domain.Entity
 
         public string Email { get; set; }
 
-        public Role Role { get; set; }
+        public string Role { get; set; }
 
         public string RefreshToken { get; set; }
-        public DateTime RefreshTokenExpiryTime { get; set; } 
-        public Filter Filter { get; set; }
+        public DateTime RefreshTokenExpiryTime { get; set; }
     }
 }
