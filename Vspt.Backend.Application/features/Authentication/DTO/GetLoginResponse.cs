@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Vspt.BackEnd.Application.Authentication.Auth
+namespace Vspt.BackEnd.Application.features.Authentication.DTO
 {
-    public class GetLoginResponse 
+    public class GetLoginResponse
     {
         public string AccessToken { get; set; } = string.Empty;
         public string RefreshToken { get; set; } = string.Empty;

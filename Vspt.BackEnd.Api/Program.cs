@@ -4,6 +4,9 @@ using System;
 using Vspt.BackEnd.Infrastructure.Database.EntityConfigurations;
 using Vspt.BackEnd.Infrastructure.Extensions;
 using Vspt.BackEnd.Application.Extensions;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 internal class Program
 {
@@ -29,7 +32,23 @@ internal class Program
             });
         });
         builder.Services.AddDbContext<PgContext>();
-       
+        builder.Services.AddAuthentication(x =>
+        {
+            x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+            x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+        }).AddJwtBearer(x =>
+        {
+            x.RequireHttpsMetadata = true;
+            x.SaveToken = true;
+            x.TokenValidationParameters = new TokenValidationParameters
+            {
+                ValidateIssuerSigningKey = true,
+                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("Verisecret1234567890fdsf/")),
+                ValidateAudience = false,
+                ValidateIssuer = false,
+                ClockSkew = TimeSpan.Zero
+            };
+        });
         var app = builder.Build();
 
         // Configure the HTTP request pipeline.
@@ -40,6 +59,8 @@ internal class Program
         }
 
         app.UseHttpsRedirection();
+        app.UseCors("MyPolicy");
+        app.UseAuthentication();
 
         app.UseAuthorization();
 

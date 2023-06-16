@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Vspt.BackEnd.Application.features.Authentication.DTO;
 using Vspt.BackEnd.Domain.Entity;
 
 namespace Vspt.BackEnd.Application.features.Authentication

@@ -9,7 +9,7 @@ using Vspt.BackEnd.Application.features.Authentication.Helpers;
 using Vspt.Box.MediatR;
 using Vspt.BackEnd.Domain.Contract;
 using Vspt.BackEnd.Domain.Entity;
-using Vspt.BackEnd.Application.features.Authentication;
+using Vspt.BackEnd.Application.features.Authentication.DTO;
 
 namespace Vspt.BackEnd.Application.Authentication.Auth
 {
@@ -83,37 +83,19 @@ namespace Vspt.BackEnd.Application.Authentication.Auth
 
                 return jwtTokenHandler.WriteToken(token);
             }
-            string CreateRefreshtoken()
+             string CreateRefreshtoken()
             {
                 var tokenBytes = RandomNumberGenerator.GetBytes(64);
                 var refreshToken = Convert.ToBase64String(tokenBytes);
 
                 var tokenUser = _usersRepository.GetByToken(request.Token, cancellationToken);
-                //if (tokenUser)
-                //{
-                //    return CreateRefreshtoken();
-                //}
+                if (tokenUser is null)
+                {
+                    return CreateRefreshtoken();
+                }
                 return refreshToken;
             }
-            ClaimsPrincipal GetPrincipalFromExpiriedToken(string token)
-            {
-                var key = Encoding.ASCII.GetBytes("Verisecret1234567890fdsf/");
-                var tokenValidationParameters = new TokenValidationParameters
-                {
-                    ValidateAudience = false,
-                    ValidateIssuer = false,
-                    ValidateIssuerSigningKey = true,
-                    IssuerSigningKey = new SymmetricSecurityKey(key),
-                    ValidateLifetime = false
-                };
-                var tokenHandler = new JwtSecurityTokenHandler();
-                SecurityToken securityToken;
-                var principal = tokenHandler.ValidateToken(token, tokenValidationParameters, out securityToken);
-                var jwtSecurityToken = securityToken as JwtSecurityToken;
-                if (jwtSecurityToken == null || !jwtSecurityToken.Header.Alg.Equals(SecurityAlgorithms.HmacSha256, StringComparison.InvariantCultureIgnoreCase))
-                    throw new SecurityTokenException("This is invalid token");
-                return principal;
-            }
+            
         }
     }
 }

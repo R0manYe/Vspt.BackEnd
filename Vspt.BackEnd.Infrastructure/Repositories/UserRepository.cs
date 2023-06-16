@@ -20,7 +20,7 @@ internal sealed class UserRepository : EntityRepository<PgContext, User>, IUsers
 
     public async Task<User> GetByToken(string token, CancellationToken cancellationToken)
     {
-        return await _entityDbSet.FirstAsync(x => x.Token == token);
+        return await _entityDbSet.FirstAsync(x => x.RefreshToken == token);
     }
 
     public Task Add(User entity, CancellationToken cancellationToken)

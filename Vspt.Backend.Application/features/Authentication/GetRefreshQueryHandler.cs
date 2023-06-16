@@ -1,44 +1,100 @@
 ﻿using AutoMapper;
+using MediatR;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
-using System.Security.Cryptography;
-
 using System.Text;
-using Vspt.BackEnd.Application.features.Authentication.Helpers;
-using Vspt.Box.MediatR;
 using Vspt.BackEnd.Domain.Contract;
-using Vspt.BackEnd.Domain.Entity;
-using MediatR;
+using Vspt.Box.MediatR;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Text.RegularExpressions;
-using System.Threading;
-using Vspt.BackEnd.Application.features.Authentication;
+using System.Security.Cryptography;
+using Vspt.BackEnd.Infrastructure.Database.EntityConfigurations;
+using Vspt.BackEnd.Application.features.Authentication.DTO;
+using Vspt.BackEnd.Application.features.Authentication.Helpers;
 
 namespace Vspt.BackEnd.Application.Authentication.Auth
 {
-    public sealed record GetRefreshRequest : BaseRequest<GetLoginRequestItem, Unit>
+    public sealed record GetRefreshRequest : BaseRequest<TokenApiDto, Unit>
     {
     }
-    internal sealed class GetRefreshQueryHandler : BaseRequestHandler<GetRefreshRequest, GetLoginRequestItem, Unit>
+    internal sealed class GetRefreshQueryHandler : BaseRequestHandler<GetRefreshRequest, TokenApiDto, Unit>
     {
         private readonly IUsersRepository _usersRepository;
         private readonly IMapper _mapper;
+        private readonly PgContext _pgContext;
+         
       
 
-        public GetRefreshQueryHandler(IMapper mapper,  IUsersRepository usersRepository)
+        public GetRefreshQueryHandler(IMapper mapper,  IUsersRepository usersRepository, PgContext pgContext)
         {
             _usersRepository = usersRepository;
             _mapper = mapper;
+            _pgContext = pgContext;
          
         }
 
-        protected override async Task<Unit> HandleData(GetLoginRequestItem request, CancellationToken cancellationToken)
+        protected override async Task<Unit> HandleData(TokenApiDto tokenApiDto, CancellationToken cancellationToken)
         {
-            var user = _mapper.Map<User>(request);
-            await _usersRepository.Add(user, cancellationToken);
+            if (tokenApiDto is null)            
+                throw new ValidationException("Invalid Client Request.");            
+           
+            string accessToken = tokenApiDto.AccessToken;
+            string refreshToken = tokenApiDto.RefreshToken;
             
-            return Unit.Value;
+            var principal = GetPrincipalFromExpiriedToken(accessToken);
+            
+            var username = principal.Identity.Name;
+
+            var user = await _usersRepository.GetByUserName(username, cancellationToken);
+            
+           // var user = await _authContext.Users.FirstOrDefaultAsync(u => u.Username == username);
+            
+            if (user is null || user.RefreshToken != refreshToken || user.RefreshTokenExpiryTime <= DateTime.Now)
+                throw new ValidationException("Invalid request");
+            //  return BadRequest("Invalid request");
+            var newAccessToken = CreateJWToken.CreateJWT(user);               
+            var newRefreshToken = CreateRefreshtoken();
+            user.RefreshToken = newRefreshToken;
+            await _pgContext.SaveChangesAsync();
+
+            return Unit.Value;//return new TokenApiDto()
+            //{
+            //    AccessToken = accessToken,
+            //    RefreshToken = newRefreshToken
+            //};
+
+            ClaimsPrincipal GetPrincipalFromExpiriedToken(string token)
+            {
+                var key = Encoding.ASCII.GetBytes("Verisecret1234567890fdsf/");
+                var tokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateAudience = false,
+                    ValidateIssuer = false,
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(key),
+                    ValidateLifetime = false
+                };
+                var tokenHandler = new JwtSecurityTokenHandler();
+                SecurityToken securityToken;
+                var principal = tokenHandler.ValidateToken(token, tokenValidationParameters, out securityToken);
+                var jwtSecurityToken = securityToken as JwtSecurityToken;
+                if (jwtSecurityToken == null || !jwtSecurityToken.Header.Alg.Equals(SecurityAlgorithms.HmacSha256, StringComparison.InvariantCultureIgnoreCase))
+                    throw new SecurityTokenException("This is invalid token");
+                return principal;
+            }
+            string CreateRefreshtoken()
+            {
+                var tokenBytes = RandomNumberGenerator.GetBytes(64);
+                var refreshToken = Convert.ToBase64String(tokenBytes);
+
+                var tokenUser = _usersRepository.GetByToken(refreshToken, cancellationToken);
+                if (tokenUser is null)
+                {
+                    return CreateRefreshtoken();
+                }
+                return refreshToken;
+            }
 
         }
     }

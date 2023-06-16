@@ -1,10 +1,10 @@
 ﻿using Vspt.BackEnd.Domain.Entity;
 
-namespace Vspt.BackEnd.Application.features.Authentication
+namespace Vspt.BackEnd.Application.features.Authentication.DTO
 {
     public record GetLoginRequestItem
     {
-        public required Guid id { get; init; }
+        // public required Guid id { get; init; }
 
         public required string FirstName { get; init; }
 
