@@ -32,7 +32,8 @@ internal class Program
                     .AllowAnyHeader();
             });
         });
-        builder.Services.AddDbContext<PgContext>();  
+        builder.Services.AddDbContext<PgContext>(ServiceLifetime.Transient);
+        
         builder.Services.AddAuthentication(x =>
         {
             x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -44,7 +45,7 @@ internal class Program
             x.TokenValidationParameters = new TokenValidationParameters
             {
                 ValidateIssuerSigningKey = true,
-                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("Verisecret1234567890fdsf/")),
+                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("VerisecretKeyFromAbakanForKrasnoyarsk")),
                 ValidateAudience = false,
                 ValidateIssuer = false,
                 ClockSkew = TimeSpan.Zero

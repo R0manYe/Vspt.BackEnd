@@ -51,7 +51,7 @@ namespace Vspt.BackEnd.Application.Authentication.Auth
                 throw new ArgumentNullException("Password is incorrect!");
             }
 
-            user.Token = CreateJWT(user);
+            user.Token = GeneratorGWT.CreateJWT(user);
             var newAccessToken = user.Token;
             var newRefreshToken = CreateRefreshtoken();
             user.RefreshToken = newRefreshToken;
@@ -64,28 +64,7 @@ namespace Vspt.BackEnd.Application.Authentication.Auth
                 RefreshToken = newRefreshToken
 
             };
-
-
-             string CreateJWT(User user)
-            {
-                var jwtTokenHandler = new JwtSecurityTokenHandler();
-                var key = Encoding.ASCII.GetBytes("Verisecret1234567890fdsf/");
-                var identity = new ClaimsIdentity(new Claim[]
-                {
-                new Claim(ClaimTypes.Role, user.Role),
-                new Claim(ClaimTypes.Name,$"{user.Username}"),
-                });
-                var credentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256);
-                var tokenDescriptor = new SecurityTokenDescriptor
-                {
-                    Subject = identity,
-                    Expires = DateTime.Now.AddDays(5),
-                    SigningCredentials = credentials
-                };
-                var token = jwtTokenHandler.CreateToken(tokenDescriptor);
-
-                return jwtTokenHandler.WriteToken(token);
-            }
+           
              string CreateRefreshtoken()
             {
                 var tokenBytes = RandomNumberGenerator.GetBytes(64);

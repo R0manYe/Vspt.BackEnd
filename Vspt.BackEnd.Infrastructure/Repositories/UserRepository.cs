@@ -15,8 +15,6 @@ internal sealed class UserRepository : EntityRepository<PgContext, User>, IUsers
 
     public async Task<User> GetByUserName(string userName, CancellationToken cancellationToken)
     {
-      
-        //  return await _entityDbSet.Where(x => x.Username == userName).FirstOrDefaultAsync();
           return await _entityDbSet.FirstOrDefaultAsync(x=>x.Username==userName);
     }
 
