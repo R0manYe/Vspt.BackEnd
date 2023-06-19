@@ -9,6 +9,7 @@ namespace Vspt.BackEnd.Application.features.Authentication
         public UserMapper() 
         {
             CreateMap<GetLoginRequestItem, User>();
+            CreateMap<User, GetLoginRequestItem>();
         }
     }
 }

@@ -21,13 +21,13 @@ namespace Vspt.BackEnd.Application.Authentication.Auth
     public sealed record GetRegisterRequest : BaseRequest<GetLoginRequestItem, Unit>
     {
     }
-    internal sealed class GetRegisterQueryHandler : BaseRequestHandler<GetRegisterRequest, GetLoginRequestItem, Unit>
+    internal sealed class GetRegisterHandler : BaseRequestHandler<GetRegisterRequest, GetLoginRequestItem, Unit>
     {
         private readonly IUsersRepository _usersRepository;
         private readonly IMapper _mapper;
       
 
-        public GetRegisterQueryHandler(IMapper mapper,  IUsersRepository usersRepository)
+        public GetRegisterHandler(IMapper mapper,  IUsersRepository usersRepository)
         {
             _usersRepository = usersRepository;
             _mapper = mapper;

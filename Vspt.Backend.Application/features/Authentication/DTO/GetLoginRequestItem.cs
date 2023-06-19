@@ -1,6 +1,4 @@
-﻿using Vspt.BackEnd.Domain.Entity;
-
-namespace Vspt.BackEnd.Application.features.Authentication.DTO
+﻿namespace Vspt.BackEnd.Application.features.Authentication.DTO
 {
     public record GetLoginRequestItem
     {       

@@ -13,6 +13,8 @@ namespace Vspt.BackEnd.Domain.Contract
         Task<bool> GetAnyName(string Unit);
 
         Task<bool> GetAnyEmail(string Unit);
-      
+
+        Task<List<User>> GetAllUsers(CancellationToken cancellationToken);
+
     }
 }

@@ -10,13 +10,13 @@ namespace Vspt.BackEnd.Application.Authentication.Auth
     public sealed record GetAddUserRequest : BaseRequest<GetLoginRequestItem, Unit>
     {
     }
-    internal sealed class GetAddUserQueryHandler : BaseRequestHandler<GetAddUserRequest, GetLoginRequestItem, Unit>
+    internal sealed class GetAddUserHandler : BaseRequestHandler<GetAddUserRequest, GetLoginRequestItem, Unit>
     {
         private readonly IUsersRepository _usersRepository;
         private readonly IMapper _mapper;
 
 
-        public GetAddUserQueryHandler(IMapper mapper, IUsersRepository usersRepository)
+        public GetAddUserHandler(IMapper mapper, IUsersRepository usersRepository)
         {
             _usersRepository = usersRepository;
             _mapper = mapper;
@@ -27,7 +27,6 @@ namespace Vspt.BackEnd.Application.Authentication.Auth
         {
             var user = _mapper.Map<User>(request);
             await _usersRepository.Add(user, cancellationToken);
-
             return Unit.Value;
 
         }

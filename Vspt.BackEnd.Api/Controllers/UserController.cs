@@ -40,6 +40,12 @@ namespace Vspt.BackEnd.Api.Controllers
         {
             return _mediator.Send(new GetRefreshRequest { Data = request });
         }
+
+        [HttpGet]
+        public async Task<List<User>> GtAllUsers()
+        {
+            return await _mediator.Send(new GetAllUsersHandlerRequest { Data=Unit.Value });
+        }
        
     }
 }

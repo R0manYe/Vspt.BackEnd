@@ -19,7 +19,7 @@ namespace Vspt.BackEnd.Application.Authentication.Auth
     public sealed record GetRefreshRequest : BaseRequest<TokenApiDto, Unit>
     {
     }
-    internal sealed class GetRefreshQueryHandler : BaseRequestHandler<GetRefreshRequest, TokenApiDto, Unit>
+    internal sealed class GetRefreshHandler : BaseRequestHandler<GetRefreshRequest, TokenApiDto, Unit>
     {
         private readonly IUsersRepository _usersRepository;
         private readonly IMapper _mapper;
@@ -27,7 +27,7 @@ namespace Vspt.BackEnd.Application.Authentication.Auth
          
       
 
-        public GetRefreshQueryHandler(IMapper mapper,  IUsersRepository usersRepository, PgContext pgContext)
+        public GetRefreshHandler(IMapper mapper,  IUsersRepository usersRepository, PgContext pgContext)
         {
             _usersRepository = usersRepository;
             _mapper = mapper;

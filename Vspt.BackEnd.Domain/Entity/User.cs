@@ -14,7 +14,7 @@ namespace Vspt.BackEnd.Domain.Entity
 
         public string Password { get; set; }
 
-        public string Token { get; set; }
+        public string? Token { get; set; }
 
         public string Email { get; set; }
 

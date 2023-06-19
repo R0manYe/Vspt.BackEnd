@@ -37,4 +37,11 @@ internal sealed class UserRepository : EntityRepository<PgContext, User>, IUsers
     {
         return _entityDbSet.AnyAsync(x => x.Email == Unit);
     }
+
+    public async Task<List<User>> GetAllUsers(CancellationToken cancellationToken)
+    {
+        return await _entityDbSet.AsNoTracking().ToListAsync(cancellationToken);
+    }
+
+   
 }

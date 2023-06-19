@@ -16,17 +16,15 @@ namespace Vspt.BackEnd.Application.Authentication.Auth
     public sealed record GetLoginRequest : BaseRequest<GetLoginRequestItem, GetLoginResponse>
     {
     }
-    internal sealed class GetLoginQueryHandler : BaseRequestHandler<GetLoginRequest, GetLoginRequestItem, GetLoginResponse>
+    internal sealed class GetLoginHandler : BaseRequestHandler<GetLoginRequest, GetLoginRequestItem, GetLoginResponse>
     {
-        private readonly IUsersRepository _usersRepository;
-        private readonly IMapper _mapper;
+        private readonly IUsersRepository _usersRepository;       
         private readonly PgContext _pgContext;
       
 
-        public GetLoginQueryHandler(IMapper mapper,  IUsersRepository usersRepository, PgContext pgContext)
+        public GetLoginHandler(IUsersRepository usersRepository, PgContext pgContext)
         {
-            _usersRepository = usersRepository;
-            _mapper = mapper;
+            _usersRepository = usersRepository;           
             _pgContext = pgContext;
          
         }
