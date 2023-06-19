@@ -7,6 +7,7 @@ using Vspt.BackEnd.Application.Extensions;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using System.Configuration;
 
 internal class Program
 {
@@ -31,7 +32,7 @@ internal class Program
                     .AllowAnyHeader();
             });
         });
-        builder.Services.AddDbContext<PgContext>();
+        builder.Services.AddDbContext<PgContext>();  
         builder.Services.AddAuthentication(x =>
         {
             x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;

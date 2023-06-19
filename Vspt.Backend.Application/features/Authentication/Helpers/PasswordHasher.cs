@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Security.Cryptography;
 
 namespace Vspt.BackEnd.Application.features.Authentication.Helpers;
 
@@ -45,9 +40,8 @@ public class PasswordHasher
 
                 return false;
 
-
         }
         return true;
-
     }
+
 }

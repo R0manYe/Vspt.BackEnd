@@ -21,8 +21,7 @@ namespace Vspt.BackEnd.Infrastructure.Database.EntityConfigurations
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder options)
-        {
-            // connect to postgres with connection string from app settings
+        {           
             options.UseNpgsql(Configuration.GetConnectionString("PgServerConnStr"));
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)

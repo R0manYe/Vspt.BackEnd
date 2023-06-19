@@ -12,6 +12,7 @@ using System.Security.Cryptography;
 using Vspt.BackEnd.Infrastructure.Database.EntityConfigurations;
 using Vspt.BackEnd.Application.features.Authentication.DTO;
 using Vspt.BackEnd.Application.features.Authentication.Helpers;
+using Vspt.BackEnd.Domain.Entity;
 
 namespace Vspt.BackEnd.Application.Authentication.Auth
 {
@@ -53,7 +54,7 @@ namespace Vspt.BackEnd.Application.Authentication.Auth
             if (user is null || user.RefreshToken != refreshToken || user.RefreshTokenExpiryTime <= DateTime.Now)
                 throw new ValidationException("Invalid request");
             //  return BadRequest("Invalid request");
-            var newAccessToken = CreateJWToken.CreateJWT(user);               
+            var newAccessToken = CreateJWT(user);               
             var newRefreshToken = CreateRefreshtoken();
             user.RefreshToken = newRefreshToken;
             await _pgContext.SaveChangesAsync();
@@ -94,6 +95,26 @@ namespace Vspt.BackEnd.Application.Authentication.Auth
                     return CreateRefreshtoken();
                 }
                 return refreshToken;
+            }
+             string CreateJWT(User user)
+            {
+                var jwtTokenHandler = new JwtSecurityTokenHandler();
+                var key = Encoding.ASCII.GetBytes("Verisecret1234567890fdsf/");
+                var identity = new ClaimsIdentity(new Claim[]
+                {
+                new Claim(ClaimTypes.Role, user.Role),
+                new Claim(ClaimTypes.Name,$"{user.Username}"),
+                });
+                var credentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256);
+                var tokenDescriptor = new SecurityTokenDescriptor
+                {
+                    Subject = identity,
+                    Expires = DateTime.Now.AddDays(5),
+                    SigningCredentials = credentials
+                };
+                var token = jwtTokenHandler.CreateToken(tokenDescriptor);
+
+                return jwtTokenHandler.WriteToken(token);
             }
 
         }

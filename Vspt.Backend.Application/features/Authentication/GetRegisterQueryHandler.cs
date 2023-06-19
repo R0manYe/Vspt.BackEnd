@@ -13,6 +13,7 @@ using MediatR;
 using System.ComponentModel.DataAnnotations;
 using System.Text.RegularExpressions;
 using System.Threading;
+using Vspt.BackEnd.Application.features.Authentication;
 using Vspt.BackEnd.Application.features.Authentication.DTO;
 
 namespace Vspt.BackEnd.Application.Authentication.Auth

@@ -20,7 +20,7 @@ namespace Vspt.BackEnd.Domain.Entity
 
         public string Role { get; set; }
 
-        public string RefreshToken { get; set; }
+        public string? RefreshToken { get; set; }
         public DateTime RefreshTokenExpiryTime { get; set; }
     }
 }
