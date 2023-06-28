@@ -22,14 +22,14 @@ internal sealed class UserConfiguration : IEntityTypeConfiguration<User>
         //builder
         //.HasOne(x => x.Role)
         //    .WithMany()
-        //    .HasForeignKey(x => x.Role.Id)
+        //    .HasForeignKey(x => x.Role.Select(x=>x.Id).ToList())
         //    .OnDelete(DeleteBehavior.Restrict);
 
-       // builder
-       //.HasOne(x => x.Filter)
-       //    .WithMany()
-       //    .HasForeignKey(x => x.Filter.Id)
-       //    .OnDelete(DeleteBehavior.Restrict);
+        // builder
+        //.HasOne(x => x.Filter)
+        //    .WithMany()
+        //    .HasForeignKey(x => x.Filter.Id)
+        //    .OnDelete(DeleteBehavior.Restrict);
 
     }
 }

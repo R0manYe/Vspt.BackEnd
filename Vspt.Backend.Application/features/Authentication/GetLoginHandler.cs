@@ -59,7 +59,8 @@ namespace Vspt.BackEnd.Application.Authentication.Auth
             return new GetLoginResponse
             {
                 AccessToken = newAccessToken,
-                RefreshToken = newRefreshToken
+                RefreshToken = newRefreshToken,
+                Username= request.Username
 
             };
            

@@ -102,7 +102,7 @@ namespace Vspt.BackEnd.Application.Authentication.Auth
                 var key = Encoding.ASCII.GetBytes("Verisecret1234567890fdsf/");
                 var identity = new ClaimsIdentity(new Claim[]
                 {
-                new Claim(ClaimTypes.Role, user.Role),
+                //new Claim(ClaimTypes.Role, user.Role.Id),
                 new Claim(ClaimTypes.Name,$"{user.Username}"),
                 });
                 var credentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256);

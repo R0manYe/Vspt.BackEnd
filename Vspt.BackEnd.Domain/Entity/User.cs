@@ -18,9 +18,10 @@ namespace Vspt.BackEnd.Domain.Entity
 
         public string Email { get; set; }
 
-        public string Role { get; set; }
-
+        public string Role { get; set; }    
         public string? RefreshToken { get; set; }
         public DateTime RefreshTokenExpiryTime { get; set; }
+       // public IReadOnlyList<Role>? Role { get; set; }
+      //  public IReadOnlyList<Filter>? Filter { get; set; }
     }
 }

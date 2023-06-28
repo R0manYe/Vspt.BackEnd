@@ -34,10 +34,7 @@ namespace Vspt.BackEnd.Application.Authentication.Auth
 
         protected override async Task<List<User>> HandleData(Unit unit, CancellationToken cancellationToken)
         {
-          return await _usersRepository.GetAllUsers(cancellationToken);
-         // var user = _usersRepository.GetAllUsers(cancellationToken);
-          //  return await _mapper.Map<User>(user);
-          //  return user;
+          return await _usersRepository.GetAllUsers(cancellationToken);      
             
         }
     }
