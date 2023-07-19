@@ -4,9 +4,13 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
-
   <ItemGroup>
-    <Folder Include="Database\EntityConfiguration\" />
+    <Compile Remove="Database\EntityConfiguration\**" />
+    <EmbeddedResource Remove="Database\EntityConfiguration\**" />
+    <None Remove="Database\EntityConfiguration\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Oracle.EntityFrameworkCore" Version="7.21.9" />
   </ItemGroup>
 
   <ItemGroup>

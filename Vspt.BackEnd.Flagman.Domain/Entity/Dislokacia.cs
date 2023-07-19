@@ -9,13 +9,13 @@ public partial class Dislokacia
 
     public string? NOM_VAG { get; set; }
 
-    public sbyte? ROD_VAG_UCH { get; set; }
+  //  public sbyte? ROD_VAG_UCH { get; set; }
 
     // public decimal? KOD_SOB { get; set; }
 
-    //public DateTime? DateNach { get; set; }
+    public DateTime? DATE_NACH { get; set; }
 
-    //public decimal? StanNach { get; set; }
+    public decimal? STAN_NACH { get; set; }
 
     //public decimal? DorNach { get; set; }
 
@@ -23,7 +23,7 @@ public partial class Dislokacia
 
     //public DateTime? DateKon { get; set; }
 
-    //public decimal? StanNazn { get; set; }
+    public decimal? STAN_NAZN { get; set; }
 
     //public decimal? DorNazn { get; set; }
 
@@ -127,7 +127,7 @@ public partial class Dislokacia
 
     //public DateTime? DateOtpr { get; set; }
 
-    //public DateTime? DatePrib { get; set; }
+    public DateTime? DATE_PRIB { get; set; }
 
     //public string? KodPlOtpr { get; set; }
 
@@ -171,9 +171,9 @@ public partial class Dislokacia
 
     //public string? OsOtm3 { get; set; }
 
-    //public decimal? VesGrz { get; set; }
+    public decimal? VES_GRZ { get; set; }
 
-    //public DateTime? DateOp { get; set; }
+    public DateTime? DATE_OP { get; set; }
 
     //public string? DorRasch { get; set; }
 
@@ -203,25 +203,25 @@ public partial class Dislokacia
 
     //public decimal? DorPriemGos { get; set; }
 
-    //public string? IndexPoezd { get; set; }
+    public string? INDEX_POEZD { get; set; }
 
-    //public string? NomPoezd { get; set; }
+    public string? NOM_POEZD { get; set; }
 
-    //public decimal? NppVag { get; set; }
+    public decimal? NPP_VAG { get; set; }
 
     //public DateTime? DateIns { get; set; }
 
-    //public string? NaimRodVag { get; set; }
+    public string? NAIM_ROD_VAG { get; set; }
 
-    //public string? NaimStanNazn { get; set; }
+    public string? NAIM_STAN_NAZN { get; set; }
 
-    //public string? NaimGruzpolOkpo { get; set; }
+    public string? NAIM_GRUZPOL_OKPO { get; set; }
 
-    //public string? NaimKodGrz { get; set; }
+    public string? NAIM_KOD_GRZ { get; set; }
 
-    //public string? NaimStanOp { get; set; }
+    public string? NAIM_STAN_OP { get; set; }
 
-    //public string? NaimKopVmd { get; set; }
+    public string? NAIM_KOP_VMD { get; set; }
 
-    //public string? NaimGruzotprOkpo { get; set; }
+    public string? NAIM_GRUZOTPR_OKPO { get; set; }
 }

@@ -1,25 +1,26 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Vspt.BackEnd.Flagman.Infrastructure.Database;
+﻿using MediatR;
+using Microsoft.AspNetCore.Mvc;
+using Vspt.BackEnd.Flagman.Application.features;
+using Vspt.BackEnd.Flagman.Domain.Entity;
 
 
 namespace Vspt.BackEnd.Flagman.Api.Controllers
 {
+    [Route("api/[controller]")]
+    [ApiController]
     public class FlagmanController : ControllerBase
     {
-        private readonly FlagmanContext _context;
+        private readonly IMediator _mediator;
 
-        public FlagmanController(FlagmanContext context)
+        public FlagmanController(IMediator mediator)
         {
-            _context = context;
-        }
-        [HttpPost]
-        public async Task<ActionResult> Get()
+            _mediator = mediator;
+        }  
+      
+        [HttpGet("dislokacia")]
+        public async Task<List<Dislokacia>> GetDislokacia()
         {
-            var result = await _context.Dislokacias.ToListAsync();  
-            return Ok(result);
-
-
+            return await _mediator.Send(new GetDislokaciaHandlerRequest { Data = Unit.Value });
         }
     }
 }
