@@ -1,11 +1,6 @@
-﻿using System.Threading;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using Vspt.Box.Data.EfCore.Entities.Infrastructure;
-using Vspt.Box.EfCore.Infrastructure;
-using Vspt.Service.Common.Infrastructure.Conventions;
-using Vspt.Service.Common.MassTransit.Extensions;
+using Vspt.BackEnd.Flagman.Domain.Entity;
 
 namespace Vspt.BackEnd.Flagman.Infrastructure.Database;
 
@@ -27,5 +22,6 @@ public class FlagmanContext : DbContext
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
-    }   
+    }
+    public DbSet<Dislokacia> Dislokacias { get; set; }
 }

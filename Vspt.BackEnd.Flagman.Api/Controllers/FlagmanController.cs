@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Vspt.BackEnd.Flagman.Infrastructure.Database;
 
 
@@ -15,7 +16,7 @@ namespace Vspt.BackEnd.Flagman.Api.Controllers
         [HttpPost]
         public async Task<ActionResult> Get()
         {
-            var result = await _context.Dislokacia.AsNoTracking().ToListAsync();
+            var result = await _context.Dislokacias.ToListAsync();  
             return Ok(result);
 
 
