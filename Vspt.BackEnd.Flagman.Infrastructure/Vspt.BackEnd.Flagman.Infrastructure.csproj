@@ -1,0 +1,25 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Database\EntityConfiguration\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.7" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Vspt.Box.Data.EfCore\Vspt.Box.Data.EfCore.csproj" />
+    <ProjectReference Include="..\Vspt.Box.Data\Vspt.Box.Data.csproj" />
+    <ProjectReference Include="..\Vspt.Service.Common\Vspt.Service.Common.csproj" />
+    <ProjectReference Include="..\Vspt.Shared.EfCore\Vspt.Box.EfCore.csproj" />
+    <ProjectReference Include="..\Vspt.Shared.MediatR\Vspt.Box.MediatR.csproj" />
+  </ItemGroup>
+
+</Project>
