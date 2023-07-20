@@ -15,7 +15,7 @@ public partial class Dislokacia
 
     public DateTime? DATE_NACH { get; set; }
 
-    public decimal? STAN_NACH { get; set; }
+    public int? STAN_NACH { get; set; }
 
     //public decimal? DorNach { get; set; }
 
@@ -23,7 +23,7 @@ public partial class Dislokacia
 
     //public DateTime? DateKon { get; set; }
 
-    public decimal? STAN_NAZN { get; set; }
+    public int? STAN_NAZN { get; set; }
 
     //public decimal? DorNazn { get; set; }
 
@@ -171,7 +171,7 @@ public partial class Dislokacia
 
     //public string? OsOtm3 { get; set; }
 
-    public decimal? VES_GRZ { get; set; }
+    public int? VES_GRZ { get; set; }
 
     public DateTime? DATE_OP { get; set; }
 
@@ -207,7 +207,7 @@ public partial class Dislokacia
 
     public string? NOM_POEZD { get; set; }
 
-    public decimal? NPP_VAG { get; set; }
+    public byte? NPP_VAG { get; set; }
 
     //public DateTime? DateIns { get; set; }
 

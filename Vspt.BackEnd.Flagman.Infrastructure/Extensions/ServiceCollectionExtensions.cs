@@ -13,6 +13,7 @@ public static class ServiceCollectionExtensions
 
         AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
         services.AddScoped<IDislokaciaRepository, DislokaciaRepository>();
+        services.AddScoped<IVsptSubjectPersoneRepository, VsptSubjectPersoneRepository>();
 
         return services;
     }

@@ -41,6 +41,8 @@ internal class Program
         }
 
         app.UseHttpsRedirection();
+        app.UseCors("MyPolicy");
+        app.UseAuthentication();
 
         app.UseAuthorization();
 

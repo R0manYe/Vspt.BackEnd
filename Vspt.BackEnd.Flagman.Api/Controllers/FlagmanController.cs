@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Vspt.BackEnd.Flagman.Application.features;
 using Vspt.BackEnd.Flagman.Domain.Entity;
+using Vspt.BackEnd.Flagman.Infrastructure.Database;
 
 
 namespace Vspt.BackEnd.Flagman.Api.Controllers
@@ -21,6 +22,11 @@ namespace Vspt.BackEnd.Flagman.Api.Controllers
         public async Task<List<Dislokacia>> GetDislokacia()
         {
             return await _mediator.Send(new GetDislokaciaHandlerRequest { Data = Unit.Value });
+        }
+        [HttpGet("vspt_subject_persone")]
+        public async Task<List<Vspt_subject_persone>> GetVsptSubject()
+        {
+            return await _mediator.Send(new GetVsptSubjectPersoneHandlerRequest { Data = Unit.Value });
         }
     }
 }

@@ -11,6 +11,7 @@
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="7.0.5" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.9" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="7.0.0" />
+    <PackageReference Include="Serilog.Sinks.Console" Version="4.1.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
   </ItemGroup>
 
@@ -19,6 +20,8 @@
     <ProjectReference Include="..\Vspt.BackEnd.Flagman.Application\Vspt.BackEnd.Flagman.Application.csproj" />
     <ProjectReference Include="..\Vspt.BackEnd.Flagman.Domain\Vspt.BackEnd.Flagman.Domain.csproj" />
     <ProjectReference Include="..\Vspt.BackEnd.Flagman.Infrastructure\Vspt.BackEnd.Flagman.Infrastructure.csproj" />
+    <ProjectReference Include="..\Vspt.Box.Data.EfCore\Vspt.Box.Data.EfCore.csproj" />
+    <ProjectReference Include="..\Vspt.Service.Common\Vspt.Service.Common.csproj" />
   </ItemGroup>
 
 </Project>
