@@ -153,7 +153,7 @@ public partial class Dislokacia
 
     //public string? IdGruzotpr { get; set; }
 
-    //public string? GruzpolOkpo { get; set; }
+    public string? GRUZPOL_OKPO { get; set; }
 
     //public string? Gruzotpr { get; set; }
 

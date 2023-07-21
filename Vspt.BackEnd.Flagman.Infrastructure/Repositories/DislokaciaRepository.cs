@@ -17,7 +17,7 @@ internal sealed class DislokaciaRepository : EntityRepository<FlagmanContext, Di
 
     public async Task<List<Dislokacia>> GetDislokacia(CancellationToken cancellationToken)
     {
-        return await _entityDbSet.AsNoTracking().Take(50).ToListAsync(cancellationToken);
+        return await _entityDbSet.AsNoTracking().ToListAsync(cancellationToken);
     }
 
 
