@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 using Vspt.BackEnd.Application.Extensions;
 using Vspt.BackEnd.Flagman.Infrastructure.Database;
 using Vspt.BackEnd.Flagman.Infrastructure.Extensions;
@@ -21,9 +22,11 @@ internal class Program
         {
             option.AddPolicy("MyPolicy", builder =>
             {
-                builder.AllowAnyOrigin()
-                    .AllowAnyMethod()
-                    .AllowAnyHeader();
+                builder .WithOrigins("http://localhost:4200")
+                       .AllowAnyMethod()
+                       .AllowAnyHeader()
+                       .AllowCredentials();
+                ;
             });
         });
         builder.Services.AddDbContext<FlagmanContext>(options =>

@@ -1,24 +1,28 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Vspt.BackEnd.Flagman.Domain.Contract;
 using Vspt.BackEnd.Flagman.Domain.Entity;
+using Vspt.BackEnd.Flagman.Domain.PublishModels.Dislokacia;
 using Vspt.BackEnd.Flagman.Infrastructure.Database;
-using Vspt.Box.Data.EfCore.Entities;
 using Vspt.Box.EfCore;
 
 namespace Vspt.BackEnd.Flagman.Infrastructure.Repositories;
 
-internal sealed class DislokaciaRepository : EntityRepository<FlagmanContext, Dislokacia>, IDislokaciaRepository
+internal sealed class DislokaciaRepository : EntityRepository<FlagmanContext, GetAllDislokacia>, IDislokaciaRepository
 {
     public DislokaciaRepository(FlagmanContext context) : base(context)
     {
     }
 
-   
 
-    public async Task<List<Dislokacia>> GetDislokacia(CancellationToken cancellationToken)
+
+    public async Task<List<GetAllDislokacia>> GetDislokacia(CancellationToken cancellationToken)
     {
-        return await _entityDbSet.AsNoTracking().ToListAsync(cancellationToken);
+
+        var result =await _entityDbSet.AsNoTracking().ToListAsync(cancellationToken);
+        return result;
+
     }
-
-
 }
+
+
+        

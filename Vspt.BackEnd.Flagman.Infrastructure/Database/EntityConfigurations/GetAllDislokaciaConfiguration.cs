@@ -4,11 +4,11 @@ using Vspt.BackEnd.Flagman.Domain.Entity;
 
 namespace Tiss.Pricing.Infrastructure.Database.EntityConfigurations;
 
-internal class DislokaciaConfiguration : IEntityTypeConfiguration<Dislokacia>
+internal class GetAllConfiguration : IEntityTypeConfiguration<GetAllDislokacia>
 {
-	public void Configure(EntityTypeBuilder<Dislokacia> builder)
+	public void Configure(EntityTypeBuilder<GetAllDislokacia> builder)
 	{
-		builder.ToTable("DISLOKACIA");
+		builder.ToTable("GETALLDISLOKACIA");
 
 		builder.HasKey(x => x.ID);
 

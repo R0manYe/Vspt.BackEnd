@@ -27,15 +27,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vspt.Box.AbstractTransactio
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "flagman", "flagman", "{274D1896-2F72-48F9-A565-F684B2BE4AFD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vspt.BackEnd.Flagman.Api", "Vspt.BackEnd.Flagman.Api\Vspt.BackEnd.Flagman.Api.csproj", "{BC6CEAD0-939A-4D12-AF44-862A9DDE8D84}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vspt.BackEnd.Flagman.Api", "Vspt.BackEnd.Flagman.Api\Vspt.BackEnd.Flagman.Api.csproj", "{BC6CEAD0-939A-4D12-AF44-862A9DDE8D84}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vspt.BackEnd.Flagman.Application", "Vspt.BackEnd.Flagman.Application\Vspt.BackEnd.Flagman.Application.csproj", "{A8702542-83AA-4A6D-8DC0-1E72274A8005}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vspt.BackEnd.Flagman.Application", "Vspt.BackEnd.Flagman.Application\Vspt.BackEnd.Flagman.Application.csproj", "{A8702542-83AA-4A6D-8DC0-1E72274A8005}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vspt.BackEnd.Flagman.Domain", "Vspt.BackEnd.Flagman.Domain\Vspt.BackEnd.Flagman.Domain.csproj", "{1C94EF8E-2C78-4F0C-8549-ACC5F828BB4F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vspt.BackEnd.Flagman.Domain", "Vspt.BackEnd.Flagman.Domain\Vspt.BackEnd.Flagman.Domain.csproj", "{1C94EF8E-2C78-4F0C-8549-ACC5F828BB4F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vspt.BackEnd.Flagman.Infrastructure", "Vspt.BackEnd.Flagman.Infrastructure\Vspt.BackEnd.Flagman.Infrastructure.csproj", "{88880CD4-EEB7-489F-A419-4E9683A8EFD3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vspt.BackEnd.Flagman.Infrastructure", "Vspt.BackEnd.Flagman.Infrastructure\Vspt.BackEnd.Flagman.Infrastructure.csproj", "{88880CD4-EEB7-489F-A419-4E9683A8EFD3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vspt.Service.Common", "Vspt.Service.Common\Vspt.Service.Common.csproj", "{712E8115-4319-4EAE-B65A-F9F8A785D8BA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vspt.Service.Common", "Vspt.Service.Common\Vspt.Service.Common.csproj", "{712E8115-4319-4EAE-B65A-F9F8A785D8BA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

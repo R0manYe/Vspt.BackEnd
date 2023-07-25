@@ -1,7 +1,9 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Vspt.BackEnd.Flagman.Application.features;
 using Vspt.BackEnd.Flagman.Domain.Entity;
+using Vspt.BackEnd.Flagman.Domain.PublishModels.Dislokacia;
 using Vspt.BackEnd.Flagman.Infrastructure.Database;
 
 
@@ -9,6 +11,7 @@ namespace Vspt.BackEnd.Flagman.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    
     public class FlagmanController : ControllerBase
     {
         private readonly IMediator _mediator;
@@ -16,10 +19,10 @@ namespace Vspt.BackEnd.Flagman.Api.Controllers
         public FlagmanController(IMediator mediator)
         {
             _mediator = mediator;
-        }  
-      
+        }
+        
         [HttpGet("dislokacia")]
-        public async Task<List<Dislokacia>> GetDislokacia()
+        public async Task<List<GetAllDislokacia>> GetDislokacia()
         {
             return await _mediator.Send(new GetDislokaciaHandlerRequest { Data = Unit.Value });
         }
