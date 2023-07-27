@@ -7,23 +7,27 @@ using Vspt.Box.Data.EfCore.Entities;
 
 namespace Vspt.BackEnd.Infrastructure.Repositories;
 
-internal sealed class UserRepository : EntityRepository<PgContext, User>, IUsersRepository
+internal sealed class UserRepository : EntityRepository<PgContext, IdentityUsers>, IUsersRepository
 {
     public UserRepository(PgContext context) : base(context)
     {
     }
 
-    public async Task<User> GetByUserName(string userName, CancellationToken cancellationToken)
+    public async Task<IdentityUsers> GetByUserName(string userName, CancellationToken cancellationToken)
     {
           return await _entityDbSet.FirstOrDefaultAsync(x=>x.Username==userName);
     }
+    public async Task<IdentityUsers> GetByUserNamePsw(string userName, string userPsw, CancellationToken cancellationToken)
+    {
+        return await _entityDbSet.FirstOrDefaultAsync(x => x.Username == userName && x.Password == userPsw);
+    }
 
-    public async Task<User> GetByToken(string token, CancellationToken cancellationToken)
+    public async Task<IdentityUsers> GetByToken(string token, CancellationToken cancellationToken)
     {
         return await _entityDbSet.FirstAsync(x => x.RefreshToken == token);
     }
 
-    public Task Add(User entity, CancellationToken cancellationToken)
+    public Task Add(IdentityUsers entity, CancellationToken cancellationToken)
     {
         return _entityDbSet.AddAndSave(entity, cancellationToken);
     }
@@ -33,15 +37,18 @@ internal sealed class UserRepository : EntityRepository<PgContext, User>, IUsers
         return _entityDbSet.AnyAsync(x => x.Username == Unit);
     }
 
-    public Task<bool> GetAnyEmail(string Unit)
-    {
-        return _entityDbSet.AnyAsync(x => x.Email == Unit);
-    }
+    //public Task<bool> GetAnyEmail(string Unit)
+    //{
+    //    return _entityDbSet.AnyAsync(x => x.Email == Unit);
+    //}
 
-    public async Task<List<User>> GetAllUsers(CancellationToken cancellationToken)
+    public async Task<List<IdentityUsers>> GetAllUsers(CancellationToken cancellationToken)
     {
         return await _entityDbSet.AsNoTracking().ToListAsync(cancellationToken);
     }
 
-   
+    public  Task GetBySaveToken(IdentityUsers user, CancellationToken cancellationToken)
+    {
+        return _entityDbSet.UpdateAndSave(user,cancellationToken);
+    }
 }

@@ -18,7 +18,7 @@ namespace Vspt.BackEnd.Api.Controllers
         }
 
         [HttpPost("authenticate")]
-        public async Task<GetLoginResponse> Autenticate([FromBody] GetLoginRequestItem request)
+        public async Task<GetLoginResponse> Autenticate([FromBody] GetAutenticateRequest request)
         {
             return await _mediator.Send(new GetLoginRequest { Data = request });
         }
@@ -42,7 +42,7 @@ namespace Vspt.BackEnd.Api.Controllers
         }
 
         [HttpGet]
-        public async Task<List<User>> GtAllUsers()
+        public async Task<List<IdentityUsers>> GtAllUsers()
         {
             return await _mediator.Send(new GetAllUsersHandlerRequest { Data=Unit.Value });
         }

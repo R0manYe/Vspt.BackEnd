@@ -46,6 +46,7 @@ namespace Vspt.BackEnd.Application.Authentication.Auth
             var principal = GetPrincipalFromExpiriedToken(accessToken);
             
             var username = principal.Identity.Name;
+            
 
             var user = await _usersRepository.GetByUserName(username, cancellationToken);
             
@@ -96,7 +97,7 @@ namespace Vspt.BackEnd.Application.Authentication.Auth
                 }
                 return refreshToken;
             }
-             string CreateJWT(User user)
+             string CreateJWT(IdentityUsers user)
             {
                 var jwtTokenHandler = new JwtSecurityTokenHandler();
                 var key = Encoding.ASCII.GetBytes("Verisecret1234567890fdsf/");

@@ -1,13 +1,10 @@
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.EntityFrameworkCore;
-using System;
-using Vspt.BackEnd.Infrastructure.Database.EntityConfigurations;
-using Vspt.BackEnd.Infrastructure.Extensions;
-using Vspt.BackEnd.Application.Extensions;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
-using System.Configuration;
+using Vspt.BackEnd.Application.Extensions;
+using Vspt.BackEnd.Infrastructure.Database.EntityConfigurations;
+using Vspt.BackEnd.Infrastructure.Extensions;
 
 internal class Program
 {
@@ -31,16 +28,20 @@ internal class Program
                     .AllowAnyMethod()
                     .AllowAnyHeader();
             });
+        });      
+
+        builder.Services.AddDbContext<PgContext>(options =>
+        {
+            options.UseNpgsql(builder.Configuration.GetConnectionString("PgServerConnStr"));
         });
-        builder.Services.AddDbContext<PgContext>(ServiceLifetime.Transient);
-        
+
         builder.Services.AddAuthentication(x =>
         {
             x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
             x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
         }).AddJwtBearer(x =>
         {
-            x.RequireHttpsMetadata = true;
+            x.RequireHttpsMetadata = false;
             x.SaveToken = true;
             x.TokenValidationParameters = new TokenValidationParameters
             {
@@ -52,7 +53,7 @@ internal class Program
             };
         });
         var app = builder.Build();
-
+       
         // Configure the HTTP request pipeline.
         if (app.Environment.IsDevelopment())
         {

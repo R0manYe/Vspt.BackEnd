@@ -1,5 +1,4 @@
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Options;
 using Vspt.BackEnd.Application.Extensions;
 using Vspt.BackEnd.Flagman.Infrastructure.Database;
 using Vspt.BackEnd.Flagman.Infrastructure.Extensions;
@@ -15,9 +14,9 @@ internal class Program
         builder.Services.AddControllers();
         // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
         builder.Services.AddEndpointsApiExplorer();
-        builder.Services.AddSwaggerGen();
-        builder.Services.AddApplicationFlagmanReferences(builder.Configuration);
+        builder.Services.AddSwaggerGen();       
         builder.Services.AddInfrastructureFlagmanReferences(builder.Configuration);
+        builder.Services.AddApplicationFlagmanReferences(builder.Configuration);
         builder.Services.AddCors(option =>
         {
             option.AddPolicy("MyPolicy", builder =>

@@ -7,10 +7,11 @@ using System.Threading.Tasks;
 
 namespace Vspt.BackEnd.Domain.Entity
 {
-    public class Role
+    public class IdentityRoles
     {
         [Key]
-        public int Id { get; set; }
-        public string? Name { get; set; }
+        public Guid Id { get; set; }
+        public string RoleName { get; set; }
+        public List<IdentityUsersRoles> IdentityUsersRole { get; set; } 
     }
 }

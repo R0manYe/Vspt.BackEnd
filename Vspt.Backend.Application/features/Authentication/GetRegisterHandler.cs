@@ -1,20 +1,13 @@
 ﻿using AutoMapper;
-using Microsoft.IdentityModel.Tokens;
-using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
-using System.Security.Cryptography;
-
-using System.Text;
-using Vspt.BackEnd.Application.features.Authentication.Helpers;
-using Vspt.Box.MediatR;
-using Vspt.BackEnd.Domain.Contract;
-using Vspt.BackEnd.Domain.Entity;
 using MediatR;
 using System.ComponentModel.DataAnnotations;
+using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading;
-using Vspt.BackEnd.Application.features.Authentication;
 using Vspt.BackEnd.Application.features.Authentication.DTO;
+using Vspt.BackEnd.Application.features.Authentication.Helpers;
+using Vspt.BackEnd.Domain.Contract;
+using Vspt.BackEnd.Domain.Entity;
+using Vspt.Box.MediatR;
 
 namespace Vspt.BackEnd.Application.Authentication.Auth
 {
@@ -41,22 +34,22 @@ namespace Vspt.BackEnd.Application.Authentication.Auth
            
             if (await CheckUserNameExistAsnc(request.Username))
                 throw new ValidationException($"Username {request.Username} уже есть в базе!");
-           
+
             //check Email
-            if (await CheckUserEmailExistAsnc(request.Email))
-                throw new ValidationException($"Email {request.Email} уже есть в базе!");
-           
+            //if (await CheckUserEmailExistAsnc(request.Email))
+            //    throw new ValidationException($"Email {request.Email} уже есть в базе!");
+
 
             //check Passw
-            var pass = CheckPasswordExistAsnc(request.Password);
-            if(!string.IsNullOrEmpty(pass))
-                throw new ValidationException($"Пароль {request.Password}  некорректен!");
+            //var pass = CheckPasswordExistAsnc(request.Password);
+            //if(!string.IsNullOrEmpty(pass))
+            //    throw new ValidationException($"Пароль {request.Password}  некорректен!");
 
 
-            request.Password = PasswordHasher.HashPassword(request.Password);
+            request.Password = request.Password; //PasswordHasher.HashPassword(request.Password);
             request.Role = "User";
             request.Token = "";
-            var user= _mapper.Map<User>(request);
+            var user= _mapper.Map<IdentityUsers>(request);
             await _usersRepository.Add(user, cancellationToken);
             
             return Unit.Value;           
@@ -66,9 +59,9 @@ namespace Vspt.BackEnd.Application.Authentication.Auth
             => _usersRepository.GetAnyName(userName);
         
 
-        private Task<bool> CheckUserEmailExistAsnc(string Email)
+        //private Task<bool> CheckUserEmailExistAsnc(string Email)
 
-            => _usersRepository.GetAnyEmail(Email); 
+        //    => _usersRepository.GetAnyEmail(Email); 
           
 
         private string CheckPasswordExistAsnc(string Password)

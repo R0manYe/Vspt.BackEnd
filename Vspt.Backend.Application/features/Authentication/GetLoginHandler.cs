@@ -1,22 +1,17 @@
-﻿using AutoMapper;
-using Microsoft.IdentityModel.Tokens;
-using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
-using System.Security.Cryptography;
-using System.Text;
-using Vspt.BackEnd.Application.features.Authentication.Helpers;
-using Vspt.Box.MediatR;
-using Vspt.BackEnd.Domain.Contract;
-using Vspt.BackEnd.Domain.Entity;
+﻿using System.Security.Cryptography;
 using Vspt.BackEnd.Application.features.Authentication.DTO;
+using Vspt.BackEnd.Application.features.Authentication.Helpers;
+using Vspt.BackEnd.Domain.Contract;
 using Vspt.BackEnd.Infrastructure.Database.EntityConfigurations;
+using Vspt.Box.Data.EfCore.Entities;
+using Vspt.Box.MediatR;
 
 namespace Vspt.BackEnd.Application.Authentication.Auth
 {
-    public sealed record GetLoginRequest : BaseRequest<GetLoginRequestItem, GetLoginResponse>
+    public sealed record GetLoginRequest : BaseRequest<GetAutenticateRequest, GetLoginResponse>
     {
     }
-    internal sealed class GetLoginHandler : BaseRequestHandler<GetLoginRequest, GetLoginRequestItem, GetLoginResponse>
+    internal sealed class GetLoginHandler : BaseRequestHandler<GetLoginRequest, GetAutenticateRequest, GetLoginResponse>
     {
         private readonly IUsersRepository _usersRepository;       
         private readonly PgContext _pgContext;
@@ -29,14 +24,14 @@ namespace Vspt.BackEnd.Application.Authentication.Auth
          
         }
 
-        protected override async Task<GetLoginResponse> HandleData(GetLoginRequestItem request, CancellationToken cancellationToken)
+        protected override async Task<GetLoginResponse> HandleData(GetAutenticateRequest request, CancellationToken cancellationToken)
         {
             if (request == null)
             {
                 throw new ArgumentNullException(nameof(request));
             }
           
-            var user = await _usersRepository.GetByUserName(request.Username, cancellationToken);         
+            var user = await _usersRepository.GetByUserNamePsw(request.Username,request.Password, cancellationToken);         
           
            
             if (user == null)
@@ -44,7 +39,8 @@ namespace Vspt.BackEnd.Application.Authentication.Auth
                 throw new ArgumentNullException("user not found");
             }
 
-            if (!PasswordHasher.VerifyPassword(request.Password, user.Password))
+       //     if (!PasswordHasher.VerifyPassword(request.Password, user.Password))
+            if ((request.Password!= user.Password))
             {
                 throw new ArgumentNullException("Password is incorrect!");
             }
@@ -54,7 +50,7 @@ namespace Vspt.BackEnd.Application.Authentication.Auth
             var newRefreshToken = CreateRefreshtoken();
             user.RefreshToken = newRefreshToken;
             user.RefreshTokenExpiryTime = DateTime.Now.AddDays(5);
-            await _pgContext.SaveChangesAsync();
+            await _usersRepository.GetBySaveToken(user, cancellationToken);
 
             return new GetLoginResponse
             {

@@ -14,10 +14,10 @@ using MediatR;
 
 namespace Vspt.BackEnd.Application.Authentication.Auth
 {
-    public sealed record GetAllUsersHandlerRequest : BaseRequest<Unit, List<User>>
+    public sealed record GetAllUsersHandlerRequest : BaseRequest<Unit, List<IdentityUsers>>
     {
     }
-    internal sealed class GetAllUsersHandlerHandler : BaseRequestHandler<GetAllUsersHandlerRequest, Unit, List<User>>
+    internal sealed class GetAllUsersHandlerHandler : BaseRequestHandler<GetAllUsersHandlerRequest, Unit, List<IdentityUsers>>
     {
         private readonly IUsersRepository _usersRepository;
         private readonly IMapper _mapper;
@@ -32,7 +32,7 @@ namespace Vspt.BackEnd.Application.Authentication.Auth
          
         }
 
-        protected override async Task<List<User>> HandleData(Unit unit, CancellationToken cancellationToken)
+        protected override async Task<List<IdentityUsers>> HandleData(Unit unit, CancellationToken cancellationToken)
         {
           return await _usersRepository.GetAllUsers(cancellationToken);      
             
