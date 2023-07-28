@@ -1,0 +1,18 @@
+#!/bin/bash
+set -Eeuo pipefail
+cd "$(dirname -- "$(realpath -- "${BASH_SOURCE[0]}")")"
+cd ..
+set -x
+time (
+	./scripts/fix-scripts
+	./scripts/fix-migrations
+	dotnet restore
+	./scripts/generate-api-clients --no-restore
+	dotnet build --no-restore --configuration=Debug
+	./scripts/generate-swagger-json-files --no-build
+	./scripts/dotnet-format --no-restore
+	dotnet test --no-build --configuration=Debug
+	dotnet build --no-restore --configuration=Release
+	./scripts/check-dotnet-format --no-restore
+	true
+)

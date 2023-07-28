@@ -1,4 +1,6 @@
-﻿namespace Vspt.BackEnd.Domain.Entity
+﻿using Vspt.Box.Data.Entities;
+
+namespace Vspt.BackEnd.Domain.Entity
 {
     public sealed class IdentityUsersRoles
     {        

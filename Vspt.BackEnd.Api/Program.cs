@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using System.Data.Entity;
 using System.Text;
 using Vspt.BackEnd.Application.Extensions;
 using Vspt.BackEnd.Infrastructure.Database.EntityConfigurations;
@@ -28,13 +29,13 @@ internal class Program
                     .AllowAnyMethod()
                     .AllowAnyHeader();
             });
-        });      
-
+        });
+        //  builder.Services.AddDbContext<PgContext>(ServiceLifetime.Transient);
         builder.Services.AddDbContext<PgContext>(options =>
         {
-            options.UseNpgsql(builder.Configuration.GetConnectionString("PgServerConnStr"));
+            options.UseNpgsql(builder.Configuration.GetConnectionString("PgServerConnStr"), b => b.MigrationsAssembly("Vspt.BackEnd.Api"));
         });
-
+        //  builder.Services.AddDbContext<PgContext>(ServiceLifetime.Transient);
         builder.Services.AddAuthentication(x =>
         {
             x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;

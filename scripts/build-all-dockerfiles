@@ -1,0 +1,11 @@
+#!/bin/bash
+set -Eeuo pipefail
+cd "$(dirname -- "$(realpath -- "${BASH_SOURCE[0]}")")"
+cd ../src
+export DOCKER_SCAN_SUGGEST=false
+for i in *.Dockerfile; do
+	(
+		set -x
+		docker build --file "$i" ..
+	)
+done

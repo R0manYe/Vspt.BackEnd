@@ -32,8 +32,8 @@ namespace Vspt.BackEnd.Application.Authentication.Auth
             if (request == null)
                 throw new ValidationException("Bad request");
            
-            if (await CheckUserNameExistAsnc(request.Username))
-                throw new ValidationException($"Username {request.Username} уже есть в базе!");
+            //if (await CheckUserNameExistAsnc(request.Username))
+            //    throw new ValidationException($"Username {request.Username} уже есть в базе!");
 
             //check Email
             //if (await CheckUserEmailExistAsnc(request.Email))
@@ -54,9 +54,9 @@ namespace Vspt.BackEnd.Application.Authentication.Auth
             
             return Unit.Value;           
         }
-        private Task<bool> CheckUserNameExistAsnc(string userName)
+        //private Task<bool> CheckUserNameExistAsnc(string userName)
 
-            => _usersRepository.GetAnyName(userName);
+        //    => _usersRepository.GetAnyName(userName);
         
 
         //private Task<bool> CheckUserEmailExistAsnc(string Email)

@@ -1,0 +1,8 @@
+#!/bin/bash
+set -Eeuo pipefail
+cd "$(dirname -- "$(realpath -- "${BASH_SOURCE[0]}")")"
+./_internal/generate-project-dockerfile ../src/Tiss.BFF.B2BWeb
+./_internal/generate-project-dockerfile ../src/Tiss.Catalog
+./_internal/generate-project-dockerfile ../src/Tiss.Cross
+./_internal/generate-project-dockerfile ../src/Tiss.Partner
+./_internal/generate-project-dockerfile ../src/Tiss.Pricing

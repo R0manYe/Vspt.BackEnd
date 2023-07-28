@@ -1,0 +1,100 @@
+#!/bin/bash
+set -Eeuo pipefail
+if [[ "${#}" -ne 1 ]]; then
+	echo "Usage: bash ${0} MIGRATION_DESIGNER_CS_FILE_PATH" >&2
+	exit 1
+fi
+function read_file() {
+	local output_variable_name="${1}" && shift
+	local file_path="${1}" && shift
+	local content="$(cat "${file_path}" && printf FinalNewLinePreserver)"
+	content="${content%FinalNewLinePreserver}"
+	eval "${output_variable_name}="\${content}""
+}
+function write_file_if_changed() {
+	local file_path="${1}" && shift
+	local content="${1}" && shift
+	local original_content=
+	read_file original_content "${file_path}" || true
+	if [[ "${original_content}" != "${content}" ]]; then
+		echo "Writing ${file_path}"
+		printf "%s" "${content}" > "${file_path}"
+	fi
+}
+function get_first_regex_match() {
+	local output_variable_name="${1}" && shift
+	local text="${1}" && shift
+	local pattern="${1}" && shift
+	pattern="(?x)(?:${pattern})"
+	pattern=$(printf "%s" "${pattern}" | tr --squeeze ' \t\r\n' ' ')
+	# https://www.gnu.org/software/grep/manual/grep.html#index-_002dm seems to be broken
+	local match=
+	while IFS= read -r -d '' match; do
+		break
+	done < <(printf "%s" "${text}" | LC_ALL=en_US.utf8 grep --binary --no-filename --null-data --only-matching --perl-regex --regexp "${pattern}")
+	eval "${output_variable_name}="\${match}""
+}
+migration_designer_cs_file_path="${1}"
+migration_designer_cs_file_path="$(realpath -- "${migration_designer_cs_file_path}")"
+migration_dir_path="$(dirname -- "${migration_designer_cs_file_path}")"
+migration_designer_cs_file_name="$(basename -- "${migration_designer_cs_file_path}")"
+migration_cs_file_name="${migration_designer_cs_file_name/%.Designer.cs/.cs}"
+migration_cs_file_path="${migration_dir_path}/${migration_cs_file_name}"
+if [[ "${migration_cs_file_name}" == "${migration_designer_cs_file_name}" ]]; then
+	echo "Migration file name '${migration_designer_cs_file_name}' must end with '.Designer.cs'" >&2
+	exit 1
+fi
+{
+	read_file migration_designer_cs_content "${migration_designer_cs_file_path}"
+	read_file migration_cs_content "${migration_cs_file_path}"
+	new_migration_cs_content="${migration_cs_content}"
+}
+{
+	attributes_pattern='
+		[ \t]* \[ \s* DbContext \s* \( \s* typeof \s* \( \s* \w+ \s* \) \s* \) \s* \] [ \t]* \r?\n
+		[ \t]* \[ \s* Migration \s* \( \s* " \d{14} _ \w+ " \s* \) \s* \] [ \t]* \r?\n
+	'
+	get_first_regex_match existing_attributes "${new_migration_cs_content}" "${attributes_pattern}"
+	if [[ "${existing_attributes}" != '' ]]; then
+		echo "Class attributes are already present in '${migration_cs_file_name}'" >&2
+		exit 1
+	fi
+	get_first_regex_match attributes "${migration_designer_cs_content}" "${attributes_pattern}"
+	if [[ "${attributes}" == '' ]]; then
+		echo "No required class attributes in '${migration_designer_cs_file_name}'" >&2
+		exit 1
+	fi
+	get_first_regex_match class_header "${new_migration_cs_content}" '
+		[ \t]* (public \s+)? (internal \s+)? (sealed \s+)? (partial \s+)? class \s+ \w+ \s* : \s* Migration [ \t]* \r?\n
+	'
+	if [[ "${class_header}" == '' ]]; then
+		echo "No required class header in '${migration_designer_cs_file_name}'" >&2
+		exit 1
+	fi
+	content_prefix=${new_migration_cs_content%%${class_header}*}
+	content_suffix=${new_migration_cs_content#*${class_header}}
+	new_class_header="${class_header}"
+	new_class_header="${new_class_header//public / }"
+	new_class_header="${new_class_header//internal / }"
+	new_class_header="${new_class_header//sealed / }"
+	new_class_header="${new_class_header//partial / }"
+	new_class_header="${new_class_header//class /internal sealed class }"
+	new_class_header="${attributes}${new_class_header}"
+	new_migration_cs_content="${content_prefix}${new_class_header}${content_suffix}"
+}
+{
+	usings_pattern='
+		( [ \t]* using \s* [\w.]+ \s* ; [ \t]* \r?\n )+
+	'
+	get_first_regex_match existing_usings "${new_migration_cs_content}" "${usings_pattern}"
+	get_first_regex_match usings "${migration_designer_cs_content}" "${usings_pattern}"
+	content_prefix=${new_migration_cs_content%%${existing_usings}*}
+	content_suffix=${new_migration_cs_content#*${existing_usings}}
+	new_usings="${existing_usings}${usings}"
+	new_migration_cs_content="${content_prefix}${new_usings}${content_suffix}"
+}
+write_file_if_changed "${migration_cs_file_path}" "${new_migration_cs_content}"
+(
+	echo "Deleting ${migration_designer_cs_file_path}"
+	rm -- "${migration_designer_cs_file_path}"
+)

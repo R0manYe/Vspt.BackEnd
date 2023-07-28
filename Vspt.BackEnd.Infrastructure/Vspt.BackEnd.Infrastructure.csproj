@@ -1,9 +1,10 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net7.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <GenerateRuntimeConfigurationFiles>True</GenerateRuntimeConfigurationFiles>
   </PropertyGroup>
 
   <ItemGroup>
@@ -24,6 +25,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Vspt.BackEnd.Domain\Vspt.BackEnd.Domain.csproj" />
     <ProjectReference Include="..\Vspt.Box.Data.EfCore\Vspt.Box.Data.EfCore.csproj" />
+    <ProjectReference Include="..\Vspt.Box.EfCore.Npgsql\Vspt.Box.EfCore.Npgsql.csproj" />
     <ProjectReference Include="..\Vspt.Service.Common\Vspt.Service.Common.csproj" />
     <ProjectReference Include="..\Vspt.Shared.EfCore\Vspt.Box.EfCore.csproj" />
   </ItemGroup>

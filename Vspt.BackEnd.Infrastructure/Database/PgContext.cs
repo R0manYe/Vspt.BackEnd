@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Vspt.BackEnd.Domain.Entity;
 using Vspt.Box.Data.EfCore.Entities.Infrastructure;
 using Vspt.Box.EfCore.Infrastructure;
 using Vspt.Service.Common.Infrastructure.Conventions;
@@ -28,11 +29,14 @@ namespace Vspt.BackEnd.Infrastructure.Database.EntityConfigurations
 
             return base.SaveChanges();
         }
+   
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.HasDefaultSchema("VsptBackend");
+            base.OnModelCreating(modelBuilder);
 
-              modelBuilder.HasPostgresExtension("pgcrypto");
+           modelBuilder.HasDefaultSchema(SchemaName);
+
+            modelBuilder.HasPostgresExtension("pgcrypto");
 
             modelBuilder.AddTransactionalOutbox();
 

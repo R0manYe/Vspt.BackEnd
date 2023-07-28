@@ -18,9 +18,9 @@ namespace Vspt.BackEnd.Api.Controllers
         }
 
         [HttpPost("authenticate")]
-        public async Task<GetLoginResponse> Autenticate([FromBody] GetAutenticateRequest request)
+        public  Task<GetLoginResponse> Autenticate([FromBody] GetAutenticateRequest request)
         {
-            return await _mediator.Send(new GetLoginRequest { Data = request });
+            return  _mediator.Send(new GetLoginRequest { Data = request });
         }
 
         [HttpPost("register")]

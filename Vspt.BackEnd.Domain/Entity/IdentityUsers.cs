@@ -2,11 +2,11 @@
 
 namespace Vspt.BackEnd.Domain.Entity
 {
-    public sealed class IdentityUsers : IEntityWithId
+    public class IdentityUsers : IEntityWithId
     {
         public Guid Id { get; set; }    
 
-        public string Username { get; set; }
+        public string? Username { get; set; }
 
         public string? Password { get; set; }
 
@@ -14,10 +14,12 @@ namespace Vspt.BackEnd.Domain.Entity
 
         public string? Email { get; set; }
 
-        public string Role { get; set; }    
+        public string? Role { get; set; }    
         public string? RefreshToken { get; set; }
-        public DateTime RefreshTokenExpiryTime { get; set; }
-        public List<IdentityUsersRoles> IdentityUsersRole { get; set; }
-     
+        public DateTime? RefreshTokenExpiryTime { get; set; }
+
+        public List<IdentityUsersRoles>? IdentityUsersRole { get; set; }
+
+        public List<IdentityUsersClaims>? identityUsersClaims { get; set; }     
     }
 }

@@ -1,0 +1,15 @@
+#!/bin/bash
+set -Eeuo pipefail
+cd "$(dirname -- "$(realpath -- "${BASH_SOURCE[0]}")")"
+cd ../..
+export DOCKER_SCAN_SUGGEST=false
+set -x
+export BUILDKIT_PROGRESS="${BUILDKIT_PROGRESS:-plain}"
+export COMPOSE_FILE="${COMPOSE_FILE:-tiss.docker-compose.json}"
+export COMPOSE_PARALLEL_LIMIT="${COMPOSE_PARALLEL_LIMIT:-1}"
+export COMPOSE_PROFILES="${COMPOSE_PROFILES:-all}"
+docker compose pull
+docker compose build
+# because of https://github.com/docker/compose/issues/8432#issuecomment-1113207788
+docker compose --profile all down --remove-orphans
+docker compose up --detach --no-build --remove-orphans

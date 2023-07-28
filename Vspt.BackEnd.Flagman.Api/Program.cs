@@ -30,7 +30,7 @@ internal class Program
         });
         builder.Services.AddDbContext<FlagmanContext>(options =>
         {
-            options.UseOracle(builder.Configuration.GetConnectionString("OraDbConnection"));
+            options.UseOracle(builder.Configuration.GetConnectionString("OraDbConnection"),b => b.MigrationsAssembly("Vspt.BackEnd.Flagman.Api"));
         });
 
         var app = builder.Build();

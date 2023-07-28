@@ -24,14 +24,14 @@ namespace Vspt.BackEnd.Application.Authentication.Auth
          
         }
 
-        protected override async Task<GetLoginResponse> HandleData(GetAutenticateRequest request, CancellationToken cancellationToken)
+        protected override async  Task<GetLoginResponse> HandleData(GetAutenticateRequest request, CancellationToken cancellationToken)
         {
             if (request == null)
             {
                 throw new ArgumentNullException(nameof(request));
             }
           
-            var user = await _usersRepository.GetByUserNamePsw(request.Username,request.Password, cancellationToken);         
+            var user = await _usersRepository.GetByUserNamePsw(request.Username, request.Password, cancellationToken);         
           
            
             if (user == null)
@@ -40,7 +40,7 @@ namespace Vspt.BackEnd.Application.Authentication.Auth
             }
 
        //     if (!PasswordHasher.VerifyPassword(request.Password, user.Password))
-            if ((request.Password!= user.Password))
+            if (request.Password!= user.Password)
             {
                 throw new ArgumentNullException("Password is incorrect!");
             }
@@ -50,7 +50,7 @@ namespace Vspt.BackEnd.Application.Authentication.Auth
             var newRefreshToken = CreateRefreshtoken();
             user.RefreshToken = newRefreshToken;
             user.RefreshTokenExpiryTime = DateTime.Now.AddDays(5);
-            await _usersRepository.GetBySaveToken(user, cancellationToken);
+            _usersRepository.GetBySaveToken(user, cancellationToken);
 
             return new GetLoginResponse
             {

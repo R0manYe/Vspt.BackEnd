@@ -12,7 +12,7 @@ namespace Vspt.BackEnd.Domain.Contract
 
         Task Add(IdentityUsers entity, CancellationToken cancellationToken);
 
-        Task<bool> GetAnyName(string Unit);     
+      //  Task<bool> GetAnyName(string Unit);     
 
         Task<List<IdentityUsers>> GetAllUsers(CancellationToken cancellationToken);
     }
