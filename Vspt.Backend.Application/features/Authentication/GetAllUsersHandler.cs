@@ -19,17 +19,12 @@ namespace Vspt.BackEnd.Application.Authentication.Auth
     }
     internal sealed class GetAllUsersHandlerHandler : BaseRequestHandler<GetAllUsersHandlerRequest, Unit, List<IdentityUsers>>
     {
-        private readonly IUsersRepository _usersRepository;
-        private readonly IMapper _mapper;
-       
+        private readonly IUsersRepository _usersRepository;       
       
 
-        public GetAllUsersHandlerHandler(IMapper mapper,  IUsersRepository usersRepository)
+        public GetAllUsersHandlerHandler(IUsersRepository usersRepository)
         {
-            _usersRepository = usersRepository;
-            _mapper = mapper;
-          
-         
+            _usersRepository = usersRepository; 
         }
 
         protected override async Task<List<IdentityUsers>> HandleData(Unit unit, CancellationToken cancellationToken)

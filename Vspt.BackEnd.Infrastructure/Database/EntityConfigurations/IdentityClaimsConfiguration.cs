@@ -19,9 +19,9 @@ internal sealed class IdentityClaimsConfiguration : IEntityTypeConfiguration<Ide
             .IsRequired()
             .HasMaxLength(50);
 
-        builder
-            .HasMany(x => x.IdentityUsersClaim)
-            .WithOne()
-            .HasForeignKey(x => x.ClaimId);
+        //builder
+        //    .HasMany(x => x.IdentityUsersClaim)
+        //    .WithOne()
+        //    .HasForeignKey(x => x.ClaimId);
     }
 }

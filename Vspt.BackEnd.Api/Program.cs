@@ -25,17 +25,15 @@ internal class Program
         {
             option.AddPolicy("MyPolicy", builder =>
             {
-                builder.AllowAnyOrigin()
+                builder.WithOrigins("http://localhost:4200")
                     .AllowAnyMethod()
                     .AllowAnyHeader();
             });
-        });
-        //  builder.Services.AddDbContext<PgContext>(ServiceLifetime.Transient);
+        });        
         builder.Services.AddDbContext<PgContext>(options =>
         {
             options.UseNpgsql(builder.Configuration.GetConnectionString("PgServerConnStr"), b => b.MigrationsAssembly("Vspt.BackEnd.Api"));
         });
-        //  builder.Services.AddDbContext<PgContext>(ServiceLifetime.Transient);
         builder.Services.AddAuthentication(x =>
         {
             x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;

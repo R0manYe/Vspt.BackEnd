@@ -17,11 +17,6 @@ internal sealed class IdentityRolesConfiguration : IEntityTypeConfiguration<Iden
         builder
             .Property(x => x.RoleName)
             .IsRequired()
-            .HasMaxLength(50);
-
-        builder
-            .HasMany(x => x.IdentityUsersRole)
-            .WithOne()
-            .HasForeignKey(x => x.RoleId);
+            .HasMaxLength(50);       
     }
 }

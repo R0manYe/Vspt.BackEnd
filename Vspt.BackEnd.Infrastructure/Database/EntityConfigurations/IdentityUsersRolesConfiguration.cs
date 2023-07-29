@@ -14,12 +14,12 @@ internal sealed class IdentityUsersRolesConfiguration : IEntityTypeConfiguration
 
         builder
             .HasOne(x => x.IdentityUser)
-            .WithMany(x => x.IdentityUsersRole)
+            .WithMany()
             .HasForeignKey(x => x.UserId);
        
         builder
            .HasOne(x => x.IdentityRole)
-           .WithMany(x => x.IdentityUsersRole)
+           .WithMany()
            .HasForeignKey(x => x.RoleId);
     }
 }

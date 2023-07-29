@@ -52,5 +52,5 @@ public class UserRepository : EntityRepository<PgContext, IdentityUsers>, IUsers
     public  Task GetBySaveToken(IdentityUsers user, CancellationToken cancellationToken)
     {
          return _entityDbSet.UpdateAndSave(user,cancellationToken);
-    }
+    }    
 }

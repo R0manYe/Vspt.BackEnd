@@ -14,12 +14,12 @@ internal sealed class IdentityUsersClaimsConfiguration : IEntityTypeConfiguratio
 
         builder
             .HasOne(x => x.IdentityUser)
-            .WithMany(x => x.identityUsersClaims)
+            .WithMany()
             .HasForeignKey(x => x.UserId);
-       
+
         builder
-           .HasOne(x => x.IdentityClaims)
-           .WithMany(x => x.IdentityUsersClaim)
+           .HasOne(x => x.IdentityClaim)
+           .WithMany()
            .HasForeignKey(x => x.ClaimId);
     }
 }

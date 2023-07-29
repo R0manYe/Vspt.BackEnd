@@ -1,4 +1,4 @@
-﻿namespace Vspt.BackEnd.Application.features.Authentication.DTO
+﻿namespace Vspt.Common.Api.Contract.Postgrees.DTO.Auth
 {
     public class TokenApiDto
     {

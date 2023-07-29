@@ -24,6 +24,9 @@ public static class ServiceCollectionExtensions
        
         AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
         services.AddScoped<IUsersRepository, UserRepository>();
+        services.AddScoped<IClaimsRepository, ClaimRepository>();
+        services.AddScoped<IRolesRepository, RoleRepository>();
+
       
         return services;
     }

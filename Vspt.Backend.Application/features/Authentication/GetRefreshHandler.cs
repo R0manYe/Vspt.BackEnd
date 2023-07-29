@@ -10,9 +10,9 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Security.Cryptography;
 using Vspt.BackEnd.Infrastructure.Database.EntityConfigurations;
-using Vspt.BackEnd.Application.features.Authentication.DTO;
 using Vspt.BackEnd.Application.features.Authentication.Helpers;
 using Vspt.BackEnd.Domain.Entity;
+using Vspt.Common.Api.Contract.Postgrees.DTO.Auth;
 
 namespace Vspt.BackEnd.Application.Authentication.Auth
 {

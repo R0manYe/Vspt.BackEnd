@@ -1,10 +1,10 @@
 ﻿using System.Security.Cryptography;
-using Vspt.BackEnd.Application.features.Authentication.DTO;
 using Vspt.BackEnd.Application.features.Authentication.Helpers;
 using Vspt.BackEnd.Domain.Contract;
 using Vspt.BackEnd.Infrastructure.Database.EntityConfigurations;
 using Vspt.Box.Data.EfCore.Entities;
 using Vspt.Box.MediatR;
+using Vspt.Common.Api.Contract.Postgrees.DTO.Auth;
 
 namespace Vspt.BackEnd.Application.Authentication.Auth
 {

@@ -5,12 +5,12 @@ using Vspt.Common.Api.Contract.Postgrees.DTO.Auth;
 
 namespace Vspt.BackEnd.Application.features.Authentication
 {
-    internal sealed class UserMapper : Profile
+    internal sealed class ClaimsMapper : Profile
     {
-        public UserMapper() 
+        public ClaimsMapper() 
         {
-            CreateMap<GetLoginRequestItem, IdentityUsers>();
-            CreateMap<IdentityUsers, GetLoginRequestItem>();            
+            CreateMap<GetClaimRequest, IdentityClaims>();
+            CreateMap<IdentityClaims, GetClaimRequest>();
         }
     }
 }

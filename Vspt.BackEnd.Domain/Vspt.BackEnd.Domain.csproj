@@ -14,6 +14,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Vspt.Box.Data\Vspt.Box.Data.csproj" />
+    <ProjectReference Include="..\Vspt.Common.Api.Contract\Vspt.Common.Api.Contract.csproj" />
   </ItemGroup>
 
 </Project>

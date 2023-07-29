@@ -1,9 +1,9 @@
 ﻿using AutoMapper;
 using MediatR;
-using Vspt.BackEnd.Application.features.Authentication.DTO;
 using Vspt.BackEnd.Domain.Contract;
 using Vspt.BackEnd.Domain.Entity;
 using Vspt.Box.MediatR;
+using Vspt.Common.Api.Contract.Postgrees.DTO.Auth;
 
 namespace Vspt.BackEnd.Application.Authentication.Auth
 {

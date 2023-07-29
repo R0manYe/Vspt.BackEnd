@@ -2,7 +2,9 @@
 using Microsoft.AspNetCore.Mvc;
 using Vspt.BackEnd.Application.Authentication.Auth;
 using Vspt.BackEnd.Application.features.Authentication.DTO;
+using Vspt.BackEnd.Application.features.IdentityClaimes;
 using Vspt.BackEnd.Domain.Entity;
+using Vspt.Common.Api.Contract.Postgrees.DTO.Auth;
 
 namespace Vspt.BackEnd.Api.Controllers
 {
@@ -45,7 +47,7 @@ namespace Vspt.BackEnd.Api.Controllers
         public async Task<List<IdentityUsers>> GtAllUsers()
         {
             return await _mediator.Send(new GetAllUsersHandlerRequest { Data=Unit.Value });
-        }
-       
+        }       
+
     }
 }
