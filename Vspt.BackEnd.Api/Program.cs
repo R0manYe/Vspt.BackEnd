@@ -25,11 +25,15 @@ internal class Program
         {
             option.AddPolicy("MyPolicy", builder =>
             {
-                builder.WithOrigins("http://localhost:4200")
-                    .AllowAnyMethod()
-                    .AllowAnyHeader();
+                builder.WithOrigins("http://localhost:4200")                
+                       .AllowAnyMethod()
+                       .AllowAnyHeader()
+                       .AllowCredentials();
+              
             });
-        });        
+        
+        });    
+        
         builder.Services.AddDbContext<PgContext>(options =>
         {
             options.UseNpgsql(builder.Configuration.GetConnectionString("PgServerConnStr"), b => b.MigrationsAssembly("Vspt.BackEnd.Api"));
@@ -61,8 +65,10 @@ internal class Program
         }
 
         app.UseHttpsRedirection();
+        app.UseHttpLogging();
         app.UseCors("MyPolicy");
         app.UseAuthentication();
+        
 
         app.UseAuthorization();
 

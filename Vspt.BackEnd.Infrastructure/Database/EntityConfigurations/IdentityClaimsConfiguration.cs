@@ -18,10 +18,6 @@ internal sealed class IdentityClaimsConfiguration : IEntityTypeConfiguration<Ide
             .Property(x => x.ClaimName)
             .IsRequired()
             .HasMaxLength(50);
-
-        //builder
-        //    .HasMany(x => x.IdentityUsersClaim)
-        //    .WithOne()
-        //    .HasForeignKey(x => x.ClaimId);
+      
     }
 }

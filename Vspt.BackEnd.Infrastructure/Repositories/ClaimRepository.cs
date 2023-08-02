@@ -34,14 +34,9 @@ public class ClaimRepository : EntityRepository<PgContext, IdentityClaims>, ICla
         return _entityDbSet.UpdateAndSave(entity, cancellationToken);
     }
 
-    public async Task<IReadOnlyList<IdentityClaims>> GetReadClaims(int page, int size, CancellationToken cancellationToken)
+    public async Task<IReadOnlyList<IdentityClaims>> GetReadClaims(CancellationToken cancellationToken)
     {
-        return await _entityDbSet
-            .Where(c => c.Id != null)
-            .Skip(page * size)
-            .Take(size)
-            .AsNoTracking()
-            .ToListAsync(cancellationToken);
+        return await _entityDbSet.ToListAsync(cancellationToken);
     }
 }
 

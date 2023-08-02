@@ -9,6 +9,6 @@ namespace Vspt.BackEnd.Domain.Contract
         Task Add(IdentityClaims entity, CancellationToken cancellationToken);
         Task UpdateClaim(IdentityClaims entity, CancellationToken cancellationToken);
         Task DeleteClaim(Guid Id, CancellationToken cancellationToken);
-        Task<IReadOnlyList<IdentityClaims>> GetReadClaims(int page, int size, CancellationToken cancellationToken);
+        Task<IReadOnlyList<IdentityClaims>> GetReadClaims(CancellationToken cancellationToken);
     }
 }
