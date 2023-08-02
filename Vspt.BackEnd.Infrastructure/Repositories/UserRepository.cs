@@ -20,8 +20,7 @@ public class UserRepository : EntityRepository<PgContext, IdentityUsers>, IUsers
     }
     public  async Task<IdentityUsers> GetByUserNamePsw(string userName, string userPsw, CancellationToken cancellationToken)
     {
-        return await _entityDbSet.Where(x => x.Username == userName && x.Password == userPsw).FirstAsync();
-       
+        return await _entityDbSet.Where(x => x.Username == userName && x.Password == userPsw).FirstAsync();       
     }
 
     public async Task<IdentityUsers> GetByToken(string token, CancellationToken cancellationToken)
