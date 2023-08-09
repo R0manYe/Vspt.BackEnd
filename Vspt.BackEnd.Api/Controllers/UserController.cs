@@ -43,7 +43,7 @@ public class UserController : ControllerBase
         return _mediator.Send(new GetRefreshRequest { Data = request });
     }
 
-    [HttpGet]
+    [HttpGet("read")]
     public async Task<List<IdentityUsers>> GtAllUsers()
     {
         return await _mediator.Send(new GetAllUsersHandlerRequest { Data=Unit.Value });

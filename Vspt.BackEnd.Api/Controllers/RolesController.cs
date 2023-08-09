@@ -30,21 +30,21 @@ namespace Vspt.BackEnd.Api.Controllers
         }
 
         [HttpPost("add")]
-        public Task AddClaims( GetRoleRequest roleName)
+        public Task AddRole( GetRoleRequest roleName)
         {
             return _mediator.Send(new GetAddRoleRequest { Data = roleName });
         }
 
         [HttpPut("update/{id}")]
-        public Task UpdateClaims( Guid id,IdentityClaims request) 
+        public Task UpdateCRole( Guid id,IdentityRoles request) 
         {
-            return _mediator.Send(new GetUpdateClaimRequest { Data = new() { Id = id, ClaimName=request.ClaimName }  } );
+            return _mediator.Send(new GetUpdateRoleRequest { Data = new() { Id = id, RoleName=request.RoleName }  } );
         }
 
         [HttpDelete("delete/{id}")]
-        public Task DeleteClaims([FromQuery] Guid id) 
+        public Task DeleteRole(Guid id) 
         {
-            return _mediator.Send(new GetDeleteClaimRequest { Data = new() { Id = id } });
+            return _mediator.Send(new GetDeleteRoleRequest { Data = new() { Id = id } });
         }
     }
 }
