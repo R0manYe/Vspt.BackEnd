@@ -4,6 +4,9 @@ namespace Vspt.BackEnd.Domain.Contract
 {
     public interface IRolesRepository
     {
-        //Task Add(IdentityRoles entity, CancellationToken cancellationToken);
+        Task AddRoles(IdentityRoles entity, CancellationToken cancellationToken);
+        Task UpdateRoles(IdentityRoles entity, CancellationToken cancellationToken);
+        Task DeleteRoles(Guid Id, CancellationToken cancellationToken);
+        Task<IReadOnlyList<IdentityRoles>> GetReadRoles(CancellationToken cancellationToken);
     }
 }

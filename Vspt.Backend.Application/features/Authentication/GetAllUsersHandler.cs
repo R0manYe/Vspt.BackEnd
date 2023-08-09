@@ -1,16 +1,7 @@
-﻿using AutoMapper;
-using Microsoft.IdentityModel.Tokens;
-using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
-using System.Security.Cryptography;
-using System.Text;
-using Vspt.BackEnd.Application.features.Authentication.Helpers;
-using Vspt.Box.MediatR;
+﻿using MediatR;
 using Vspt.BackEnd.Domain.Contract;
 using Vspt.BackEnd.Domain.Entity;
-using Vspt.BackEnd.Application.features.Authentication.DTO;
-using Vspt.BackEnd.Infrastructure.Database.EntityConfigurations;
-using MediatR;
+using Vspt.Box.MediatR;
 
 namespace Vspt.BackEnd.Application.Authentication.Auth
 {

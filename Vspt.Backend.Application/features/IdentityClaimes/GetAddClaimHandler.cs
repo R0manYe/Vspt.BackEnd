@@ -1,9 +1,9 @@
 ﻿using AutoMapper;
 using MediatR;
-using Vspt.BackEnd.Application.features.Authentication.DTO;
 using Vspt.BackEnd.Domain.Contract;
 using Vspt.BackEnd.Domain.Entity;
 using Vspt.Box.MediatR;
+using Vspt.Common.Api.Contract.Postgrees.DTO.Claim;
 
 namespace Vspt.BackEnd.Application.features.IdentityClaimes
 {
@@ -26,7 +26,7 @@ namespace Vspt.BackEnd.Application.features.IdentityClaimes
         protected override async Task<Unit> HandleData(GetClaimRequest request, CancellationToken cancellationToken)
         {
             var user = _mapper.Map<IdentityClaims>(request);
-            await _claimsRepository.Add(user, cancellationToken);
+            await _claimsRepository.AddClaim(user, cancellationToken);
             return Unit.Value;
 
         }

@@ -2,9 +2,8 @@
 using Vspt.BackEnd.Domain.Contract;
 using Vspt.BackEnd.Domain.Entity;
 using Vspt.BackEnd.Infrastructure.Database.EntityConfigurations;
-using Vspt.Box.EfCore;
 using Vspt.Box.Data.EfCore.Entities;
-using Vspt.BackEnd.Application.features.Authentication.DTO;
+using Vspt.Box.EfCore;
 
 namespace Vspt.BackEnd.Infrastructure.Repositories;
 
@@ -14,7 +13,7 @@ public class ClaimRepository : EntityRepository<PgContext, IdentityClaims>, ICla
     {
     }
 
-    public Task Add(IdentityClaims entity, CancellationToken cancellationToken)
+    public Task AddClaim(IdentityClaims entity, CancellationToken cancellationToken)
     {
         return _entityDbSet.AddAndSave(entity, cancellationToken);
     }

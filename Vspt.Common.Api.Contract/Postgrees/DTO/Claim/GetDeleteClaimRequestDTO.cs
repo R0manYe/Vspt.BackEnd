@@ -1,9 +1,9 @@
-﻿namespace Vspt.BackEnd.Application.features.Authentication.DTO
+﻿namespace Vspt.Common.Api.Contract.Postgrees.DTO.Claim
 {
     public record GetDeleteClaimRequestDTO
-    {       
+    {
         public required Guid Id { get; set; }
 
-    }  
+    }
 
 }

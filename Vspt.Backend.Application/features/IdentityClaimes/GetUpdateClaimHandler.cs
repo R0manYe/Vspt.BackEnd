@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using MediatR;
-using Vspt.BackEnd.Application.features.Authentication.DTO;
 using Vspt.BackEnd.Domain.Contract;
 using Vspt.BackEnd.Domain.Entity;
 using Vspt.Box.MediatR;
@@ -13,13 +12,13 @@ namespace Vspt.BackEnd.Application.features.IdentityClaimes
     internal sealed class GetUpdateClaimHandler : BaseRequestHandler<GetUpdateClaimRequest, IdentityClaims, Unit>
     {
         private readonly IClaimsRepository _claimsRepository;
-        private readonly IMapper _mapper;
+        
 
 
-        public GetUpdateClaimHandler(IMapper mapper, IClaimsRepository claimsRepository)
+        public GetUpdateClaimHandler(IClaimsRepository claimsRepository)
         {
             _claimsRepository = claimsRepository;
-            _mapper = mapper;
+           
 
         }
 

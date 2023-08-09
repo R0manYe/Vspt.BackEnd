@@ -6,6 +6,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Windows.Markup;
 using Vspt.BackEnd.Application.features.IdentityClaimes;
+using Vspt.BackEnd.Application.features.IdentityRolees;
 using Vspt.BackEnd.Domain.Entity;
 using Vspt.Common.Api.Contract.Postgrees.DTO.Claim;
 
@@ -13,25 +14,25 @@ namespace Vspt.BackEnd.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ClaimsController : ControllerBase
+    public class RolesController : ControllerBase
     {
         private readonly IMediator _mediator;
 
-        public ClaimsController(IMediator mediator)
+        public RolesController(IMediator mediator)
         {
             _mediator = mediator;
         }
 
         [HttpGet("read")]
-        public Task<IReadOnlyList<IdentityClaims>> ReadClaims()
+        public Task<IReadOnlyList<IdentityRoles>> ReadClaims()
         {
-            return _mediator.Send(new GetReadClaimRequest { Data = Unit.Value });
+            return _mediator.Send(new GetReadRoleRequest { Data = Unit.Value });
         }
 
         [HttpPost("add")]
-        public Task AddClaims( GetClaimRequest claimName)
+        public Task AddClaims( GetRoleRequest roleName)
         {
-            return _mediator.Send(new GetAddClaimRequest { Data = claimName });
+            return _mediator.Send(new GetAddRoleRequest { Data = roleName });
         }
 
         [HttpPut("update/{id}")]
@@ -41,7 +42,7 @@ namespace Vspt.BackEnd.Api.Controllers
         }
 
         [HttpDelete("delete/{id}")]
-        public Task DeleteClaims(Guid id) 
+        public Task DeleteClaims([FromQuery] Guid id) 
         {
             return _mediator.Send(new GetDeleteClaimRequest { Data = new() { Id = id } });
         }

@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Vspt.Box.Data.Entities;
 
 namespace Vspt.BackEnd.Domain.Entity
 {
-    public sealed class IdentityRoles
-    {       
+    public sealed class IdentityRoles : IEntityWithId
+    {
         public Guid Id { get; set; }
-        public string RoleName { get; set; }      
+        public string? RoleName { get; set; }
     }
 }
