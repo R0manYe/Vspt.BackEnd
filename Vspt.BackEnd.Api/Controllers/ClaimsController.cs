@@ -37,7 +37,8 @@ namespace Vspt.BackEnd.Api.Controllers
         [HttpPut("update/{id}")]
         public Task UpdateClaims( Guid id,IdentityClaims request) 
         {
-            return _mediator.Send(new GetUpdateClaimRequest { Data = new() { Id = id, ClaimName=request.ClaimName }  } );
+            return _mediator.Send(new GetUpdateClaimRequest { Data = new() { Id = id, 
+                ClaimName=request.ClaimName, ClaimType=request.ClaimType, ClaimValue=request.ClaimValue}  } );
         }
 
         [HttpDelete("delete/{id}")]

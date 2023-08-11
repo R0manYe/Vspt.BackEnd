@@ -3,6 +3,8 @@
     public record GetClaimRequest
     {
         public string ClaimName { get; set; }
+        public required ClaimType ClaimType { get; set; }
+        public string ClaimValue { get; set; }
 
     }
 

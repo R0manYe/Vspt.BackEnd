@@ -9,7 +9,7 @@ namespace Vspt.BackEnd.Domain.Entity
 {
     public class FilialsSpr 
     {
-        public ushort Id { get; set; }
+        public uint Id { get; set; }
         public string IdTxt { get; set; }
         public string Name { get; set; }
         public string ShortName { get; set; }

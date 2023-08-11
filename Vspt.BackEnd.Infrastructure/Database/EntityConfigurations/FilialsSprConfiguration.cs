@@ -12,7 +12,7 @@ internal sealed class FilialsSprConfiguration : IEntityTypeConfiguration<Filials
             .ToTable("FilialsSpr");
 
         builder
-            .HasKey(x => x.Id);
+            .HasKey(x =>x.Id);
 
         builder
             .Property(x => x.Name)

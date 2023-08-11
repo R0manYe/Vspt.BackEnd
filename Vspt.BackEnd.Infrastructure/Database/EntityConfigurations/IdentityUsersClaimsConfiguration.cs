@@ -10,11 +10,11 @@ internal sealed class IdentityUsersClaimsConfiguration : IEntityTypeConfiguratio
     {      
 
         builder
-            .HasKey(x => new {x.ClaimId,x.UserId});
+            .HasKey(x => new {x.UserId,x.ClaimId});
 
         builder
             .HasOne(x => x.IdentityUser)
-            .WithMany()
+            .WithMany(x=>x.IdentityUsersClaim)
             .HasForeignKey(x => x.UserId);
 
         builder

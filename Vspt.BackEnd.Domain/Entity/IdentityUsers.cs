@@ -2,11 +2,9 @@
 
 namespace Vspt.BackEnd.Domain.Entity
 {
-    public class IdentityUsers : IEntityWithId
-    {
-        public Guid Id { get; set; }    
-
-        public string? Username { get; set; }
+    public class IdentityUsers : IEntity
+    {    
+        public string Username { get; set; }
 
         public string? Password { get; set; }
 
@@ -18,6 +16,7 @@ namespace Vspt.BackEnd.Domain.Entity
         
         public string? RefreshToken { get; set; }
 
-        public DateTime? RefreshTokenExpiryTime { get; set; }      
+        public DateTime? RefreshTokenExpiryTime { get; set; }
+        public List<IdentityUsersClaims> IdentityUsersClaim { get; set; }
     }
 }

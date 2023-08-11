@@ -192,11 +192,11 @@ namespace Vspt.BackEnd.Api.Migrations
 
             modelBuilder.Entity("Vspt.BackEnd.Domain.Entity.FilialsSpr", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
+                        .HasColumnType("bigint");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
 
                     b.Property<string>("IdTxt")
                         .IsRequired()
@@ -228,9 +228,30 @@ namespace Vspt.BackEnd.Api.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("character varying(50)");
 
+                    b.Property<int>("ClaimType")
+                        .HasColumnType("integer")
+                        .HasComment("ClaimType:\n- Filial = 1\n- Area = 2");
+
+                    b.Property<string>("ClaimValue")
+                        .IsRequired()
+                        .HasColumnType("text");
+
                     b.HasKey("Id");
 
                     b.ToTable("IdentityClaims", "VSPT");
+                });
+
+            modelBuilder.Entity("Vspt.BackEnd.Domain.Entity.IdentityFilialStation", b =>
+                {
+                    b.Property<long>("FilialId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("StationId")
+                        .HasColumnType("text");
+
+                    b.HasKey("FilialId", "StationId");
+
+                    b.ToTable("IdentityFilialStation", "VSPT");
                 });
 
             modelBuilder.Entity("Vspt.BackEnd.Domain.Entity.IdentityRoles", b =>
@@ -251,9 +272,9 @@ namespace Vspt.BackEnd.Api.Migrations
 
             modelBuilder.Entity("Vspt.BackEnd.Domain.Entity.IdentityUsers", b =>
                 {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
+                    b.Property<string>("Username")
+                        .HasMaxLength(50)
+                        .HasColumnType("character varying(50)");
 
                     b.Property<string>("Email")
                         .HasColumnType("text");
@@ -273,31 +294,22 @@ namespace Vspt.BackEnd.Api.Migrations
                     b.Property<string>("Token")
                         .HasColumnType("text");
 
-                    b.Property<string>("Username")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("character varying(50)");
-
-                    b.HasKey("Id");
+                    b.HasKey("Username");
 
                     b.ToTable("IdentityUsers", "VSPT");
                 });
 
             modelBuilder.Entity("Vspt.BackEnd.Domain.Entity.IdentityUsersClaims", b =>
                 {
+                    b.Property<string>("UserId")
+                        .HasColumnType("character varying(50)");
+
                     b.Property<Guid>("ClaimId")
                         .HasColumnType("uuid");
 
-                    b.Property<Guid>("UserId")
-                        .HasColumnType("uuid");
+                    b.HasKey("UserId", "ClaimId");
 
-                    b.Property<string>("ClaimValue")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.HasKey("ClaimId", "UserId");
-
-                    b.HasIndex("UserId");
+                    b.HasIndex("ClaimId");
 
                     b.ToTable("IdentityUsersClaims", "VSPT");
                 });
@@ -307,14 +319,25 @@ namespace Vspt.BackEnd.Api.Migrations
                     b.Property<Guid>("RoleId")
                         .HasColumnType("uuid");
 
-                    b.Property<Guid>("UserId")
-                        .HasColumnType("uuid");
+                    b.Property<string>("UserId")
+                        .HasColumnType("character varying(50)");
 
                     b.HasKey("RoleId", "UserId");
 
                     b.HasIndex("UserId");
 
                     b.ToTable("IdentityUsersRoles", "VSPT");
+                });
+
+            modelBuilder.Entity("Vspt.BackEnd.Domain.Entity.IdentityFilialStation", b =>
+                {
+                    b.HasOne("Vspt.BackEnd.Domain.Entity.FilialsSpr", "Filials")
+                        .WithMany()
+                        .HasForeignKey("FilialId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Filials");
                 });
 
             modelBuilder.Entity("Vspt.BackEnd.Domain.Entity.IdentityUsersClaims", b =>
@@ -325,8 +348,8 @@ namespace Vspt.BackEnd.Api.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Vspt.BackEnd.Domain.Entity.IdentityClaims", "IdentityUser")
-                        .WithMany()
+                    b.HasOne("Vspt.BackEnd.Domain.Entity.IdentityUsers", "IdentityUser")
+                        .WithMany("IdentityUsersClaim")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -353,6 +376,11 @@ namespace Vspt.BackEnd.Api.Migrations
                     b.Navigation("IdentityRole");
 
                     b.Navigation("IdentityUser");
+                });
+
+            modelBuilder.Entity("Vspt.BackEnd.Domain.Entity.IdentityUsers", b =>
+                {
+                    b.Navigation("IdentityUsersClaim");
                 });
 #pragma warning restore 612, 618
         }

@@ -12,7 +12,7 @@ internal sealed class IdentityUsersConfiguration : IEntityTypeConfiguration<Iden
             .ToTable("IdentityUsers");
 
         builder
-            .HasKey(x => x.Id);
+            .HasKey(x => x.Username);
 
         builder
             .Property(x => x.Username)
