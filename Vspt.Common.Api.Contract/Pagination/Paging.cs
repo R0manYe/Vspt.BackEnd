@@ -1,4 +1,4 @@
-﻿namespace Tiss.Common.Api.Contracts.Pagination;
+﻿namespace Vspt.Common.Api.Contracts.Pagination;
 
 public sealed record Paging : IPaging
 {

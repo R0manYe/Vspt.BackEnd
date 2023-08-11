@@ -7,18 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Extensions\**" />
-    <EmbeddedResource Remove="Extensions\**" />
-    <None Remove="Extensions\**" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Grotem.Box" Version="2.3.1" />
+    <PackageReference Include="Refit" Version="6.5.1" />
+    <PackageReference Include="Refit.HttpClientFactory" Version="6.5.1" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Vspt.Box.Data\Vspt.Box.Data.csproj" />
-    <ProjectReference Include="..\Vspt.Common.Api.Contract\Vspt.Common.Api.Contract.csproj" />
+    <ProjectReference Include="..\Vspt.Box.Security\Vspt.Box.Security.csproj" />
   </ItemGroup>
 
 </Project>

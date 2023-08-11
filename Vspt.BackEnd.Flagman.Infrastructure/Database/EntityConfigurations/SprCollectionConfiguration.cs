@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Vspt.BackEnd.Flagman.Domain.Entity;
 
-namespace Tiss.Pricing.Infrastructure.Database.EntityConfigurations;
+namespace Vspt.Pricing.Infrastructure.Database.EntityConfigurations;
 
 internal class SprCollectionConfiguration : IEntityTypeConfiguration<Spr_collection>
 {

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 
 
-namespace Tiss.Service.Common.Validation.Models;
+namespace Vspt.Service.Common.Validation.Models;
 
 public sealed class ValidatedData<TRequestItem, TModel>
 {

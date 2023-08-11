@@ -1,5 +1,5 @@
 ﻿using FluentValidation;
-using Tiss.Common.Api.Contracts.Pagination;
+using Vspt.Common.Api.Contracts.Pagination;
 
 namespace Vspt.Common.Api.Contract.Pagination.Validators;
 

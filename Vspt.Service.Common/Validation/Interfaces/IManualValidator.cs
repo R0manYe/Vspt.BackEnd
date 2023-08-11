@@ -1,4 +1,4 @@
-﻿namespace Tiss.Service.Common.Validation.Interfaces;
+﻿namespace Vspt.Service.Common.Validation.Interfaces;
 
 public interface IManualValidator
 {
