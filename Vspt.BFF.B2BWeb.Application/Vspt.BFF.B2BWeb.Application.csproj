@@ -17,7 +17,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Vspt.BackEnd.Flagman.ApiClient\Vspt.BackEnd.Flagman.ApiClient.csproj" />
     <ProjectReference Include="..\Vspt.Common.Identity\Vspt.Common.Identity.csproj" />
   </ItemGroup>
 
