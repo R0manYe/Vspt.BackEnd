@@ -1,0 +1,21 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Vspt.BackEnd.Flagman.ApiClient;
+using Vspt.BackEnd.Flagman.Domain.Entity;
+using Vspt.Common.Api.Contract.Flagman.DTO.VsptSubjectPersone;
+using Vspt.Common.Api.Contracts.Pagination;
+
+namespace Vspt.BackEnd.Application.Services.SubjectPersone
+{
+    internal sealed class SubjectPersoneService : ISubjectPersoneService
+    {
+        private readonly IFlagmanSubjectPersoneApiClient _flagmanSubjectPersoneApiClient;
+        public Task<IReadOnlyList<Vspt_subject_persone>> GetSubjectPersone()
+        {
+            return _flagmanSubjectPersoneApiClient.GetSubjectPersone();
+        }
+    }
+}
