@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Grotem.Box" Version="2.3.1" />
+    <PackageReference Include="Grotem.Box.Data.EntityFrameworkCore" Version="2.1.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Vspt.BackEnd.Flagman.Domain\Vspt.BackEnd.Flagman.Domain.csproj" />
+    <ProjectReference Include="..\Vspt.BackEnd.Flagman.PublicModels\Vspt.BackEnd.Flagman.PublicModels.csproj" />
+    <ProjectReference Include="..\Vspt.Box.RefitApiClient\Vspt.Box.RefitApiClient.csproj" />
+  </ItemGroup>
+
+</Project>

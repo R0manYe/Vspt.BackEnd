@@ -15,7 +15,7 @@ namespace Vspt.BackEnd.Api.Controllers
     {
         private readonly ISubjectPersoneService _subjectPersoneService;
         [HttpGet("count")]
-        public Task<IReadOnlyList<Vspt_subject_persone>> GetSuppliersCount()
+        public Task<Vspt_subject_persone> GetSuppliersCount()
         {
             return _subjectPersoneService.GetSubjectPersone();
         }

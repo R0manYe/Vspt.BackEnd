@@ -2,20 +2,28 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
-using Vspt.BackEnd.Flagman.ApiClient;
 using Vspt.BackEnd.Flagman.Domain.Entity;
 using Vspt.Common.Api.Contract.Flagman.DTO.VsptSubjectPersone;
 using Vspt.Common.Api.Contracts.Pagination;
+using Vspt.Pricing.ApiClients;
 
 namespace Vspt.BackEnd.Application.Services.SubjectPersone
 {
     internal sealed class SubjectPersoneService : ISubjectPersoneService
     {
-        private readonly IFlagmanSubjectPersoneApiClient _flagmanSubjectPersoneApiClient;
-        public Task<IReadOnlyList<Vspt_subject_persone>> GetSubjectPersone()
+        private readonly IFlagmanApiClient _flagmanApiClient;
+        public SubjectPersoneService (IFlagmanApiClient flagmanApiClient) 
         {
-            return _flagmanSubjectPersoneApiClient.GetSubjectPersone();
+            _flagmanApiClient=flagmanApiClient;
         }
+       
+        public async Task<Vspt_subject_persone> GetSubjectPersone()
+        {
+            return await _flagmanApiClient.GetVsptSubject();
+        }
+
+       
     }
 }

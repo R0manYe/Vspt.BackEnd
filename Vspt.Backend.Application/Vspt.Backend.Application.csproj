@@ -21,9 +21,13 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Vspt.BackEnd.ApiClient\Vspt.BackEnd.ApiClient.csproj" />
     <ProjectReference Include="..\Vspt.BackEnd.Domain\Vspt.BackEnd.Domain.csproj" />
+    <ProjectReference Include="..\Vspt.BackEnd.Flagman.ApClient\Vspt.BackEnd.Flagman.ApiClients.csproj" />
+    <ProjectReference Include="..\Vspt.BackEnd.Flagman.Domain\Vspt.BackEnd.Flagman.Domain.csproj" />
     <ProjectReference Include="..\Vspt.BackEnd.Infrastructure\Vspt.BackEnd.Infrastructure.csproj" />
     <ProjectReference Include="..\Vspt.Common.Api.Contract\Vspt.Common.Api.Contract.csproj" />
+    <ProjectReference Include="..\Vspt.Common.Identity\Vspt.Common.Identity.csproj" />
     <ProjectReference Include="..\Vspt.Shared.MediatR\Vspt.Box.MediatR.csproj" />
   </ItemGroup>
 

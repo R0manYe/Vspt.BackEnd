@@ -11,6 +11,6 @@ namespace Vspt.BackEnd.Application.Services.SubjectPersone
 {
     public interface ISubjectPersoneService
     {
-        Task<IReadOnlyList<Vspt_subject_persone>> GetSubjectPersone();
+        Task<Vspt_subject_persone> GetSubjectPersone();
     }
 }
