@@ -14,7 +14,7 @@ namespace Vspt.BackEnd.Flagman.Infrastructure.Repositories
 
         public async Task<List<Vspt_subject_persone>> GetVsptSubjectPersone(CancellationToken cancellationToken)
         {
-            return await _entityDbSet.AsNoTracking().Take(10).ToListAsync(cancellationToken);
+            return await _entityDbSet.AsNoTracking().ToListAsync(cancellationToken);
         }
     }
 }

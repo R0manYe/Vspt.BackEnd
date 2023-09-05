@@ -26,6 +26,7 @@ internal class Program
         builder.Services.AddSwaggerGen();        
         builder.Services.AddInfrastructureReferences(builder.Configuration);
         builder.Services.AddApplicationReferences(builder.Configuration);
+        builder.Services.AddApiVersioning();
         builder.Services.AddCors(option =>
         {
             option.AddPolicy("MyPolicy", builder =>
