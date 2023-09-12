@@ -6,7 +6,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Vspt.BackEnd.Flagman.Domain.Entity;
 using Vspt.Common.Api.Contracts.Pagination;
-using Vspt.Pricing.ApiClients;
+using Vspt.BackEnd.Flagman.ApiClients;
 
 namespace Vspt.BackEnd.Application.Services.SubjectPersone
 {

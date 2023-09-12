@@ -2,7 +2,6 @@
 using Microsoft.Extensions.DependencyInjection;
 using Vspt.BackEnd.Domain.Contract;
 using Vspt.BackEnd.Infrastructure.Repositories;
-using Vspt.BackEnd.Flagman.ApiClient.Infrastructure;
 using Vspt.Service.Common;
 
 
