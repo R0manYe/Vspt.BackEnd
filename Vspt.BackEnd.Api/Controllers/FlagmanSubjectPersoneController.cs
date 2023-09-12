@@ -4,21 +4,28 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Vspt.BackEnd.Application.Services.SubjectPersone;
 using Vspt.BackEnd.Flagman.Domain.Entity;
+using Vspt.Common.Api.Contracts.Pagination;
 
 namespace Vspt.BackEnd.Api.Controllers
 {
-    [Route("v1/subjectpersone")]
+    [Route("v1/vspt-subjects/")]
     [ApiController]
-    [ApiVersionNeutral]    
+ //   [ApiVersionNeutral]    
 
     public class FlagmanSubjectPersoneController : ControllerBase
     {
         private readonly ISubjectPersoneService _subjectPersoneService;
-       
-        [HttpGet("count")]
-        public Task<List<Vspt_subject_persone>> GetSubjectCount()
+
+        public FlagmanSubjectPersoneController(ISubjectPersoneService subjectPersoneService)
         {
-            return _subjectPersoneService.GetSubjectPersone();
+            _subjectPersoneService = subjectPersoneService;
+        }
+
+        [HttpPost("list")]
+        public Task<IReadOnlyList<Vspt_subject_personeDTO>> GetSubjectCount(Paging request)
+        {
+            return _subjectPersoneService.GetSubjectPersone(request);
+           
         }
 
     }

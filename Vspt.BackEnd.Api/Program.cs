@@ -6,7 +6,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using System;
-using System.Data.Entity;
 using System.Text;
 using Vspt.BackEnd.Application.Extensions;
 using Vspt.BackEnd.Infrastructure.Database.EntityConfigurations;
@@ -25,8 +24,7 @@ internal class Program
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();        
         builder.Services.AddInfrastructureReferences(builder.Configuration);
-        builder.Services.AddApplicationReferences(builder.Configuration);
-        builder.Services.AddApiVersioning();
+        builder.Services.AddApplicationReferences(builder.Configuration);      
         builder.Services.AddCors(option =>
         {
             option.AddPolicy("MyPolicy", builder =>
@@ -74,12 +72,8 @@ internal class Program
         app.UseHttpLogging();
         app.UseCors("MyPolicy");
         app.UseAuthentication();
-        
-
         app.UseAuthorization();
-
         app.MapControllers();
-
         app.Run();
     }
 }

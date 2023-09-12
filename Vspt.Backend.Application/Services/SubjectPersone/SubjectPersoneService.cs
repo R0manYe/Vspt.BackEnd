@@ -18,11 +18,12 @@ namespace Vspt.BackEnd.Application.Services.SubjectPersone
             _flagmanApiClient=flagmanApiClient;
         }
        
-        public async Task<List<Vspt_subject_persone>> GetSubjectPersone()
+        public async Task<IReadOnlyList<Vspt_subject_personeDTO>> GetSubjectPersone(Paging request)
         {
-            return await _flagmanApiClient.GetVsptSubject();
+            var result=await _flagmanApiClient.GetVsptSubject(request);
+            
+            return result;
         }
-
        
     }
 }

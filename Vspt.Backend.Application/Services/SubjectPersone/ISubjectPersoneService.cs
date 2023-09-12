@@ -10,6 +10,6 @@ namespace Vspt.BackEnd.Application.Services.SubjectPersone
 {
     public interface ISubjectPersoneService
     {
-        Task<List<Vspt_subject_persone>> GetSubjectPersone();
+        Task<IReadOnlyList<Vspt_subject_personeDTO>> GetSubjectPersone(Paging request);       
     }
 }

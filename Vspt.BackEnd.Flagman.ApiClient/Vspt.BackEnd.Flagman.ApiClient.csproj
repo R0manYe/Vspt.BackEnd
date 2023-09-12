@@ -13,6 +13,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Vspt.BackEnd.Flagman.Domain\Vspt.BackEnd.Flagman.Domain.csproj" />
     <ProjectReference Include="..\Vspt.Box.RefitApiClient\Vspt.Box.RefitApiClient.csproj" />
+    <ProjectReference Include="..\Vspt.Common.Api.Contract\Vspt.Common.Api.Contract.csproj" />
   </ItemGroup>
 
 </Project>

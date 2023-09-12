@@ -1,13 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
+﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using System.Data.Common;
-using System.Data.Entity;
 using Vspt.BackEnd.Domain.Contract;
-using Vspt.BackEnd.Infrastructure.Database.EntityConfigurations;
 using Vspt.BackEnd.Infrastructure.Repositories;
-using Vspt.Box.EfCore.Infrastructure;
-using Vspt.Box.EfCore.Npgsql.Infrastructure;
+using Vspt.BackEnd.Flagman.ApiClient.Infrastructure;
 using Vspt.Service.Common;
 
 
@@ -25,9 +20,9 @@ public static class ServiceCollectionExtensions
         AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
         services.AddScoped<IUsersRepository, UserRepository>();
         services.AddScoped<IClaimsRepository, ClaimRepository>();
-        services.AddScoped<IRolesRepository, RoleRepository>();
+        services.AddScoped<IRolesRepository, RoleRepository>();     
+     
 
-      
         return services;
     }
 }    

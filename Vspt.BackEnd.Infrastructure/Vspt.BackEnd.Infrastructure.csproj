@@ -25,6 +25,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Vspt.BackEnd.Domain\Vspt.BackEnd.Domain.csproj" />
+    <ProjectReference Include="..\Vspt.BackEnd.Flagman.ApiClient\Vspt.BackEnd.Flagman.ApiClient.csproj" />
     <ProjectReference Include="..\Vspt.Box.Data.EfCore\Vspt.Box.Data.EfCore.csproj" />
     <ProjectReference Include="..\Vspt.Box.EfCore.Npgsql\Vspt.Box.EfCore.Npgsql.csproj" />
     <ProjectReference Include="..\Vspt.Service.Common\Vspt.Service.Common.csproj" />

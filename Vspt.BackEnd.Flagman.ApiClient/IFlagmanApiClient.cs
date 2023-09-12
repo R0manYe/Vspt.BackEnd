@@ -1,7 +1,9 @@
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
 using Refit;
 using Vspt.BackEnd.Flagman.Domain.Entity;
+using Vspt.Common.Api.Contracts.Pagination;
 
 namespace Vspt.Pricing.ApiClients
 {
@@ -10,8 +12,8 @@ namespace Vspt.Pricing.ApiClients
 		/// <summary>
 		/// Выборка пользователей
 		/// </summary>	
-		[Get("/v1/Vspt-subject")]
-        Task <List<Vspt_subject_persone>> GetVsptSubject(CancellationToken cancellationToken = default);
+		[Get("/api/Flagman/vspt_subject_persone")]
+        Task <IReadOnlyList<Vspt_subject_personeDTO>> GetVsptSubject([Body] Paging request, CancellationToken cancellationToken = default);
 		
 	}
 }
