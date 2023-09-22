@@ -12,14 +12,17 @@ internal sealed class IdentityClaimsConfiguration : IEntityTypeConfiguration<Ide
             .ToTable("IdentityClaims");
 
         builder
-            .HasKey(x => x.Id);
+            .HasKey(x => new {x.Id});
 
         builder
-            .Property(x => x.ClaimName)
-            .IsRequired()
-            .HasMaxLength(50);
-        
-            
-      
+           .HasOne(x => x.IdentityUser)
+           .WithMany()
+           .HasForeignKey(x => x.ClaimUser);
+        builder
+          .HasOne(x => x.TypeClaim)
+          .WithMany()
+          .HasForeignKey(x => x.ClaimName);
+
+
     }
 }

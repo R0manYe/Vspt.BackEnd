@@ -16,7 +16,6 @@ namespace Vspt.BackEnd.Domain.Entity
         
         public string? RefreshToken { get; set; }
 
-        public DateTime? RefreshTokenExpiryTime { get; set; }
-        public List<IdentityUsersClaims> IdentityUsersClaim { get; set; }
+        public DateTime? RefreshTokenExpiryTime { get; set; }     
     }
 }

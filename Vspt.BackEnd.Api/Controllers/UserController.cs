@@ -3,8 +3,11 @@ using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Vspt.BackEnd.Application.Authentication.Auth;
+using Vspt.BackEnd.Application.features.GetUser;
 using Vspt.BackEnd.Domain.Entity;
 using Vspt.Common.Api.Contract.Postgrees.DTO.Auth;
+using Vspt.Common.Api.Contract.Postgrees.DTO.Claim;
+using Vspt.Common.Api.Contract.Postgrees.DTO.GetFlagman;
 
 namespace Vspt.BackEnd.Api.Controllers;
 
@@ -43,10 +46,14 @@ public class UserController : ControllerBase
         return _mediator.Send(new GetRefreshRequest { Data = request });
     }
 
-    [HttpGet("read")]
-    public async Task<List<IdentityUsers>> GtAllUsers()
+    [HttpGet("AllUser")]
+    public async Task<IEnumerable<GetVsptSubjectPersoneDTO>> GtAllUsers()
     {
         return await _mediator.Send(new GetAllUsersHandlerRequest { Data=Unit.Value });
-    }       
-
+    }
+    [HttpGet("User")]
+    public async Task<IEnumerable<GetVsptSubjectPersoneDTO>> GtUsers(string request)
+    {
+        return await _mediator.Send(new GetUserHandlerRequest { Data=request });
+    }
 }

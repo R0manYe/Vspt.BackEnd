@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Vspt.BackEnd.Flagman.Domain.Entity;
 using Vspt.Common.Api.Contracts.Pagination;
 using Vspt.BackEnd.Flagman.ApiClients;
+using Vspt.Common.Api.Contract.Postgrees.DTO.Claim;
 
 namespace Vspt.BackEnd.Application.Services.SubjectPersone
 {
@@ -18,9 +19,9 @@ namespace Vspt.BackEnd.Application.Services.SubjectPersone
             _flagmanApiClient=flagmanApiClient;
         }
        
-        public async Task<IReadOnlyList<Vspt_subject_personeDTO>> GetSubjectPersone(Paging request)
+        public async Task<IReadOnlyList<Vspt_subject_personeDTO>> GetAllSubjectPersone()
         {
-            var result=await _flagmanApiClient.GetVsptSubject(request);
+            var result=await _flagmanApiClient.GetVsptSubject();
             
             return result;
         }

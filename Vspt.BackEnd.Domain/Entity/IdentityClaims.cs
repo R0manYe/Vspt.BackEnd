@@ -7,10 +7,9 @@ namespace Vspt.BackEnd.Domain.Entity;
 public sealed  class IdentityClaims : IEntityWithId
 {       
     public Guid Id { get; set; }
-
-    public string ClaimName { get; set; }
-
-    public  ClaimType ClaimType { get; set; }
-
+    public byte ClaimName { get; set; }
+    public TypeClaims  TypeClaim { get; set; }
+    public IdentityUsers IdentityUser { get; set; }
+    public string ClaimUser { get; set; }    
     public string ClaimValue { get; set; }    
 }

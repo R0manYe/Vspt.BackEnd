@@ -31,17 +31,7 @@ public class UserRepository : EntityRepository<PgContext, IdentityUsers>, IUsers
     public Task Add(IdentityUsers entity, CancellationToken cancellationToken)
     {
         return _entityDbSet.AddAndSave(entity, cancellationToken);
-    }
-
-    //public Task<bool> GetAnyName(string Unit)
-    //{
-    //    return _entityDbSet.AnyAsync(x => x.Username == Unit);
-    //}
-
-    //public Task<bool> GetAnyEmail(string Unit)
-    //{
-    //    return _entityDbSet.AnyAsync(x => x.Email == Unit);
-    //}
+    }   
 
     public async Task<List<IdentityUsers>> GetAllUsers(CancellationToken cancellationToken)
     {

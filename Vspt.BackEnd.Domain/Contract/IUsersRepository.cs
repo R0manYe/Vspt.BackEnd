@@ -10,9 +10,7 @@ namespace Vspt.BackEnd.Domain.Contract
         Task<IdentityUsers> GetByToken(string token, CancellationToken cancellationToken);
         Task GetBySaveToken(IdentityUsers user, CancellationToken cancellationToken);
 
-        Task Add(IdentityUsers entity, CancellationToken cancellationToken);
-
-      //  Task<bool> GetAnyName(string Unit);     
+        Task Add(IdentityUsers entity, CancellationToken cancellationToken);    
 
         Task<List<IdentityUsers>> GetAllUsers(CancellationToken cancellationToken);
     }

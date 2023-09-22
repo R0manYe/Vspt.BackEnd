@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using MassTransit;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -10,7 +11,7 @@ namespace Vspt.BackEnd.Api.Controllers
 {
     [Route("v1/vspt-subjects/")]
     [ApiController]
- //   [ApiVersionNeutral]    
+    [ApiVersionNeutral]    
 
     public class FlagmanSubjectPersoneController : ControllerBase
     {
@@ -22,11 +23,17 @@ namespace Vspt.BackEnd.Api.Controllers
         }
 
         [HttpPost("list")]
-        public Task<IReadOnlyList<Vspt_subject_personeDTO>> GetSubjectCount(Paging request)
+        public Task<IReadOnlyList<Vspt_subject_personeDTO>> GetAllUsersSubjectPersone()
         {
-            return _subjectPersoneService.GetSubjectPersone(request);
+            return _subjectPersoneService.GetAllSubjectPersone();
            
         }
+        //[HttpPost("getUser")]
+        //public Task<IReadOnlyList<Vspt_subject_personeDTO>> GetUserSubjectRepsone(string search)
+        //{
+        //    return _subjectPersoneService.GetUserSubjectPersone(search);
+
+        //}
 
     }
 }

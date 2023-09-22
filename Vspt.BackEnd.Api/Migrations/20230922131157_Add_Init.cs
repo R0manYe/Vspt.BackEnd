@@ -7,7 +7,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Vspt.BackEnd.Api.Migrations
 {
     /// <inheritdoc />
-    public partial class InitMigration : Migration
+    public partial class Add_Init : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -17,37 +17,6 @@ namespace Vspt.BackEnd.Api.Migrations
 
             migrationBuilder.AlterDatabase()
                 .Annotation("Npgsql:PostgresExtension:pgcrypto", ",,");
-
-            migrationBuilder.CreateTable(
-                name: "FilialsSpr",
-                schema: "VSPT",
-                columns: table => new
-                {
-                    Id = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    IdTxt = table.Column<string>(type: "text", nullable: false),
-                    Name = table.Column<string>(type: "character varying(30)", maxLength: 30, nullable: false),
-                    ShortName = table.Column<string>(type: "character varying(20)", maxLength: 20, nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_FilialsSpr", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "IdentityClaims",
-                schema: "VSPT",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uuid", nullable: false),
-                    ClaimName = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
-                    ClaimType = table.Column<int>(type: "integer", nullable: false, comment: "ClaimType:\n- Filial = 1\n- Area = 2"),
-                    ClaimValue = table.Column<string>(type: "text", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_IdentityClaims", x => x.Id);
-                });
 
             migrationBuilder.CreateTable(
                 name: "IdentityRoles",
@@ -154,90 +123,96 @@ namespace Vspt.BackEnd.Api.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "IdentityFilialStation",
+                name: "SprFilials",
                 schema: "VSPT",
                 columns: table => new
                 {
-                    FilialId = table.Column<long>(type: "bigint", nullable: false),
-                    StationId = table.Column<string>(type: "text", nullable: false)
+                    Id = table.Column<byte>(type: "smallint", nullable: false),
+                    IdTxt = table.Column<string>(type: "text", nullable: false),
+                    Name = table.Column<string>(type: "text", nullable: false),
+                    ShortName = table.Column<string>(type: "text", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_IdentityFilialStation", x => new { x.FilialId, x.StationId });
-                    table.ForeignKey(
-                        name: "FK_IdentityFilialStation_FilialsSpr_FilialId",
-                        column: x => x.FilialId,
-                        principalSchema: "VSPT",
-                        principalTable: "FilialsSpr",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                    table.PrimaryKey("PK_SprFilials", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "IdentityUsersClaims",
+                name: "TypeClaims",
                 schema: "VSPT",
                 columns: table => new
                 {
-                    UserId = table.Column<string>(type: "character varying(50)", nullable: false),
-                    ClaimId = table.Column<Guid>(type: "uuid", nullable: false)
+                    Id = table.Column<byte>(type: "smallint", nullable: false),
+                    Name = table.Column<string>(type: "text", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_IdentityUsersClaims", x => new { x.UserId, x.ClaimId });
+                    table.PrimaryKey("PK_TypeClaims", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "SprDistricts",
+                schema: "VSPT",
+                columns: table => new
+                {
+                    id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Name = table.Column<string>(type: "text", nullable: false),
+                    District_id_txt = table.Column<string>(type: "text", nullable: false),
+                    Bu_id = table.Column<byte>(type: "smallint", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_SprDistricts", x => x.id);
                     table.ForeignKey(
-                        name: "FK_IdentityUsersClaims_IdentityClaims_ClaimId",
-                        column: x => x.ClaimId,
+                        name: "FK_SprDistricts_SprFilials_Bu_id",
+                        column: x => x.Bu_id,
                         principalSchema: "VSPT",
-                        principalTable: "IdentityClaims",
+                        principalTable: "SprFilials",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "IdentityClaims",
+                schema: "VSPT",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    ClaimName = table.Column<byte>(type: "smallint", nullable: false),
+                    ClaimUser = table.Column<string>(type: "character varying(50)", nullable: false),
+                    ClaimValue = table.Column<string>(type: "text", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_IdentityClaims", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_IdentityUsersClaims_IdentityUsers_UserId",
-                        column: x => x.UserId,
+                        name: "FK_IdentityClaims_IdentityUsers_ClaimUser",
+                        column: x => x.ClaimUser,
                         principalSchema: "VSPT",
                         principalTable: "IdentityUsers",
                         principalColumn: "Username",
                         onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "IdentityUsersRoles",
-                schema: "VSPT",
-                columns: table => new
-                {
-                    UserId = table.Column<string>(type: "character varying(50)", nullable: false),
-                    RoleId = table.Column<Guid>(type: "uuid", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_IdentityUsersRoles", x => new { x.RoleId, x.UserId });
                     table.ForeignKey(
-                        name: "FK_IdentityUsersRoles_IdentityRoles_RoleId",
-                        column: x => x.RoleId,
+                        name: "FK_IdentityClaims_TypeClaims_ClaimName",
+                        column: x => x.ClaimName,
                         principalSchema: "VSPT",
-                        principalTable: "IdentityRoles",
+                        principalTable: "TypeClaims",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_IdentityUsersRoles_IdentityUsers_UserId",
-                        column: x => x.UserId,
-                        principalSchema: "VSPT",
-                        principalTable: "IdentityUsers",
-                        principalColumn: "Username",
-                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_IdentityUsersClaims_ClaimId",
+                name: "IX_IdentityClaims_ClaimName",
                 schema: "VSPT",
-                table: "IdentityUsersClaims",
-                column: "ClaimId");
+                table: "IdentityClaims",
+                column: "ClaimName");
 
             migrationBuilder.CreateIndex(
-                name: "IX_IdentityUsersRoles_UserId",
+                name: "IX_IdentityClaims_ClaimUser",
                 schema: "VSPT",
-                table: "IdentityUsersRoles",
-                column: "UserId");
+                table: "IdentityClaims",
+                column: "ClaimUser");
 
             migrationBuilder.CreateIndex(
                 name: "IX_InboxState_Delivered",
@@ -276,21 +251,23 @@ namespace Vspt.BackEnd.Api.Migrations
                 schema: "VSPT",
                 table: "OutboxState",
                 column: "Created");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_SprDistricts_Bu_id",
+                schema: "VSPT",
+                table: "SprDistricts",
+                column: "Bu_id");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "IdentityFilialStation",
+                name: "IdentityClaims",
                 schema: "VSPT");
 
             migrationBuilder.DropTable(
-                name: "IdentityUsersClaims",
-                schema: "VSPT");
-
-            migrationBuilder.DropTable(
-                name: "IdentityUsersRoles",
+                name: "IdentityRoles",
                 schema: "VSPT");
 
             migrationBuilder.DropTable(
@@ -306,19 +283,19 @@ namespace Vspt.BackEnd.Api.Migrations
                 schema: "VSPT");
 
             migrationBuilder.DropTable(
-                name: "FilialsSpr",
-                schema: "VSPT");
-
-            migrationBuilder.DropTable(
-                name: "IdentityClaims",
-                schema: "VSPT");
-
-            migrationBuilder.DropTable(
-                name: "IdentityRoles",
+                name: "SprDistricts",
                 schema: "VSPT");
 
             migrationBuilder.DropTable(
                 name: "IdentityUsers",
+                schema: "VSPT");
+
+            migrationBuilder.DropTable(
+                name: "TypeClaims",
+                schema: "VSPT");
+
+            migrationBuilder.DropTable(
+                name: "SprFilials",
                 schema: "VSPT");
         }
     }

@@ -190,47 +190,18 @@ namespace Vspt.BackEnd.Api.Migrations
                     b.ToTable("OutboxState", "VSPT");
                 });
 
-            modelBuilder.Entity("Vspt.BackEnd.Domain.Entity.FilialsSpr", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
-
-                    b.Property<string>("IdTxt")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(30)
-                        .HasColumnType("character varying(30)");
-
-                    b.Property<string>("ShortName")
-                        .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("character varying(20)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("FilialsSpr", "VSPT");
-                });
-
             modelBuilder.Entity("Vspt.BackEnd.Domain.Entity.IdentityClaims", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
-                    b.Property<string>("ClaimName")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("character varying(50)");
+                    b.Property<byte>("ClaimName")
+                        .HasColumnType("smallint");
 
-                    b.Property<int>("ClaimType")
-                        .HasColumnType("integer")
-                        .HasComment("ClaimType:\n- Filial = 1\n- Area = 2");
+                    b.Property<string>("ClaimUser")
+                        .IsRequired()
+                        .HasColumnType("character varying(50)");
 
                     b.Property<string>("ClaimValue")
                         .IsRequired()
@@ -238,20 +209,11 @@ namespace Vspt.BackEnd.Api.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("ClaimName");
+
+                    b.HasIndex("ClaimUser");
+
                     b.ToTable("IdentityClaims", "VSPT");
-                });
-
-            modelBuilder.Entity("Vspt.BackEnd.Domain.Entity.IdentityFilialStation", b =>
-                {
-                    b.Property<long>("FilialId")
-                        .HasColumnType("bigint");
-
-                    b.Property<string>("StationId")
-                        .HasColumnType("text");
-
-                    b.HasKey("FilialId", "StationId");
-
-                    b.ToTable("IdentityFilialStation", "VSPT");
                 });
 
             modelBuilder.Entity("Vspt.BackEnd.Domain.Entity.IdentityRoles", b =>
@@ -299,88 +261,96 @@ namespace Vspt.BackEnd.Api.Migrations
                     b.ToTable("IdentityUsers", "VSPT");
                 });
 
-            modelBuilder.Entity("Vspt.BackEnd.Domain.Entity.IdentityUsersClaims", b =>
+            modelBuilder.Entity("Vspt.BackEnd.Domain.Entity.SprDistrict", b =>
                 {
-                    b.Property<string>("UserId")
-                        .HasColumnType("character varying(50)");
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
 
-                    b.Property<Guid>("ClaimId")
-                        .HasColumnType("uuid");
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("id"));
 
-                    b.HasKey("UserId", "ClaimId");
+                    b.Property<byte>("Bu_id")
+                        .HasColumnType("smallint");
 
-                    b.HasIndex("ClaimId");
+                    b.Property<string>("District_id_txt")
+                        .IsRequired()
+                        .HasColumnType("text");
 
-                    b.ToTable("IdentityUsersClaims", "VSPT");
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("id");
+
+                    b.HasIndex("Bu_id");
+
+                    b.ToTable("SprDistricts", "VSPT");
                 });
 
-            modelBuilder.Entity("Vspt.BackEnd.Domain.Entity.IdentityUsersRoles", b =>
+            modelBuilder.Entity("Vspt.BackEnd.Domain.Entity.SprFilials", b =>
                 {
-                    b.Property<Guid>("RoleId")
-                        .HasColumnType("uuid");
+                    b.Property<byte>("Id")
+                        .HasColumnType("smallint");
 
-                    b.Property<string>("UserId")
-                        .HasColumnType("character varying(50)");
+                    b.Property<string>("IdTxt")
+                        .IsRequired()
+                        .HasColumnType("text");
 
-                    b.HasKey("RoleId", "UserId");
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text");
 
-                    b.HasIndex("UserId");
+                    b.Property<string>("ShortName")
+                        .IsRequired()
+                        .HasColumnType("text");
 
-                    b.ToTable("IdentityUsersRoles", "VSPT");
+                    b.HasKey("Id");
+
+                    b.ToTable("SprFilials", "VSPT");
                 });
 
-            modelBuilder.Entity("Vspt.BackEnd.Domain.Entity.IdentityFilialStation", b =>
+            modelBuilder.Entity("Vspt.BackEnd.Domain.Entity.TypeClaims", b =>
                 {
-                    b.HasOne("Vspt.BackEnd.Domain.Entity.FilialsSpr", "Filials")
+                    b.Property<byte>("Id")
+                        .HasColumnType("smallint");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("TypeClaims", "VSPT");
+                });
+
+            modelBuilder.Entity("Vspt.BackEnd.Domain.Entity.IdentityClaims", b =>
+                {
+                    b.HasOne("Vspt.BackEnd.Domain.Entity.TypeClaims", "TypeClaim")
                         .WithMany()
-                        .HasForeignKey("FilialId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Filials");
-                });
-
-            modelBuilder.Entity("Vspt.BackEnd.Domain.Entity.IdentityUsersClaims", b =>
-                {
-                    b.HasOne("Vspt.BackEnd.Domain.Entity.IdentityClaims", "IdentityClaim")
-                        .WithMany()
-                        .HasForeignKey("ClaimId")
+                        .HasForeignKey("ClaimName")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Vspt.BackEnd.Domain.Entity.IdentityUsers", "IdentityUser")
-                        .WithMany("IdentityUsersClaim")
-                        .HasForeignKey("UserId")
+                        .WithMany()
+                        .HasForeignKey("ClaimUser")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("IdentityClaim");
 
                     b.Navigation("IdentityUser");
+
+                    b.Navigation("TypeClaim");
                 });
 
-            modelBuilder.Entity("Vspt.BackEnd.Domain.Entity.IdentityUsersRoles", b =>
+            modelBuilder.Entity("Vspt.BackEnd.Domain.Entity.SprDistrict", b =>
                 {
-                    b.HasOne("Vspt.BackEnd.Domain.Entity.IdentityRoles", "IdentityRole")
+                    b.HasOne("Vspt.BackEnd.Domain.Entity.SprFilials", "SprFilial")
                         .WithMany()
-                        .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .HasForeignKey("Bu_id")
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("Vspt.BackEnd.Domain.Entity.IdentityUsers", "IdentityUser")
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("IdentityRole");
-
-                    b.Navigation("IdentityUser");
-                });
-
-            modelBuilder.Entity("Vspt.BackEnd.Domain.Entity.IdentityUsers", b =>
-                {
-                    b.Navigation("IdentityUsersClaim");
+                    b.Navigation("SprFilial");
                 });
 #pragma warning restore 612, 618
         }
