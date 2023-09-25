@@ -32,13 +32,18 @@ namespace Vspt.BackEnd.Api.Controllers
         public Task AddClaims( GetClaimRequest claimName)
         {
             return _mediator.Send(new GetAddClaimRequest { Data = claimName });
-        }
-                
+        }      
 
         [HttpDelete("delete/{id}")]
         public Task DeleteClaims(Guid id) 
         {
             return _mediator.Send(new GetDeleteClaimRequest { Data = new() { Id = id } });
+        }
+
+        [HttpPost("readCliamType")]
+        public Task<IReadOnlyList<TypeClaims>> ReadTypeClaims()
+        {
+            return _mediator.Send(new GetReadTypeClaimRequest { Data = Unit.Value });
         }
     }
 }

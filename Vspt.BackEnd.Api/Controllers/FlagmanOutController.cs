@@ -9,31 +9,32 @@ using Vspt.Common.Api.Contracts.Pagination;
 
 namespace Vspt.BackEnd.Api.Controllers
 {
-    [Route("v1/vspt-subjects/")]
+    [Route("v1/vspt-flagman/")]
     [ApiController]
     [ApiVersionNeutral]    
 
-    public class FlagmanSubjectPersoneController : ControllerBase
+    public class FlagmanOutController : ControllerBase
     {
         private readonly ISubjectPersoneService _subjectPersoneService;
+        private readonly ISprOrgService _sprOrgService;
 
-        public FlagmanSubjectPersoneController(ISubjectPersoneService subjectPersoneService)
+        public FlagmanOutController(ISubjectPersoneService subjectPersoneService, ISprOrgService sprOrgService)
         {
             _subjectPersoneService = subjectPersoneService;
+            _sprOrgService = sprOrgService;
         }
 
         [HttpPost("list")]
         public Task<IReadOnlyList<Vspt_subject_personeDTO>> GetAllUsersSubjectPersone()
         {
-            return _subjectPersoneService.GetAllSubjectPersone();
-           
+            return _subjectPersoneService.GetAllSubjectPersone();           
         }
-        //[HttpPost("getUser")]
-        //public Task<IReadOnlyList<Vspt_subject_personeDTO>> GetUserSubjectRepsone(string search)
-        //{
-        //    return _subjectPersoneService.GetUserSubjectPersone(search);
+        [HttpPost("sprOrg")]
+        public Task<IReadOnlyList<Spr_org>> GetSprOrg()
+        {
+            return _sprOrgService.GetSprOrg(); 
+        }
 
-        //}
 
     }
 }

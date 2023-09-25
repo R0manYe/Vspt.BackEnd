@@ -47,12 +47,12 @@ public class UserController : ControllerBase
     }
 
     [HttpGet("AllUser")]
-    public async Task<IEnumerable<GetVsptSubjectPersoneDTO>> GtAllUsers()
+    public async Task<IEnumerable<GetVsptSubjectPersoneDTO>> GetAllUsers()
     {
         return await _mediator.Send(new GetAllUsersHandlerRequest { Data=Unit.Value });
     }
     [HttpGet("User")]
-    public async Task<IEnumerable<GetVsptSubjectPersoneDTO>> GtUsers(string request)
+    public async Task<IEnumerable<GetVsptSubjectPersoneDTO>> GetUser(string request)
     {
         return await _mediator.Send(new GetUserHandlerRequest { Data=request });
     }

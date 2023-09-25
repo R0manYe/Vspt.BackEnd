@@ -11,5 +11,8 @@ public partial interface IFlagmanApiClient
 		/// </summary>	
 	[Get("/api/Flagman/vspt_subject_persone")]
     Task <IReadOnlyList<Vspt_subject_personeDTO>> GetVsptSubject(CancellationToken cancellationToken = default);
-		
-	}
+
+    [Get("/api/Flagman/vspt_subject_persone")]
+    Task<IReadOnlyList<Spr_org>> GetSprOrg(CancellationToken cancellationToken = default);
+
+}

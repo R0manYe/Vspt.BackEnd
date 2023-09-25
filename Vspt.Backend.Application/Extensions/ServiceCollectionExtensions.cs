@@ -15,7 +15,9 @@ public static class ServiceCollectionExtensions
         services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(Assembly.GetExecutingAssembly()));        
         services.AddAutoMapper(Assembly.GetExecutingAssembly());      
         services.AddScoped<ISubjectPersoneService, SubjectPersoneService>();
+        services.AddScoped<ISprOrgService,SprOrgService>();
         services.AddRefitClient<IFlagmanApiClient>().ConfigureHttpClient(c=>c.BaseAddress=new Uri("https://localhost:7201"));
+        services.AddRefitClient<IFlagmanSprOrgApiClient>().ConfigureHttpClient(c=>c.BaseAddress=new Uri("https://localhost:7201"));
 
         return services;
     }

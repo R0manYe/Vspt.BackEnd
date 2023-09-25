@@ -31,5 +31,10 @@ namespace Vspt.BackEnd.Flagman.Api.Controllers
         {
             return await _mediator.Send(new GetVsptSubjectPersoneHandlerRequest { Data = Unit.Value });
         }
+        [HttpGet("vspt_spr_org")]
+        public async Task<List<Spr_org>> GetVsptOrg()
+        {
+            return await _mediator.Send(new GetSprOrgHandlerRequest { Data = Unit.Value });
+        }
     }
 }
