@@ -12,8 +12,8 @@ using Vspt.BackEnd.Infrastructure.Database.EntityConfigurations;
 namespace Vspt.BackEnd.Api.Migrations
 {
     [DbContext(typeof(PgContext))]
-    [Migration("20230922131157_Add_Init")]
-    partial class Add_Init
+    [Migration("20230926024025_Init_migration")]
+    partial class Init_migration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -266,14 +266,13 @@ namespace Vspt.BackEnd.Api.Migrations
 
             modelBuilder.Entity("Vspt.BackEnd.Domain.Entity.SprDistrict", b =>
                 {
-                    b.Property<int>("id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
+                    b.Property<string>("Id")
+                        .HasMaxLength(12)
+                        .HasColumnType("character varying(12)");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("id"));
-
-                    b.Property<byte>("Bu_id")
-                        .HasColumnType("smallint");
+                    b.Property<string>("Bu_id")
+                        .IsRequired()
+                        .HasColumnType("character varying(4)");
 
                     b.Property<string>("District_id_txt")
                         .IsRequired()
@@ -283,7 +282,7 @@ namespace Vspt.BackEnd.Api.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.HasKey("id");
+                    b.HasKey("Id");
 
                     b.HasIndex("Bu_id");
 
@@ -292,12 +291,9 @@ namespace Vspt.BackEnd.Api.Migrations
 
             modelBuilder.Entity("Vspt.BackEnd.Domain.Entity.SprFilials", b =>
                 {
-                    b.Property<byte>("Id")
-                        .HasColumnType("smallint");
-
-                    b.Property<string>("IdTxt")
-                        .IsRequired()
-                        .HasColumnType("text");
+                    b.Property<string>("Id")
+                        .HasMaxLength(4)
+                        .HasColumnType("character varying(4)");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -350,7 +346,7 @@ namespace Vspt.BackEnd.Api.Migrations
                     b.HasOne("Vspt.BackEnd.Domain.Entity.SprFilials", "SprFilial")
                         .WithMany()
                         .HasForeignKey("Bu_id")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("SprFilial");

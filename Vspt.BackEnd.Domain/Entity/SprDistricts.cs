@@ -8,11 +8,11 @@ namespace Vspt.BackEnd.Domain.Entity
 {
     public sealed class SprDistrict
     {    
-        public Int32 id { get; init; }        
+        public string Id { get; init; }        
         public string Name { get; init; }
         public string District_id_txt { get; init; }
         public SprFilials SprFilial { get; init; }
-        public byte Bu_id { get; init; }
+        public string Bu_id { get; init; }
 
     }
 }

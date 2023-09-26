@@ -12,6 +12,10 @@ internal sealed class SprFilialsConfiguration : IEntityTypeConfiguration<SprFili
             .ToTable("SprFilials");
 
         builder
-            .HasKey(x =>x.Id); 
+           .HasKey(x => x.Id);
+        builder
+           .Property(x => x.Id)
+           .IsRequired()
+           .HasMaxLength(4);
     }
 }

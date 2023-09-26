@@ -7,7 +7,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Vspt.BackEnd.Api.Migrations
 {
     /// <inheritdoc />
-    public partial class Add_Init : Migration
+    public partial class Init_migration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -127,8 +127,7 @@ namespace Vspt.BackEnd.Api.Migrations
                 schema: "VSPT",
                 columns: table => new
                 {
-                    Id = table.Column<byte>(type: "smallint", nullable: false),
-                    IdTxt = table.Column<string>(type: "text", nullable: false),
+                    Id = table.Column<string>(type: "character varying(4)", maxLength: 4, nullable: false),
                     Name = table.Column<string>(type: "text", nullable: false),
                     ShortName = table.Column<string>(type: "text", nullable: false)
                 },
@@ -155,22 +154,21 @@ namespace Vspt.BackEnd.Api.Migrations
                 schema: "VSPT",
                 columns: table => new
                 {
-                    id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Id = table.Column<string>(type: "character varying(12)", maxLength: 12, nullable: false),
                     Name = table.Column<string>(type: "text", nullable: false),
                     District_id_txt = table.Column<string>(type: "text", nullable: false),
-                    Bu_id = table.Column<byte>(type: "smallint", nullable: false)
+                    Bu_id = table.Column<string>(type: "character varying(4)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_SprDistricts", x => x.id);
+                    table.PrimaryKey("PK_SprDistricts", x => x.Id);
                     table.ForeignKey(
                         name: "FK_SprDistricts_SprFilials_Bu_id",
                         column: x => x.Bu_id,
                         principalSchema: "VSPT",
                         principalTable: "SprFilials",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
