@@ -11,11 +11,11 @@ namespace Vspt.BackEnd.Application.features.IdentityClaimes
     }
     internal sealed class GetUpdateClaimHandler : BaseRequestHandler<GetUpdateClaimRequest, IdentityClaims, Unit>
     {
-        private readonly IClaimsRepository _claimsRepository;
+        private readonly IIdentityClaimsRepository _claimsRepository;
         
 
 
-        public GetUpdateClaimHandler(IClaimsRepository claimsRepository)
+        public GetUpdateClaimHandler(IIdentityClaimsRepository claimsRepository)
         {
             _claimsRepository = claimsRepository;
            

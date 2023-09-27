@@ -10,11 +10,11 @@ public sealed record GetReadClaimRequest : BaseRequest<Unit, IReadOnlyList<Ident
 }
 internal sealed class GetReadClaimHandler : BaseRequestHandler<GetReadClaimRequest, Unit, IReadOnlyList<IdentityClaims>>
 {
-    private readonly IClaimsRepository _claimsRepository;
+    private readonly IIdentityClaimsRepository _claimsRepository;
    
 
 
-    public GetReadClaimHandler( IClaimsRepository claimsRepository)
+    public GetReadClaimHandler( IIdentityClaimsRepository claimsRepository)
     {
         _claimsRepository = claimsRepository;       
     }

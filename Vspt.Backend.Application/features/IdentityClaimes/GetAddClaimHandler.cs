@@ -7,26 +7,26 @@ using Vspt.Common.Api.Contract.Postgrees.DTO.Claim;
 
 namespace Vspt.BackEnd.Application.features.IdentityClaimes
 {
-    public sealed record GetAddClaimRequest : BaseRequest<GetClaimRequest, Unit>
+    public sealed record GetAddClaimRequest : BaseRequest<GetIdentityClaimRequestDTO, Unit>
     {
     }
-    internal sealed class GetAddClaimHandler : BaseRequestHandler<GetAddClaimRequest, GetClaimRequest, Unit>
+    internal sealed class GetAddClaimHandler : BaseRequestHandler<GetAddClaimRequest, GetIdentityClaimRequestDTO, Unit>
     {
-        private readonly IClaimsRepository _claimsRepository;
+        private readonly IIdentityClaimsRepository _identityclaimsRepository;
         private readonly IMapper _mapper;
 
 
-        public GetAddClaimHandler(IMapper mapper, IClaimsRepository claimsRepository)
+        public GetAddClaimHandler(IMapper mapper, IIdentityClaimsRepository identityClaimsRepository)
         {
-            _claimsRepository = claimsRepository;
+            _identityclaimsRepository = identityClaimsRepository;
             _mapper = mapper;
 
         }
 
-        protected override async Task<Unit> HandleData(GetClaimRequest request, CancellationToken cancellationToken)
+        protected override async Task<Unit> HandleData(GetIdentityClaimRequestDTO request, CancellationToken cancellationToken)
         {
             var user = _mapper.Map<IdentityClaims>(request);
-            await _claimsRepository.AddClaim(user, cancellationToken);
+            await _identityclaimsRepository.AddIdentityClaim(user, cancellationToken);
             return Unit.Value;
 
         }

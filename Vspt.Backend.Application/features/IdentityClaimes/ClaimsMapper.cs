@@ -9,8 +9,8 @@ namespace Vspt.BackEnd.Application.features.Authentication
     {
         public ClaimsMapper() 
         {
-            CreateMap<GetClaimRequest, IdentityClaims>();
-            CreateMap<IdentityClaims, GetClaimRequest>();
+            CreateMap<GetIdentityClaimRequestDTO, IdentityClaims>();
+            CreateMap<IdentityClaims, GetIdentityClaimRequestDTO>();
         }
     }
 }

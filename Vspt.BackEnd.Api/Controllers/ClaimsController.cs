@@ -2,9 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
-using System.Security.Claims;
 using System.Threading.Tasks;
-using System.Windows.Markup;
 using Vspt.BackEnd.Application.features.IdentityClaimes;
 using Vspt.BackEnd.Domain.Entity;
 using Vspt.Common.Api.Contract.Postgrees.DTO.Claim;
@@ -29,7 +27,7 @@ namespace Vspt.BackEnd.Api.Controllers
         }
 
         [HttpPost("add")]
-        public Task AddClaims( GetClaimRequest claimName)
+        public Task AddIdentityClaims( GetIdentityClaimRequestDTO claimName)
         {
             return _mediator.Send(new GetAddClaimRequest { Data = claimName });
         }      
@@ -37,7 +35,7 @@ namespace Vspt.BackEnd.Api.Controllers
         [HttpDelete("delete/{id}")]
         public Task DeleteClaims(Guid id) 
         {
-            return _mediator.Send(new GetDeleteClaimRequest { Data = new() { Id = id } });
+            return _mediator.Send(new GetDeleteClaimRequest { Data = id } );
         }
 
         [HttpPost("readCliamType")]
