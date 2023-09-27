@@ -30,7 +30,7 @@ namespace Vspt.BackEnd.Api.Controllers
         }
 
         [HttpPost("add")]
-        public Task AddRole( GetRoleRequest roleName)
+        public Task AddRole( string roleName)
         {
             return _mediator.Send(new GetAddRoleRequest { Data = roleName });
         }

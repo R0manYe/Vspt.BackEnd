@@ -7,10 +7,10 @@ using Vspt.Common.Api.Contract.Postgrees.DTO.Claim;
 
 namespace Vspt.BackEnd.Application.features.IdentityClaimes
 {
-    public sealed record GetAddRoleRequest : BaseRequest<GetRoleRequest, Unit>
+    public sealed record GetAddRoleRequest : BaseRequest<string, Unit>
     {
     }
-    internal sealed class GetAddRoleHandler : BaseRequestHandler<GetAddRoleRequest, GetRoleRequest, Unit>
+    internal sealed class GetAddRoleHandler : BaseRequestHandler<GetAddRoleRequest, string, Unit>
     {
         private readonly IRolesRepository _rolesRepository;
         private readonly IMapper _mapper;
@@ -23,12 +23,11 @@ namespace Vspt.BackEnd.Application.features.IdentityClaimes
 
         }
 
-        protected override async Task<Unit> HandleData(GetRoleRequest request, CancellationToken cancellationToken)
+        protected override async Task<Unit> HandleData(string request, CancellationToken cancellationToken)
         {
-            var user = _mapper.Map<IdentityRoles>(request);
-            await _rolesRepository.AddRoles(user, cancellationToken);
+            var model=new IdentityRoles { Id=Guid.NewGuid(), RoleName=request};
+            await _rolesRepository.AddRoles(model, cancellationToken);
             return Unit.Value;
-
         }
     }
 }
