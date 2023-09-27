@@ -5,7 +5,6 @@ namespace Vspt.BackEnd.Domain.Contract
 {
     public interface ISprDistrictsRepository
     {
-       Task<IReadOnlyList<SprDistrict>> GetAllDistricts(CancellationToken cancellationToken);
-      
+       Task<IReadOnlyList<SprDistrict>> GetAllDistricts(CancellationToken cancellationToken);      
     }
 }

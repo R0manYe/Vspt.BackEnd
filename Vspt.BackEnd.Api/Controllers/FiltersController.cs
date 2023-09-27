@@ -32,6 +32,5 @@ namespace Vspt.BackEnd.Api.Controllers
         {
             return _mediator.Send(new GetDistrictFilterHandlerRequest { Data = userId });
         }
-
     }
 }

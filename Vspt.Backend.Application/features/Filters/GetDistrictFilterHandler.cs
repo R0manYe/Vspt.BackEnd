@@ -1,10 +1,6 @@
 ﻿using MassTransit.Initializers;
-using System.Runtime.CompilerServices;
-using System.Security.Cryptography.X509Certificates;
 using Vspt.BackEnd.Domain.Contract;
-using Vspt.BackEnd.Flagman.ApiClients;
 using Vspt.Box.MediatR;
-using Vspt.Common.Api.Contract.Postgrees.DTO.GetFlagman;
 using Vspt.Common.Api.Contract.Postgrees.Filters;
 
 namespace Vspt.BackEnd.Application.features.Filters

@@ -17,7 +17,5 @@ public class SprDistrictRepository : EntityRepository<PgContext, SprDistrict>, I
     public async Task<IReadOnlyList<SprDistrict>> GetAllDistricts(CancellationToken cancellationToken)
     {
         return await _entityDbSet.ToListAsync(cancellationToken);
-    }
-
-   
+    }   
 }
