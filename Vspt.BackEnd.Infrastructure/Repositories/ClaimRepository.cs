@@ -5,7 +5,7 @@ using Vspt.BackEnd.Domain.Entity;
 using Vspt.BackEnd.Infrastructure.Database.EntityConfigurations;
 using Vspt.Box.Data.EfCore.Entities;
 using Vspt.Box.EfCore;
-using Vspt.Common.Api.Contract.Postgrees.Filters;
+using Vspt.Common.Api.Contract.Postgrees.DTO.Filters;
 
 namespace Vspt.BackEnd.Infrastructure.Repositories;
 
@@ -49,6 +49,14 @@ public class ClaimRepository : EntityRepository<PgContext, IdentityClaims>, IIde
             .Select(x =>new GetFilterIdRequestDTO { Id=x.ClaimValue})
             .ToListAsync(cancellationToken);
         
+    }
+    public async Task<IReadOnlyList<GetFilterIdRequestDTO>> GetFilialsClaim(string entity, CancellationToken cancellationToken)
+    {
+        return await _entityDbSet
+            .Where(x => x.ClaimUser == entity && x.ClaimName == 1)
+            .Select(x => new GetFilterIdRequestDTO { Id = x.ClaimValue })
+            .ToListAsync(cancellationToken);
+
     }
 }
 

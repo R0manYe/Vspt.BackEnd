@@ -12,7 +12,7 @@ using Vspt.BackEnd.Application.features.IdentityClaimes;
 using Vspt.BackEnd.Application.features.IdentityRolees;
 using Vspt.BackEnd.Domain.Entity;
 using Vspt.Common.Api.Contract.Postgrees.DTO.Claim;
-using Vspt.Common.Api.Contract.Postgrees.Filters;
+using Vspt.Common.Api.Contract.Postgrees.DTO.Filters;
 
 namespace Vspt.BackEnd.Api.Controllers
 {
@@ -27,10 +27,15 @@ namespace Vspt.BackEnd.Api.Controllers
             _mediator = mediator;
         }
 
-        [HttpGet("filterDistrict")]
-        public Task<IReadOnlyList<GetFilterResponseDTO>> ReadClaims(string userId)
+        [HttpGet("filterDistricts")]
+        public Task<IReadOnlyList<GetFilterResponseDTO>> ReadDistricts(string userId)
         {
             return _mediator.Send(new GetDistrictFilterHandlerRequest { Data = userId });
+        }
+        [HttpGet("filterFilials")]
+        public Task<IReadOnlyList<GetFilterResponseDTO>> ReadFilials(string userId)
+        {
+            return _mediator.Send(new GetFilialsFilterHandlerRequest { Data = userId });
         }
     }
 }

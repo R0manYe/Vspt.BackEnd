@@ -1,4 +1,4 @@
-﻿namespace Vspt.Common.Api.Contract.Postgrees.Filters
+﻿namespace Vspt.Common.Api.Contract.Postgrees.DTO.Filters
 {
     public record GetFilterResponseDTO
     {

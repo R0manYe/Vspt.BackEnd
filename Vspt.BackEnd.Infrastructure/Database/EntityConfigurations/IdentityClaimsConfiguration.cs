@@ -12,7 +12,7 @@ internal sealed class IdentityClaimsConfiguration : IEntityTypeConfiguration<Ide
             .ToTable("IdentityClaims");
 
         builder
-            .HasKey(x => new {x.Id});
+            .HasKey(x => new {x.Id,x.ClaimName,x.ClaimValue});
 
         builder
            .HasOne(x => x.IdentityUser)
