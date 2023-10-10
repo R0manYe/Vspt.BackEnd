@@ -4,6 +4,7 @@ using Refit;
 using System.Reflection;
 using Vspt.BackEnd.Application.Services.Filters.District;
 using Vspt.BackEnd.Application.Services.Filters.Filials;
+using Vspt.BackEnd.Application.Services.Filters.FilialsStations;
 using Vspt.BackEnd.Application.Services.SubjectPersone;
 using Vspt.BackEnd.Domain.Contract;
 using Vspt.BackEnd.Flagman.ApiClients;
@@ -22,11 +23,11 @@ public static class ServiceCollectionExtensions
         services.AddScoped<ISprOrgService,SprOrgService>();
         services.AddScoped<ISprDistrictsRepository, SprDistrictRepository>();
         services.AddScoped<ISprFilialsRepository, SprFilialRepository>();
+        services.AddScoped<IFilialsStationsDistrictsRepository, FilialsStationsDistrictsRepository>();
         services.AddScoped<IFilterUserFilialsService, FilterUserFilialsService>();
         services.AddScoped<IFilterUserDistrictsService, FilterUserDistrictsService>();
-        
-        
-
+        services.AddScoped<IFilterFilialsStationsService, FilterFilialsStationsService>();
+  
         services.AddRefitClient<IFlagmanApiClient>().ConfigureHttpClient(c=>c.BaseAddress=new Uri("https://localhost:7201"));
         services.AddRefitClient<IFlagmanSprOrgApiClient>().ConfigureHttpClient(c=>c.BaseAddress=new Uri("https://localhost:7201"));
 

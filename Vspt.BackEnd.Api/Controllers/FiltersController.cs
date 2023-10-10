@@ -37,5 +37,10 @@ namespace Vspt.BackEnd.Api.Controllers
         {
             return _mediator.Send(new GetFilialsFilterHandlerRequest { Data = userId });
         }
+        [HttpGet("filterUserStation")]
+        public Task<IReadOnlyList<GetFilterIdResponseDTO>> GetUserStation(string userId)
+        {
+            return _mediator.Send(new GetUserFilialStationFilterHandlerRequest { Data = userId });
+        }
     }
 }

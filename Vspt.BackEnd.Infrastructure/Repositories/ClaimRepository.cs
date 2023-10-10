@@ -42,18 +42,18 @@ public class ClaimRepository : EntityRepository<PgContext, IdentityClaims>, IIde
         return await _entityDbSet.ToListAsync(cancellationToken);
     }
 
-    public async Task<IReadOnlyList<GetFilterIdRequestDTO>> GetDistrictsClaim(string entity, CancellationToken cancellationToken)
+    public async Task<IReadOnlyList<GetFilterIdRequestDTO>> GetDistrictsClaim(string username, CancellationToken cancellationToken)
     {
         return await _entityDbSet
-            .Where(x => x.ClaimUser == entity && x.ClaimName == 2)
+            .Where(x => x.ClaimUser == username && x.ClaimName == 2)
             .Select(x =>new GetFilterIdRequestDTO { Id=x.ClaimValue})
             .ToListAsync(cancellationToken);
         
     }
-    public async Task<IReadOnlyList<GetFilterIdRequestDTO>> GetFilialsClaim(string entity, CancellationToken cancellationToken)
+    public async Task<IReadOnlyList<GetFilterIdRequestDTO>> GetFilialsClaim(string username, CancellationToken cancellationToken)
     {
         return await _entityDbSet
-            .Where(x => x.ClaimUser == entity && x.ClaimName == 1)
+            .Where(x => x.ClaimUser == username && x.ClaimName == 1)
             .Select(x => new GetFilterIdRequestDTO { Id = x.ClaimValue })
             .ToListAsync(cancellationToken);
 

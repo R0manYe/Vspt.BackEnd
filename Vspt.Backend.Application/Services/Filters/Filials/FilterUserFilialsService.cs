@@ -1,5 +1,9 @@
-﻿using Vspt.BackEnd.Domain.Contract;
+﻿using System.ComponentModel.DataAnnotations;
+using System.Security.Cryptography;
+using System.Security.Cryptography.X509Certificates;
+using Vspt.BackEnd.Domain.Contract;
 using Vspt.Common.Api.Contract.Postgrees.DTO.Filters;
+using static MassTransit.ValidationResultExtensions;
 
 namespace Vspt.BackEnd.Application.Services.Filters.Filials
 {
@@ -13,7 +17,7 @@ namespace Vspt.BackEnd.Application.Services.Filters.Filials
             _sprFilialsRepository = sprFilialsRepository;
         }
 
-        public async Task<IReadOnlyList<GetFilterResponseDTO>> GetFilials(string username, CancellationToken cancellationToken)
+        public async Task<IReadOnlyList<GetFilterResponseDTO>> GetIdNameFilials(string username, CancellationToken cancellationToken)
         {
             var existAviliableFilials = await _identityClaimsRepository.GetFilialsClaim(username, cancellationToken);
             var checkAllFilial = existAviliableFilials.Where(x => x.Id == "1").Count();
@@ -35,6 +39,26 @@ namespace Vspt.BackEnd.Application.Services.Filters.Filials
                 }).ToList();
             }
         }
-                return existAviliableFilials.Select(x => new GetFilterIdRequestDTO
+        public async Task<IReadOnlyList<GetFilterIdResponseDTO>> GetIdFilials(string username, CancellationToken cancellationToken)
+        {
+            var existAviliableFilials = await _identityClaimsRepository.GetFilialsClaim(username, cancellationToken);
+            var checkAllFilial = existAviliableFilials.Where(x => x.Id == "1").Count();
+            var avaliableFilials = await _sprFilialsRepository.GetAllFilials(cancellationToken);
+            if (checkAllFilial == 0)
+            {
+                return existAviliableFilials.Select(x =>new  GetFilterIdResponseDTO
+                {
+                    Id = avaliableFilials[0].Id,
+                }).ToList();               
+               ;
+            }
+            else
+            {
+                return avaliableFilials.Where(s => s.Id.Length > 1).Select(x => new GetFilterIdResponseDTO
+                { Id = x.Id}).ToList();
+            }
+            
+        }
+
     }
 }
