@@ -12,6 +12,6 @@ namespace Vspt.BackEnd.Application.Services.Filters.FilialsStations
 {
     public interface IFilterFilialsStationsService
     {
-        Task<IReadOnlyList<GetFilterIdResponseDTO>> GetFilialsStations(string Username, CancellationToken cancellationToken);
+        Task<IReadOnlyList<GetFilterIdResponseDTO>> GetFilialsStationsId(string Username, CancellationToken cancellationToken);
     }
 }

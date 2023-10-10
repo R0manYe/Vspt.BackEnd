@@ -27,17 +27,17 @@ namespace Vspt.BackEnd.Api.Controllers
             _mediator = mediator;
         }
 
-        [HttpGet("filterDistricts")]
+        [HttpGet("filterUserDistrictsIdName")]
         public Task<IReadOnlyList<GetFilterResponseDTO>> ReadDistricts(string userId)
         {
             return _mediator.Send(new GetDistrictFilterHandlerRequest { Data = userId });
         }
-        [HttpGet("filterFilials")]
+        [HttpGet("filterUserFilialsIdName")]
         public Task<IReadOnlyList<GetFilterResponseDTO>> ReadFilials(string userId)
         {
             return _mediator.Send(new GetFilialsFilterHandlerRequest { Data = userId });
         }
-        [HttpGet("filterUserStation")]
+        [HttpGet("filterUserStationId")]
         public Task<IReadOnlyList<GetFilterIdResponseDTO>> GetUserStation(string userId)
         {
             return _mediator.Send(new GetUserFilialStationFilterHandlerRequest { Data = userId });

@@ -24,7 +24,7 @@ internal sealed class GetUserFilialStationFilterHandler : BaseRequestHandler<Get
     }
     protected override async Task<IReadOnlyList<GetFilterIdResponseDTO>> HandleData(string username, CancellationToken cancellationToken)
     {
-        return await _filterFilialsStationsService.GetFilialsStations(username,cancellationToken);
+        return await _filterFilialsStationsService.GetFilialsStationsId(username,cancellationToken);
        
     }
 }

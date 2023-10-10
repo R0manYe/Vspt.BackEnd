@@ -19,12 +19,12 @@ namespace Vspt.BackEnd.Application.Services.Filters.Filials
         }
 
 
-        public async Task<IReadOnlyList<GetFilterIdResponseDTO>> GetFilialsStations(string Username, CancellationToken cancellationToken)
+        public async Task<IReadOnlyList<GetFilterIdResponseDTO>> GetFilialsStationsId(string Username, CancellationToken cancellationToken)
         {
 
             var existingFilials = _filterUserFilialsService.GetIdFilials(Username, cancellationToken);          
 
-            var existValidFilals = _filialsStationsDistrictsRepository.GetFilialStation(existingFilials.Result, cancellationToken);
+            var existValidFilals = _filialsStationsDistrictsRepository.GetFilialStationFull(existingFilials.Result, cancellationToken);
 
             return existValidFilals.Result;
         }
