@@ -35,5 +35,6 @@ namespace Vspt.BackEnd.Application.Services.Filters.Filials
                 }).ToList();
             }
         }
+                return existAviliableFilials.Select(x => new GetFilterIdRequestDTO
     }
 }
