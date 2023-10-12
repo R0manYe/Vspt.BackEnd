@@ -17,6 +17,7 @@ public static class ServiceCollectionExtensions
         services.AddScoped<IVsptSubjectPersoneRepository, VsptSubjectPersoneRepository>();
         services.AddScoped<ISprOrgRepository, SprOrgRepository>();
         services.AddScoped<ISprCargoRepository, SprCargoRepository>();
+        services.AddScoped<ISprCargoGroupRepository, SprCargoGroupRepository>();
   
         return services;
     }
