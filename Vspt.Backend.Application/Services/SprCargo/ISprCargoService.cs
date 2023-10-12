@@ -8,10 +8,9 @@ using Vspt.Common.Api.Contract.Postgrees.DTO.Claim;
 using Vspt.Common.Api.Contract.Postgrees.DTO.Filters;
 using Vspt.Common.Api.Contracts.Pagination;
 
-namespace Vspt.BackEnd.Application.Services.Filters.District
+namespace Vspt.BackEnd.Application.Services.SprOrg;
+
+public interface ISprCargoService
 {
-    public interface IFilterUserDistrictsService
-    {
-        Task<IReadOnlyList<GetFilterIdNameDTO>> GetDistricts(string Username, CancellationToken cancellationToken);
-    }
+    Task<IReadOnlyList<GetFilterIdNameDTO>> GetSprCargo(CancellationToken cancellationToken);
 }

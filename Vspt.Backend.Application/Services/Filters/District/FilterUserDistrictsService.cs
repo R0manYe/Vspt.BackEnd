@@ -13,14 +13,14 @@ namespace Vspt.BackEnd.Application.Services.Filters.District
             _sprDistrictsRepository = sprDistrictsRepository;
         }
 
-        public async Task<IReadOnlyList<GetFilterResponseDTO>> GetDistricts(string username, CancellationToken cancellationToken)
+        public async Task<IReadOnlyList<GetFilterIdNameDTO>> GetDistricts(string username, CancellationToken cancellationToken)
         {
             var existAviliableDistricts = await _identityClaimsRepository.GetDistrictsClaim(username, cancellationToken);
             var checkAllFilial = existAviliableDistricts.Where(x => x.Id == "1").Count();
             var avaliableDistricts = await _sprDistrictsRepository.GetAllDistricts(cancellationToken);
             if (checkAllFilial == 0)
             {
-                return existAviliableDistricts.Select(x => new GetFilterResponseDTO
+                return existAviliableDistricts.Select(x => new GetFilterIdNameDTO
                 {
                     Id = avaliableDistricts.Where(y => y.Id == x.Id).Select(z => z.Id).First(),
                     Name = avaliableDistricts.Where(y => y.Id == x.Id).Select(z => z.Name).First()
@@ -28,7 +28,7 @@ namespace Vspt.BackEnd.Application.Services.Filters.District
             }
             else
             {
-                return avaliableDistricts.Where(s => s.Id.Length > 1).Select(x => new GetFilterResponseDTO
+                return avaliableDistricts.Where(s => s.Id.Length > 1).Select(x => new GetFilterIdNameDTO
                 {
                     Id = x.Id,
                     Name = x.Name

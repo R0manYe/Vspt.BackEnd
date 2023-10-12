@@ -41,5 +41,15 @@ namespace Vspt.BackEnd.Flagman.Api.Controllers
         {
             return await _mediator.Send(new GetSprOrgHandlerRequest { Data = Unit.Value });
         }
+        [HttpGet("/cargo/full")]
+        public async Task<IReadOnlyList<Spr_cargo>> GetVsptCargoFull()
+        {
+            return await _mediator.Send(new GetSprCargoFullHandlerRequest { Data = Unit.Value });
+        }
+        [HttpGet("cargo/vspt_spr_cargo")]
+        public async Task<IReadOnlyList<GetFilterIdNameDTO>> GetVsptCargo()
+        {
+            return await _mediator.Send(new GetSprCargoHandlerRequest { Data = Unit.Value });
+        }
     }
 }

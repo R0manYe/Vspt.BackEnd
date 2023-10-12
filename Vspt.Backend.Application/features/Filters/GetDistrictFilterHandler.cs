@@ -6,10 +6,10 @@ using Vspt.Common.Api.Contract.Postgrees.DTO.Filters;
 
 namespace Vspt.BackEnd.Application.features.Filters;
 
-public sealed record GetDistrictFilterHandlerRequest : BaseRequest<string, IReadOnlyList<GetFilterResponseDTO>>
+public sealed record GetDistrictFilterHandlerRequest : BaseRequest<string, IReadOnlyList<GetFilterIdNameDTO>>
 {
 }
-internal sealed class GetDistrictFilterHandlerHandler : BaseRequestHandler<GetDistrictFilterHandlerRequest, string, IReadOnlyList<GetFilterResponseDTO>>
+internal sealed class GetDistrictFilterHandlerHandler : BaseRequestHandler<GetDistrictFilterHandlerRequest, string, IReadOnlyList<GetFilterIdNameDTO>>
 {
     private readonly IFilterUserDistrictsService _filterUserDistrictsService;
 
@@ -17,7 +17,7 @@ internal sealed class GetDistrictFilterHandlerHandler : BaseRequestHandler<GetDi
     {
         _filterUserDistrictsService = sprDistrictsRepository;
     }
-    protected override async Task<IReadOnlyList<GetFilterResponseDTO>> HandleData(string request, CancellationToken cancellationToken)
+    protected override async Task<IReadOnlyList<GetFilterIdNameDTO>> HandleData(string request, CancellationToken cancellationToken)
     {
         return await _filterUserDistrictsService.GetDistricts(request, cancellationToken);
     }

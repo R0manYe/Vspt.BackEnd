@@ -28,12 +28,12 @@ namespace Vspt.BackEnd.Api.Controllers
         }
 
         [HttpGet("filterUserDistrictsIdName")]
-        public Task<IReadOnlyList<GetFilterResponseDTO>> ReadDistricts(string userId)
+        public Task<IReadOnlyList<GetFilterIdNameDTO>> ReadDistricts(string userId)
         {
             return _mediator.Send(new GetDistrictFilterHandlerRequest { Data = userId });
         }
         [HttpGet("filterUserFilialsIdName")]
-        public Task<IReadOnlyList<GetFilterResponseDTO>> ReadFilials(string userId)
+        public Task<IReadOnlyList<GetFilterIdNameDTO>> ReadFilials(string userId)
         {
             return _mediator.Send(new GetFilialsFilterHandlerRequest { Data = userId });
         }

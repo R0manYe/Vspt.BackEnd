@@ -17,14 +17,14 @@ namespace Vspt.BackEnd.Application.Services.Filters.Filials
             _sprFilialsRepository = sprFilialsRepository;
         }
 
-        public async Task<IReadOnlyList<GetFilterResponseDTO>> GetIdNameFilials(string username, CancellationToken cancellationToken)
+        public async Task<IReadOnlyList<GetFilterIdNameDTO>> GetIdNameFilials(string username, CancellationToken cancellationToken)
         {
             var existAviliableFilials = await _identityClaimsRepository.GetFilialsClaim(username, cancellationToken);
             var checkAllFilial = existAviliableFilials.Where(x => x.Id == "1").Count();
             var avaliableFilials = await _sprFilialsRepository.GetAllFilials(cancellationToken);
             if (checkAllFilial == 0)
             {
-                return existAviliableFilials.Select(x => new GetFilterResponseDTO
+                return existAviliableFilials.Select(x => new GetFilterIdNameDTO
                 {
                     Id = avaliableFilials.Where(y => y.Id == x.Id).Select(z => z.Id).First(),
                     Name = avaliableFilials.Where(y => y.Id == x.Id).Select(z => z.Name).First()
@@ -32,7 +32,7 @@ namespace Vspt.BackEnd.Application.Services.Filters.Filials
             }
             else
             {
-                return avaliableFilials.Where(s => s.Id.Length > 1).Select(x => new GetFilterResponseDTO
+                return avaliableFilials.Where(s => s.Id.Length > 1).Select(x => new GetFilterIdNameDTO
                 {
                     Id = x.Id,
                     Name = x.Name

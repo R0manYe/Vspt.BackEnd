@@ -5,10 +5,10 @@ using Vspt.Common.Api.Contract.Postgrees.DTO.Filters;
 
 namespace Vspt.BackEnd.Application.features.Filters
 {
-    public sealed record GetFilialsFilterHandlerRequest : BaseRequest<string, IReadOnlyList<GetFilterResponseDTO>>
+    public sealed record GetFilialsFilterHandlerRequest : BaseRequest<string, IReadOnlyList<GetFilterIdNameDTO>>
     {
     }
-    internal sealed class GetFilialsFilterHandlerHandler : BaseRequestHandler<GetFilialsFilterHandlerRequest, string, IReadOnlyList<GetFilterResponseDTO>>
+    internal sealed class GetFilialsFilterHandlerHandler : BaseRequestHandler<GetFilialsFilterHandlerRequest, string, IReadOnlyList<GetFilterIdNameDTO>>
     {       
         private readonly IFilterUserFilialsService _filterUserFilialsService;
 
@@ -18,7 +18,7 @@ namespace Vspt.BackEnd.Application.features.Filters
             _filterUserFilialsService = filterUserFilialsService;
 
         }
-        protected override async Task<IReadOnlyList<GetFilterResponseDTO>> HandleData(string request, CancellationToken cancellationToken)
+        protected override async Task<IReadOnlyList<GetFilterIdNameDTO>> HandleData(string request, CancellationToken cancellationToken)
         {
             return await _filterUserFilialsService.GetIdNameFilials(request, cancellationToken);
                     

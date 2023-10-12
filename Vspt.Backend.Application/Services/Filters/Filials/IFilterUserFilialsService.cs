@@ -12,7 +12,7 @@ namespace Vspt.BackEnd.Application.Services.Filters.Filials
 {
     public interface IFilterUserFilialsService
     {
-       Task<IReadOnlyList<GetFilterResponseDTO>> GetIdNameFilials(string Username, CancellationToken cancellationToken);
+       Task<IReadOnlyList<GetFilterIdNameDTO>> GetIdNameFilials(string Username, CancellationToken cancellationToken);
        Task<IReadOnlyList<GetFilterIdResponseDTO>> GetIdFilials(string username, CancellationToken cancellationToken);       
     }
 }
