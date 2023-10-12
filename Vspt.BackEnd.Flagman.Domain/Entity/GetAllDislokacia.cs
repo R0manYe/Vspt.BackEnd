@@ -13,7 +13,7 @@ public partial class GetAllDislokacia
 
     public string? NAIM_ROD_VAG { get; set; }
 
-    public int? STAN_NAZN { get; set; }
+    public string? STAN_NAZN { get; set; }
 
     public string? NAIM_STAN_NAZN { get; set; }
 

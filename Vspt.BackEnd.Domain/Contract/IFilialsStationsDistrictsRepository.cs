@@ -5,5 +5,5 @@ namespace Vspt.BackEnd.Domain.Contract;
 
 public interface IFilialsStationsDistrictsRepository
 {  
-    Task<IReadOnlyList<GetFilterIdResponseDTO>> GetFilialStationFull(IReadOnlyList<GetFilterIdResponseDTO> existingFilials, CancellationToken cancellationToken);
+    Task<IReadOnlyList<GetFilterIdRequestDTO>> GetFilialStationFull(IReadOnlyList<GetFilterIdResponseDTO> existingFilials, CancellationToken cancellationToken);
 }

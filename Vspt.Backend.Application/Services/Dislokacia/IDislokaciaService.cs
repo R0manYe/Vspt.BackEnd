@@ -8,10 +8,11 @@ using Vspt.Common.Api.Contract.Postgrees.DTO.Claim;
 using Vspt.Common.Api.Contract.Postgrees.DTO.Filters;
 using Vspt.Common.Api.Contracts.Pagination;
 
-namespace Vspt.BackEnd.Application.Services.Filters.FilialsStations
+namespace Vspt.BackEnd.Application.Services.SprOrg
 {
-    public interface IFilterFilialsStationsService
+    public interface IDislokaciaService
     {
-        Task<IReadOnlyList<GetFilterIdRequestDTO>> GetFilialsStationsId(string Username, CancellationToken cancellationToken);
+        Task<IReadOnlyList<GetAllDislokacia>> GetDislokacia(CancellationToken cancellationToken);
+        Task<IReadOnlyList<GetAllDislokacia>> GetDislokaciaFilterStations(string userId, CancellationToken cancellationToken);
     }
 }

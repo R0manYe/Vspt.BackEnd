@@ -7,10 +7,10 @@ using Vspt.BackEnd.Flagman.Domain.Entity;
 using Vspt.Common.Api.Contract.Postgrees.DTO.Claim;
 using Vspt.Common.Api.Contracts.Pagination;
 
-namespace Vspt.BackEnd.Application.Services.SubjectPersone
+namespace Vspt.BackEnd.Application.Services.SprOrg
 {
     public interface ISprOrgService
     {
-        Task<IReadOnlyList<Spr_org>> GetSprOrg();      
+        Task<IReadOnlyList<Spr_org>> GetSprOrg();
     }
 }

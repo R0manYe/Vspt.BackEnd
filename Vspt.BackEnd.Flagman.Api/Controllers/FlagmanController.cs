@@ -5,7 +5,7 @@ using Vspt.BackEnd.Flagman.Application.features;
 using Vspt.BackEnd.Flagman.Domain.Entity;
 using Vspt.BackEnd.Flagman.Domain.PublishModels.Dislokacia;
 using Vspt.BackEnd.Flagman.Infrastructure.Database;
-
+using Vspt.Common.Api.Contract.Postgrees.DTO.Filters;
 
 namespace Vspt.BackEnd.Flagman.Api.Controllers
 {
@@ -25,6 +25,11 @@ namespace Vspt.BackEnd.Flagman.Api.Controllers
         public async Task<List<GetAllDislokacia>> GetDislokacia()
         {
             return await _mediator.Send(new GetDislokaciaHandlerRequest { Data = Unit.Value });
+        }
+        [HttpPost("dislokaciaFiltrStation")]
+        public async Task<List<GetAllDislokacia>> GetDislokaciaFiltrStation(IReadOnlyList<GetFilterIdRequestDTO> stations, CancellationToken cancellationToken)
+        {
+            return await _mediator.Send(new GetDislokaciaFilterStationHandlerRequest { Data = stations });
         }
         [HttpGet("vspt_subject_persone")]
         public async Task<List<Vspt_subject_persone>> GetVsptSubject()

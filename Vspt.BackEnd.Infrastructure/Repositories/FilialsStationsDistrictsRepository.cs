@@ -18,9 +18,9 @@ public class FilialsStationsDistrictsRepository : EntityRepository<PgContext, Fi
     {
     }
 
-    public async Task<IReadOnlyList<GetFilterIdResponseDTO>> GetFilialStationFull(IReadOnlyList<GetFilterIdResponseDTO> existingFilials, CancellationToken cancellationToken)
+    public async Task<IReadOnlyList<GetFilterIdRequestDTO>> GetFilialStationFull(IReadOnlyList<GetFilterIdResponseDTO> existingFilials, CancellationToken cancellationToken)
     {
-       return await  _entityDbSet.Where(c =>existingFilials.Select(x=>x.Id).Contains(c.BuId)).Select(s=> new GetFilterIdResponseDTO
+       return await  _entityDbSet.Where(c =>existingFilials.Select(x=>x.Id).Contains(c.BuId)).Select(s=> new GetFilterIdRequestDTO
        {
            Id=s.StationECPId           
            

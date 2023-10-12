@@ -19,7 +19,7 @@ namespace Vspt.BackEnd.Application.Services.Filters.Filials
         }
 
 
-        public async Task<IReadOnlyList<GetFilterIdResponseDTO>> GetFilialsStationsId(string Username, CancellationToken cancellationToken)
+        public async Task<IReadOnlyList<GetFilterIdRequestDTO>> GetFilialsStationsId(string Username, CancellationToken cancellationToken)
         {
 
             var existingFilials = _filterUserFilialsService.GetIdFilials(Username, cancellationToken);          
