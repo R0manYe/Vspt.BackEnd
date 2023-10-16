@@ -6,5 +6,7 @@ namespace Vspt.BackEnd.Flagman.Domain.Contract
     {
 
         Task<List<Vspt_subject_persone>> GetVsptSubjectPersone(CancellationToken cancellationToken);
+        Task<IReadOnlyList<Vspt_subject_personeFIODTO>> GetVsptSubjectPersoneFIO(CancellationToken cancellationToken);
+
     }
 }

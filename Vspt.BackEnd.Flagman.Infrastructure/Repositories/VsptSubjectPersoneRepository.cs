@@ -16,5 +16,10 @@ namespace Vspt.BackEnd.Flagman.Infrastructure.Repositories
         {
             return await _entityDbSet.AsNoTracking().ToListAsync(cancellationToken);
         }
+
+        public async Task<IReadOnlyList<Vspt_subject_personeFIODTO>> GetVsptSubjectPersoneFIO(CancellationToken cancellationToken)
+        {
+            return await _entityDbSet.Select(x => new Vspt_subject_personeFIODTO { ID=x.ID,  FIO=x.FIO }).ToListAsync();
+        }
     }
 }
