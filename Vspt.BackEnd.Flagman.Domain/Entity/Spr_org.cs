@@ -7,9 +7,9 @@ namespace Vspt.BackEnd.Flagman.Domain.Entity
         [Key]
         public string ID { get; set; }
         public string? NAME { get; set; }
-        public string? FULL_NAME { get; set; }
+     /*   public string? FULL_NAME { get; set; }
         public string? INN { get; set; }
-        public string? ADDRESS { get; set; }
+        public string? ADDRESS { get; set; }*/
 
     }
 }

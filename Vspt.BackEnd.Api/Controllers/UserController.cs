@@ -1,9 +1,11 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Vspt.BackEnd.Application.Authentication.Auth;
 using Vspt.BackEnd.Application.features.GetUser;
+using Vspt.BackEnd.Application.features.IdentityClaimes;
 using Vspt.BackEnd.Domain.Entity;
 using Vspt.Common.Api.Contract.Postgrees.DTO.Auth;
 using Vspt.Common.Api.Contract.Postgrees.DTO.Claim;
@@ -46,7 +48,7 @@ public class UserController : ControllerBase
         return _mediator.Send(new GetRefreshRequest { Data = request });
     }
 
-    [HttpGet("AllUser")]
+    [HttpGet("read")]
     public async Task<IEnumerable<GetVsptSubjectPersoneDTO>> GetAllUsers()
     {
         return await _mediator.Send(new GetAllUsersHandlerRequest { Data=Unit.Value });
@@ -55,5 +57,15 @@ public class UserController : ControllerBase
     public async Task<IEnumerable<GetVsptSubjectPersoneDTO>> GetUser(string request)
     {
         return await _mediator.Send(new GetUserHandlerRequest { Data=request });
+    }
+    [HttpDelete("delete/{userId}")]
+    public Task UserDelete(string userId)
+    {
+        return _mediator.Send(new GetDeleteUserRequest { Data = userId });
+    }
+    [HttpPatch("update/{userId}")]
+    public Task UpdateUser(string userId, IdentityUsers request)
+    {
+        return _mediator.Send(new GetUpdateUserRequest { Data = new() { Username=userId, Password=request.Password, Role=request.Role } });
     }
 }

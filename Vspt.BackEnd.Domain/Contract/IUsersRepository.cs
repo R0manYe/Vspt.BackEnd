@@ -1,4 +1,5 @@
 ﻿using Vspt.BackEnd.Domain.Entity;
+using Vspt.Common.Api.Contract.Postgrees.DTO.Claim;
 
 namespace Vspt.BackEnd.Domain.Contract
 {
@@ -13,5 +14,8 @@ namespace Vspt.BackEnd.Domain.Contract
         Task Add(IdentityUsers entity, CancellationToken cancellationToken);    
 
         Task<List<IdentityUsers>> GetAllUsers(CancellationToken cancellationToken);
+
+        Task DeleteUser(string userId, CancellationToken cancellationToken);
+        Task UpdateUser(IdentityUsers entity, CancellationToken cancellationToken);      
     }
 }

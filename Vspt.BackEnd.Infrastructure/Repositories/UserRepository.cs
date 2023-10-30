@@ -4,7 +4,7 @@ using Vspt.BackEnd.Domain.Entity;
 using Vspt.BackEnd.Infrastructure.Database.EntityConfigurations;
 using Vspt.Box.EfCore;
 using Vspt.Box.Data.EfCore.Entities;
-
+using Vspt.Common.Api.Contract.Postgrees.DTO.Claim;
 
 namespace Vspt.BackEnd.Infrastructure.Repositories;
 
@@ -16,7 +16,7 @@ public class UserRepository : EntityRepository<PgContext, IdentityUsers>, IUsers
 
     public async Task<IdentityUsers> GetByUserName(string userName, CancellationToken cancellationToken)
     {
-          return await _entityDbSet.FirstAsync(x=>x.Username==userName);
+          return await _entityDbSet.AsNoTracking().FirstAsync(x=>x.Username==userName);
     }
     public  async Task<IdentityUsers> GetByUserNamePsw(string userName, string userPsw, CancellationToken cancellationToken)
     {
@@ -35,11 +35,27 @@ public class UserRepository : EntityRepository<PgContext, IdentityUsers>, IUsers
 
     public async Task<List<IdentityUsers>> GetAllUsers(CancellationToken cancellationToken)
     {
-        return await _entityDbSet.ToListAsync();
+        return await _entityDbSet.AsNoTracking().ToListAsync();
+       
     }
 
     public  Task GetBySaveToken(IdentityUsers user, CancellationToken cancellationToken)
     {
          return _entityDbSet.UpdateAndSave(user,cancellationToken);
-    }    
+    }
+
+    public async Task DeleteUser(string userId, CancellationToken cancellationToken)
+    {
+        var item = await _entityDbSet.FirstOrDefaultAsync(x => x.Username == userId, cancellationToken);
+
+        if (item != null)
+        {
+            await _entityDbSet.RemoveAndSave(item, cancellationToken);
+        }
+    }
+    public Task UpdateUser(IdentityUsers entity, CancellationToken cancellationToken)
+    { 
+        return _entityDbSet.UpdateAndSave(entity, cancellationToken);
+        
+    }
 }
