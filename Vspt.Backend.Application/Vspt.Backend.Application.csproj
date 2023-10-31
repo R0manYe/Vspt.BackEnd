@@ -29,4 +29,8 @@
     <ProjectReference Include="..\Vspt.Shared.MediatR\Vspt.Box.MediatR.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="features\DailyPlan\" />
+  </ItemGroup>
+
 </Project>

@@ -32,6 +32,16 @@ namespace Vspt.BackEnd.Api.Controllers
         {
             return _mediator.Send(new GetReadFilialsRequest { Data = Unit.Value });
         }
+        [HttpGet("readDistricts")]
+        public Task<IReadOnlyList<GetFilterIdNameDTO>> ReadDistricts()
+        {
+            return _mediator.Send(new GetReadDistrictsRequest { Data = Unit.Value });
+        }
+        [HttpGet("readSprSvod")]
+        public Task<IReadOnlyList<SprSvod>> ReadSprSvod()
+        {
+            return _mediator.Send(new GetSprSvodRequest { Data = Unit.Value });
+        }
 
     }
 }

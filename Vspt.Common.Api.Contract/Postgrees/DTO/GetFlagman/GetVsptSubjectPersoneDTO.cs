@@ -5,7 +5,7 @@ namespace Vspt.Common.Api.Contract.Postgrees.DTO.GetFlagman;
 public partial class GetVsptSubjectPersoneDTO
 {   
     [Key]
-
+  
     public string Username { get; set; }
 
     public string? Password { get; set; }
@@ -16,7 +16,7 @@ public partial class GetVsptSubjectPersoneDTO
 
     public string? Role { get; set; }
 
-    public string RefreshToken { get; set; }
+    public string? RefreshToken { get; set; }
 
     public DateTime? RefreshTokenExpiryTime { get; set; }    
 

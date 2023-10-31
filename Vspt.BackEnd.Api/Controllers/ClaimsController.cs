@@ -38,7 +38,7 @@ namespace Vspt.BackEnd.Api.Controllers
             return _mediator.Send(new GetDeleteClaimRequest { Data = id } );
         }
 
-        [HttpPost("readCliamType")]
+        [HttpGet("readClaimType")]
         public Task<IReadOnlyList<TypeClaims>> ReadTypeClaims()
         {
             return _mediator.Send(new GetReadTypeClaimRequest { Data = Unit.Value });
