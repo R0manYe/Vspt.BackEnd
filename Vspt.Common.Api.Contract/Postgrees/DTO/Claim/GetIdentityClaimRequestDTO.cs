@@ -3,7 +3,7 @@
     public record GetIdentityClaimRequestDTO
     {       
         public byte ClaimName { get; set; }      
-        public string ClaimUser { get; set; }
+        public uint ClaimUser { get; set; }
         public string ClaimValue { get; set; }
     }
 

@@ -190,6 +190,240 @@ namespace Vspt.BackEnd.Api.Migrations
                     b.ToTable("OutboxState", "VSPT");
                 });
 
+            modelBuilder.Entity("Vspt.BackEnd.Domain.Entity.DailyReportingDvigen", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime>("DateDvigenReporting")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<string>("idDistrict")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("idFilial")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("DailyReportingDvigen", "VSPT");
+                });
+
+            modelBuilder.Entity("Vspt.BackEnd.Domain.Entity.DailyReportingDvigenDetails", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("DvigenId")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("GruzGroupId")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<int?>("LoadingApplication")
+                        .HasColumnType("integer");
+
+                    b.Property<int?>("LoadingFirstHalfDay")
+                        .HasColumnType("integer");
+
+                    b.Property<int?>("LoadingPPGT")
+                        .HasColumnType("integer");
+
+                    b.Property<int?>("LoadingPlan")
+                        .HasColumnType("integer");
+
+                    b.Property<int?>("LoadingSecuredLastDay")
+                        .HasColumnType("integer");
+
+                    b.Property<int?>("LoadingSecuredTotal")
+                        .HasColumnType("integer");
+
+                    b.Property<int?>("LoadingTotalTonns")
+                        .HasColumnType("integer");
+
+                    b.Property<int?>("LoadingTotalWagons")
+                        .HasColumnType("integer");
+
+                    b.Property<int?>("Notations")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("OrgId")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<int?>("UnloadingAccesptedFullTerm")
+                        .HasColumnType("integer");
+
+                    b.Property<int?>("UnloadingAccesptedLastDayWagons")
+                        .HasColumnType("integer");
+
+                    b.Property<int?>("UnloadingAccesptedPPGT")
+                        .HasColumnType("integer");
+
+                    b.Property<int?>("UnloadingAccesptedTotal")
+                        .HasColumnType("integer");
+
+                    b.Property<int?>("UnloadingAccesptedTotalTonns")
+                        .HasColumnType("integer");
+
+                    b.Property<int?>("UnloadingAccesptedTotalWagons")
+                        .HasColumnType("integer");
+
+                    b.Property<int?>("UnloadingPlan")
+                        .HasColumnType("integer");
+
+                    b.Property<int?>("UnloadingProduceFullTerm")
+                        .HasColumnType("integer");
+
+                    b.Property<int?>("UnloadingProduceTotal")
+                        .HasColumnType("integer");
+
+                    b.Property<int?>("UnloadingRemainsFullTerm")
+                        .HasColumnType("integer");
+
+                    b.Property<int?>("UnloadingRemainsGuiltConsignee")
+                        .HasColumnType("integer");
+
+                    b.Property<int?>("UnloadingRemainsGuiltPPGT")
+                        .HasColumnType("integer");
+
+                    b.Property<int?>("UnloadingRemainsLastDay")
+                        .HasColumnType("integer");
+
+                    b.Property<int?>("UnloadingRemainsTotal")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DvigenId");
+
+                    b.ToTable("DailyReportingDvigenDetails", "VSPT");
+                });
+
+            modelBuilder.Entity("Vspt.BackEnd.Domain.Entity.DailyReportingPlan", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime>("DatePlanReporting")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<string>("idDistrict")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("idFilial")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("DailyReportingPlan", "VSPT");
+                });
+
+            modelBuilder.Entity("Vspt.BackEnd.Domain.Entity.DailyReportingPlanDetails", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("FilialId")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("GruzGroupId")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<int?>("LoadingApplication")
+                        .HasColumnType("integer");
+
+                    b.Property<int?>("LoadingFirstHalfDay")
+                        .HasColumnType("integer");
+
+                    b.Property<int?>("LoadingPPGT")
+                        .HasColumnType("integer");
+
+                    b.Property<int?>("LoadingPlan")
+                        .HasColumnType("integer");
+
+                    b.Property<int?>("LoadingSecuredLastDay")
+                        .HasColumnType("integer");
+
+                    b.Property<int?>("LoadingSecuredTotal")
+                        .HasColumnType("integer");
+
+                    b.Property<int?>("LoadingTotalTonns")
+                        .HasColumnType("integer");
+
+                    b.Property<int?>("LoadingTotalWagons")
+                        .HasColumnType("integer");
+
+                    b.Property<int?>("Notations")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("OrgId")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<Guid>("PlanId")
+                        .HasColumnType("uuid");
+
+                    b.Property<int?>("UnloadingAccesptedFullTerm")
+                        .HasColumnType("integer");
+
+                    b.Property<int?>("UnloadingAccesptedLastDayWagons")
+                        .HasColumnType("integer");
+
+                    b.Property<int?>("UnloadingAccesptedPPGT")
+                        .HasColumnType("integer");
+
+                    b.Property<int?>("UnloadingAccesptedTotal")
+                        .HasColumnType("integer");
+
+                    b.Property<int?>("UnloadingAccesptedTotalTonns")
+                        .HasColumnType("integer");
+
+                    b.Property<int?>("UnloadingAccesptedTotalWagons")
+                        .HasColumnType("integer");
+
+                    b.Property<int?>("UnloadingPlan")
+                        .HasColumnType("integer");
+
+                    b.Property<int?>("UnloadingProduceFullTerm")
+                        .HasColumnType("integer");
+
+                    b.Property<int?>("UnloadingProduceTotal")
+                        .HasColumnType("integer");
+
+                    b.Property<int?>("UnloadingRemainsFullTerm")
+                        .HasColumnType("integer");
+
+                    b.Property<int?>("UnloadingRemainsGuiltConsignee")
+                        .HasColumnType("integer");
+
+                    b.Property<int?>("UnloadingRemainsGuiltPPGT")
+                        .HasColumnType("integer");
+
+                    b.Property<int?>("UnloadingRemainsLastDay")
+                        .HasColumnType("integer");
+
+                    b.Property<int?>("UnloadingRemainsTotal")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PlanId");
+
+                    b.ToTable("DailyReportingPlanDetails", "VSPT");
+                });
+
             modelBuilder.Entity("Vspt.BackEnd.Domain.Entity.FilialsStationsDistricts", b =>
                 {
                     b.Property<string>("BuId")
@@ -218,19 +452,20 @@ namespace Vspt.BackEnd.Api.Migrations
             modelBuilder.Entity("Vspt.BackEnd.Domain.Entity.IdentityClaims", b =>
                 {
                     b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
                     b.Property<byte>("ClaimName")
                         .HasColumnType("smallint");
 
+                    b.Property<long>("ClaimUser")
+                        .HasColumnType("bigint");
+
                     b.Property<string>("ClaimValue")
+                        .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<string>("ClaimUser")
-                        .IsRequired()
-                        .HasColumnType("character varying(50)");
-
-                    b.HasKey("Id", "ClaimName", "ClaimValue");
+                    b.HasKey("Id");
 
                     b.HasIndex("ClaimName");
 
@@ -257,14 +492,18 @@ namespace Vspt.BackEnd.Api.Migrations
 
             modelBuilder.Entity("Vspt.BackEnd.Domain.Entity.IdentityUsers", b =>
                 {
-                    b.Property<string>("Username")
+                    b.Property<long>("Username")
+                        .ValueGeneratedOnAdd()
                         .HasMaxLength(50)
-                        .HasColumnType("character varying(50)");
+                        .HasColumnType("bigint");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Username"));
 
                     b.Property<string>("Email")
                         .HasColumnType("text");
 
                     b.Property<string>("Password")
+                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("RefreshToken")
@@ -274,6 +513,7 @@ namespace Vspt.BackEnd.Api.Migrations
                         .HasColumnType("timestamp without time zone");
 
                     b.Property<string>("Role")
+                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("Token")
@@ -328,6 +568,23 @@ namespace Vspt.BackEnd.Api.Migrations
                     b.ToTable("SprFilials", "VSPT");
                 });
 
+            modelBuilder.Entity("Vspt.BackEnd.Domain.Entity.SprSvod", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("text");
+
+                    b.Property<string>("name")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<byte>("spr")
+                        .HasColumnType("smallint");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("SprSvod", "VSPT");
+                });
+
             modelBuilder.Entity("Vspt.BackEnd.Domain.Entity.TypeClaims", b =>
                 {
                     b.Property<byte>("Id")
@@ -340,6 +597,28 @@ namespace Vspt.BackEnd.Api.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("TypeClaims", "VSPT");
+                });
+
+            modelBuilder.Entity("Vspt.BackEnd.Domain.Entity.DailyReportingDvigenDetails", b =>
+                {
+                    b.HasOne("Vspt.BackEnd.Domain.Entity.DailyReportingDvigen", "DailyReportingDvigens")
+                        .WithMany()
+                        .HasForeignKey("DvigenId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("DailyReportingDvigens");
+                });
+
+            modelBuilder.Entity("Vspt.BackEnd.Domain.Entity.DailyReportingPlanDetails", b =>
+                {
+                    b.HasOne("Vspt.BackEnd.Domain.Entity.DailyReportingPlan", "DailyReportingPlan")
+                        .WithMany()
+                        .HasForeignKey("PlanId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("DailyReportingPlan");
                 });
 
             modelBuilder.Entity("Vspt.BackEnd.Domain.Entity.FilialsStationsDistricts", b =>

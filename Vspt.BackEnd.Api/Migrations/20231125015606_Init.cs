@@ -7,7 +7,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Vspt.BackEnd.Api.Migrations
 {
     /// <inheritdoc />
-    public partial class Init_migration : Migration
+    public partial class Init : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -17,6 +17,36 @@ namespace Vspt.BackEnd.Api.Migrations
 
             migrationBuilder.AlterDatabase()
                 .Annotation("Npgsql:PostgresExtension:pgcrypto", ",,");
+
+            migrationBuilder.CreateTable(
+                name: "DailyReportingDvigen",
+                schema: "VSPT",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    DateDvigenReporting = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    idFilial = table.Column<string>(type: "text", nullable: false),
+                    idDistrict = table.Column<string>(type: "text", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_DailyReportingDvigen", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "DailyReportingPlan",
+                schema: "VSPT",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    DatePlanReporting = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    idFilial = table.Column<string>(type: "text", nullable: false),
+                    idDistrict = table.Column<string>(type: "text", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_DailyReportingPlan", x => x.Id);
+                });
 
             migrationBuilder.CreateTable(
                 name: "IdentityRoles",
@@ -36,11 +66,12 @@ namespace Vspt.BackEnd.Api.Migrations
                 schema: "VSPT",
                 columns: table => new
                 {
-                    Username = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
-                    Password = table.Column<string>(type: "text", nullable: true),
+                    Username = table.Column<long>(type: "bigint", maxLength: 50, nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Password = table.Column<string>(type: "text", nullable: false),
                     Token = table.Column<string>(type: "text", nullable: true),
                     Email = table.Column<string>(type: "text", nullable: true),
-                    Role = table.Column<string>(type: "text", nullable: true),
+                    Role = table.Column<string>(type: "text", nullable: false),
                     RefreshToken = table.Column<string>(type: "text", nullable: true),
                     RefreshTokenExpiryTime = table.Column<DateTime>(type: "timestamp without time zone", nullable: true)
                 },
@@ -137,6 +168,20 @@ namespace Vspt.BackEnd.Api.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "SprSvod",
+                schema: "VSPT",
+                columns: table => new
+                {
+                    Id = table.Column<string>(type: "text", nullable: false),
+                    spr = table.Column<byte>(type: "smallint", nullable: false),
+                    name = table.Column<string>(type: "text", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_SprSvod", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "TypeClaims",
                 schema: "VSPT",
                 columns: table => new
@@ -147,6 +192,97 @@ namespace Vspt.BackEnd.Api.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_TypeClaims", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "DailyReportingDvigenDetails",
+                schema: "VSPT",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    DvigenId = table.Column<Guid>(type: "uuid", nullable: false),
+                    OrgId = table.Column<string>(type: "text", nullable: false),
+                    GruzGroupId = table.Column<string>(type: "text", nullable: false),
+                    LoadingPlan = table.Column<int>(type: "integer", nullable: true),
+                    LoadingApplication = table.Column<int>(type: "integer", nullable: true),
+                    LoadingSecuredTotal = table.Column<int>(type: "integer", nullable: true),
+                    LoadingSecuredLastDay = table.Column<int>(type: "integer", nullable: true),
+                    LoadingTotalWagons = table.Column<int>(type: "integer", nullable: true),
+                    LoadingTotalTonns = table.Column<int>(type: "integer", nullable: true),
+                    LoadingPPGT = table.Column<int>(type: "integer", nullable: true),
+                    LoadingFirstHalfDay = table.Column<int>(type: "integer", nullable: true),
+                    UnloadingPlan = table.Column<int>(type: "integer", nullable: true),
+                    UnloadingRemainsLastDay = table.Column<int>(type: "integer", nullable: true),
+                    UnloadingAccesptedTotal = table.Column<int>(type: "integer", nullable: true),
+                    UnloadingAccesptedFullTerm = table.Column<int>(type: "integer", nullable: true),
+                    UnloadingProduceTotal = table.Column<int>(type: "integer", nullable: true),
+                    UnloadingProduceFullTerm = table.Column<int>(type: "integer", nullable: true),
+                    UnloadingAccesptedTotalWagons = table.Column<int>(type: "integer", nullable: true),
+                    UnloadingAccesptedTotalTonns = table.Column<int>(type: "integer", nullable: true),
+                    UnloadingAccesptedPPGT = table.Column<int>(type: "integer", nullable: true),
+                    UnloadingAccesptedLastDayWagons = table.Column<int>(type: "integer", nullable: true),
+                    UnloadingRemainsTotal = table.Column<int>(type: "integer", nullable: true),
+                    UnloadingRemainsFullTerm = table.Column<int>(type: "integer", nullable: true),
+                    UnloadingRemainsGuiltPPGT = table.Column<int>(type: "integer", nullable: true),
+                    UnloadingRemainsGuiltConsignee = table.Column<int>(type: "integer", nullable: true),
+                    Notations = table.Column<int>(type: "integer", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_DailyReportingDvigenDetails", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_DailyReportingDvigenDetails_DailyReportingDvigen_DvigenId",
+                        column: x => x.DvigenId,
+                        principalSchema: "VSPT",
+                        principalTable: "DailyReportingDvigen",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "DailyReportingPlanDetails",
+                schema: "VSPT",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    PlanId = table.Column<Guid>(type: "uuid", nullable: false),
+                    FilialId = table.Column<string>(type: "text", nullable: false),
+                    OrgId = table.Column<string>(type: "text", nullable: false),
+                    GruzGroupId = table.Column<string>(type: "text", nullable: false),
+                    LoadingPlan = table.Column<int>(type: "integer", nullable: true),
+                    LoadingApplication = table.Column<int>(type: "integer", nullable: true),
+                    LoadingSecuredTotal = table.Column<int>(type: "integer", nullable: true),
+                    LoadingSecuredLastDay = table.Column<int>(type: "integer", nullable: true),
+                    LoadingTotalWagons = table.Column<int>(type: "integer", nullable: true),
+                    LoadingTotalTonns = table.Column<int>(type: "integer", nullable: true),
+                    LoadingPPGT = table.Column<int>(type: "integer", nullable: true),
+                    LoadingFirstHalfDay = table.Column<int>(type: "integer", nullable: true),
+                    UnloadingPlan = table.Column<int>(type: "integer", nullable: true),
+                    UnloadingRemainsLastDay = table.Column<int>(type: "integer", nullable: true),
+                    UnloadingAccesptedTotal = table.Column<int>(type: "integer", nullable: true),
+                    UnloadingAccesptedFullTerm = table.Column<int>(type: "integer", nullable: true),
+                    UnloadingProduceTotal = table.Column<int>(type: "integer", nullable: true),
+                    UnloadingProduceFullTerm = table.Column<int>(type: "integer", nullable: true),
+                    UnloadingAccesptedTotalWagons = table.Column<int>(type: "integer", nullable: true),
+                    UnloadingAccesptedTotalTonns = table.Column<int>(type: "integer", nullable: true),
+                    UnloadingAccesptedPPGT = table.Column<int>(type: "integer", nullable: true),
+                    UnloadingAccesptedLastDayWagons = table.Column<int>(type: "integer", nullable: true),
+                    UnloadingRemainsTotal = table.Column<int>(type: "integer", nullable: true),
+                    UnloadingRemainsFullTerm = table.Column<int>(type: "integer", nullable: true),
+                    UnloadingRemainsGuiltPPGT = table.Column<int>(type: "integer", nullable: true),
+                    UnloadingRemainsGuiltConsignee = table.Column<int>(type: "integer", nullable: true),
+                    Notations = table.Column<int>(type: "integer", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_DailyReportingPlanDetails", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_DailyReportingPlanDetails_DailyReportingPlan_PlanId",
+                        column: x => x.PlanId,
+                        principalSchema: "VSPT",
+                        principalTable: "DailyReportingPlan",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -178,7 +314,7 @@ namespace Vspt.BackEnd.Api.Migrations
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
                     ClaimName = table.Column<byte>(type: "smallint", nullable: false),
-                    ClaimUser = table.Column<string>(type: "character varying(50)", nullable: false),
+                    ClaimUser = table.Column<long>(type: "bigint", nullable: false),
                     ClaimValue = table.Column<string>(type: "text", nullable: false)
                 },
                 constraints: table =>
@@ -199,6 +335,58 @@ namespace Vspt.BackEnd.Api.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
+
+            migrationBuilder.CreateTable(
+                name: "FilialsStationsDistricts",
+                schema: "VSPT",
+                columns: table => new
+                {
+                    BuId = table.Column<string>(type: "character varying(4)", nullable: false),
+                    DistrictId = table.Column<string>(type: "character varying(12)", nullable: false),
+                    StationECPId = table.Column<string>(type: "text", nullable: false),
+                    StationRZDId = table.Column<string>(type: "text", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.ForeignKey(
+                        name: "FK_FilialsStationsDistricts_SprDistricts_DistrictId",
+                        column: x => x.DistrictId,
+                        principalSchema: "VSPT",
+                        principalTable: "SprDistricts",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_FilialsStationsDistricts_SprFilials_BuId",
+                        column: x => x.BuId,
+                        principalSchema: "VSPT",
+                        principalTable: "SprFilials",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_DailyReportingDvigenDetails_DvigenId",
+                schema: "VSPT",
+                table: "DailyReportingDvigenDetails",
+                column: "DvigenId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_DailyReportingPlanDetails_PlanId",
+                schema: "VSPT",
+                table: "DailyReportingPlanDetails",
+                column: "PlanId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_FilialsStationsDistricts_BuId",
+                schema: "VSPT",
+                table: "FilialsStationsDistricts",
+                column: "BuId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_FilialsStationsDistricts_DistrictId",
+                schema: "VSPT",
+                table: "FilialsStationsDistricts",
+                column: "DistrictId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_IdentityClaims_ClaimName",
@@ -261,6 +449,18 @@ namespace Vspt.BackEnd.Api.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
+                name: "DailyReportingDvigenDetails",
+                schema: "VSPT");
+
+            migrationBuilder.DropTable(
+                name: "DailyReportingPlanDetails",
+                schema: "VSPT");
+
+            migrationBuilder.DropTable(
+                name: "FilialsStationsDistricts",
+                schema: "VSPT");
+
+            migrationBuilder.DropTable(
                 name: "IdentityClaims",
                 schema: "VSPT");
 
@@ -278,6 +478,18 @@ namespace Vspt.BackEnd.Api.Migrations
 
             migrationBuilder.DropTable(
                 name: "OutboxState",
+                schema: "VSPT");
+
+            migrationBuilder.DropTable(
+                name: "SprSvod",
+                schema: "VSPT");
+
+            migrationBuilder.DropTable(
+                name: "DailyReportingDvigen",
+                schema: "VSPT");
+
+            migrationBuilder.DropTable(
+                name: "DailyReportingPlan",
                 schema: "VSPT");
 
             migrationBuilder.DropTable(

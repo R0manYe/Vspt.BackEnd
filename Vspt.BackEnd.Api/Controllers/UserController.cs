@@ -54,17 +54,17 @@ public class UserController : ControllerBase
         return await _mediator.Send(new GetAllUsersHandlerRequest { Data=Unit.Value });
     }
     [HttpGet("User")]
-    public async Task<IEnumerable<GetVsptSubjectPersoneDTO>> GetUser(string request)
+    public async Task<IEnumerable<GetVsptSubjectPersoneDTO>> GetUser(uint request)
     {
         return await _mediator.Send(new GetUserHandlerRequest { Data=request });
     }
     [HttpDelete("delete/{userId}")]
-    public Task UserDelete(string userId)
+    public Task UserDelete(uint userId)
     {
         return _mediator.Send(new GetDeleteUserRequest { Data = userId });
     }
     [HttpPatch("update/{userId}")]
-    public Task UpdateUser(string userId, IdentityUsers request)
+    public Task UpdateUser(uint userId, IdentityUsers request)
     {
         return _mediator.Send(new GetUpdateUserRequest { Data = new() { Username=userId, Password=request.Password, Role=request.Role } });
     }

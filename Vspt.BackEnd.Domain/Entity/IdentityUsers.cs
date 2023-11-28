@@ -4,7 +4,7 @@ namespace Vspt.BackEnd.Domain.Entity
 {
     public sealed class IdentityUsers : IEntity
     {    
-        public string Username { get; set; }
+        public uint Username { get; set; }
 
         public string Password { get; set; }
 

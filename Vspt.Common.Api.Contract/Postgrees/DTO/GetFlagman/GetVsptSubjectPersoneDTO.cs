@@ -6,7 +6,7 @@ public partial class GetVsptSubjectPersoneDTO
 {   
     [Key]
   
-    public string Username { get; set; }
+    public uint Username { get; set; }
 
     public string? Password { get; set; }
 

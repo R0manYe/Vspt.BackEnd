@@ -48,7 +48,7 @@ namespace Vspt.BackEnd.Application.Authentication.Auth
 
             request.Password = request.Password; //PasswordHasher.HashPassword(request.Password);
             request.Role = "User";
-            request.Token = "";
+           // request.Token = "";
             var user= _mapper.Map<IdentityUsers>(request);
             await _usersRepository.Add(user, cancellationToken);
             

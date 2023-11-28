@@ -14,8 +14,8 @@ internal sealed class DailyReportingDvigenDetailsConfiguration : IEntityTypeConf
         builder
             .HasKey(x =>x.Id);
         builder
-          .HasOne(x => x.DailyReportingDvigen)
-          .WithMany()
-          .HasForeignKey(x => x.DvigenId);
+           .HasOne(x => x.DailyReportingDvigens)
+           .WithMany()
+           .HasForeignKey(x => x.DvigenId);
     }
 }

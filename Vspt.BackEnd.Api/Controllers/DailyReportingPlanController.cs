@@ -2,49 +2,48 @@
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
-using System.Security.Claims;
 using System.Threading.Tasks;
-using System.Windows.Markup;
 using Vspt.BackEnd.Application.features.IdentityClaimes;
 using Vspt.BackEnd.Application.features.IdentityRolees;
 using Vspt.BackEnd.Domain.Entity;
 using Vspt.Common.Api.Contract.Postgrees.DTO.Claim;
+using Vspt.Common.Api.Contract.Postgrees.DTO.Filters;
 
 namespace Vspt.BackEnd.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class RolesController : ControllerBase
+    public class DailyReportingPlanController : ControllerBase
     {
         private readonly IMediator _mediator;
 
-        public RolesController(IMediator mediator)
+        public DailyReportingPlanController(IMediator mediator)
         {
             _mediator = mediator;
         }
 
         [HttpGet("read")]
-        public Task<IReadOnlyList<IdentityRoles>> ReadClaims()
+        public Task<IReadOnlyList<DailyReportingPlanDetails>> ReadDailyReportingPlanDetails(string userId)
         {
-            return _mediator.Send(new GetReadRoleRequest { Data = Unit.Value });
+            return _mediator.Send(new GetReadRepotingPlanRequest { Data = userId });
         }
 
         [HttpPost("add")]
-        public Task AddRole( string roleName)
+        public Task AddIdentityClaims( GetIdentityClaimRequestDTO claimName)
         {
-            return _mediator.Send(new GetAddRoleRequest { Data = roleName });
-        }
-
-        [HttpPut("update/{id}")]
-        public Task UpdateCRole( Guid id,IdentityRoles request) 
-        {
-            return _mediator.Send(new GetUpdateRoleRequest { Data = new() { Id = id, RoleName=request.RoleName }  } );
-        }
+            return _mediator.Send(new GetAddClaimRequest { Data = claimName });
+        }      
 
         [HttpDelete("delete/{id}")]
-        public Task DeleteRole(Guid id) 
+        public Task DeleteClaims(Guid id) 
         {
-            return _mediator.Send(new GetDeleteRoleRequest { Data = new() { Id = id } });
+            return _mediator.Send(new GetDeleteClaimRequest { Data = id } );
+        }
+
+        [HttpGet("readClaimType")]
+        public Task<IReadOnlyList<TypeClaims>> ReadTypeClaims()
+        {
+            return _mediator.Send(new GetReadTypeClaimRequest { Data = Unit.Value });
         }
     }
 }

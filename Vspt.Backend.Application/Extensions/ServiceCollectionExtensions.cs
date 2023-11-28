@@ -31,7 +31,8 @@ public static class ServiceCollectionExtensions
         services.AddScoped<IDislokaciaService, DislokaciaService>();
         services.AddScoped<ISprCargoService,SprCargoService>();
         services.AddScoped<ISprSvodRepository, SprSvodRepository>();
-  
+        services.AddScoped<IDailyReportingPlanDetailsRepository, DailyReportingPlanDetailsRepository>();
+
         services.AddRefitClient<IFlagmanApiClient>().ConfigureHttpClient(c=>c.BaseAddress=new Uri("https://localhost:7201"));
         services.AddRefitClient<IFlagmanSprOrgApiClient>().ConfigureHttpClient(c=>c.BaseAddress=new Uri("https://localhost:7201"));
         services.AddRefitClient<IFlagmanDislokaciaApiClient>().ConfigureHttpClient(c => c.BaseAddress = new Uri("https://localhost:7201"));

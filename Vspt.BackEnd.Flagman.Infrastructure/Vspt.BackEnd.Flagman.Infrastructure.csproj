@@ -19,8 +19,10 @@
   </ItemGroup>
 
   <ItemGroup>
+ <ProjectReference Include="..\Vspt.BackEnd.Domain\Vspt.BackEnd.Domain.csproj" />
  <ProjectReference Include="..\Vspt.BackEnd.Flagman.ApiClient\Vspt.BackEnd.Flagman.ApiClient.csproj" />
  <ProjectReference Include="..\Vspt.BackEnd.Flagman.Domain\Vspt.BackEnd.Flagman.Domain.csproj" />
+ <ProjectReference Include="..\Vspt.BackEnd.Infrastructure\Vspt.BackEnd.Infrastructure.csproj" />
     <ProjectReference Include="..\Vspt.Box.Data.EfCore\Vspt.Box.Data.EfCore.csproj" /> 
     <ProjectReference Include="..\Vspt.Box.Data\Vspt.Box.Data.csproj" /> 
     <ProjectReference Include="..\Vspt.Service.Common\Vspt.Service.Common.csproj" />  

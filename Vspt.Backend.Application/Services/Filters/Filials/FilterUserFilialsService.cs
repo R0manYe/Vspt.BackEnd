@@ -47,10 +47,8 @@ namespace Vspt.BackEnd.Application.Services.Filters.Filials
             if (checkAllFilial == 0)
             {
                 return existAviliableFilials.Select(x =>new  GetFilterIdResponseDTO
-                {
-                    Id = avaliableFilials[0].Id,
-                }).ToList();               
-               ;
+                { Id=x.Id}).ToList();            
+               
             }
             else
             {

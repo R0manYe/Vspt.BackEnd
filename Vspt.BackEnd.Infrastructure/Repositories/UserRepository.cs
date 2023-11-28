@@ -14,13 +14,13 @@ public class UserRepository : EntityRepository<PgContext, IdentityUsers>, IUsers
     {
     }
 
-    public async Task<IdentityUsers> GetByUserName(string userName, CancellationToken cancellationToken)
+    public async Task<IdentityUsers> GetByUserName(uint userName, CancellationToken cancellationToken)
     {
           return await _entityDbSet.AsNoTracking().FirstAsync(x=>x.Username==userName);
     }
     public  async Task<IdentityUsers> GetByUserNamePsw(string userName, string userPsw, CancellationToken cancellationToken)
     {
-        return await _entityDbSet.Where(x => x.Username == userName && x.Password == userPsw).FirstAsync();       
+        return await _entityDbSet.Where(x => x.Username == uint.Parse(userName) && x.Password == userPsw).FirstAsync();       
     }
 
     public async Task<IdentityUsers> GetByToken(string token, CancellationToken cancellationToken)
@@ -44,7 +44,7 @@ public class UserRepository : EntityRepository<PgContext, IdentityUsers>, IUsers
          return _entityDbSet.UpdateAndSave(user,cancellationToken);
     }
 
-    public async Task DeleteUser(string userId, CancellationToken cancellationToken)
+    public async Task DeleteUser(uint userId, CancellationToken cancellationToken)
     {
         var item = await _entityDbSet.FirstOrDefaultAsync(x => x.Username == userId, cancellationToken);
 

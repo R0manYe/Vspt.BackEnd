@@ -7,7 +7,8 @@ namespace Vspt.BackEnd.Domain.Entity;
 public sealed  class DailyReportingPlanDetails : IEntityWithId
 {       
     public Guid Id { get; set; }
-    public string PlanId { get; set; }
+    public Guid PlanId { get; set; }
+    public string FilialId { get; set; }
     public DailyReportingPlan DailyReportingPlan { get; set; }
     public string OrgId { get; set; }   
     public string GruzGroupId { get; set; }   

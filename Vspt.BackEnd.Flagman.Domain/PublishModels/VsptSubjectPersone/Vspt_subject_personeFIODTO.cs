@@ -5,7 +5,7 @@ namespace Vspt.BackEnd.Flagman.Domain.Entity
     public partial class Vspt_subject_personeDTO
     {
         [Key]
-        public string ID { get; set; }
+        public uint ID { get; set; }
 
         public string? LAST_NAME { get; set; }
 

@@ -13,10 +13,10 @@ using Vspt.Common.Api.Contracts.Pagination;
 
 namespace Vspt.BackEnd.Application.features.GetUser
 {
-    public sealed record GetUserHandlerRequest : BaseRequest<string, IEnumerable<GetVsptSubjectPersoneDTO>>
+    public sealed record GetUserHandlerRequest : BaseRequest<uint, IEnumerable<GetVsptSubjectPersoneDTO>>
     {
     }
-    internal sealed class GetUsersHandlerHandler : BaseRequestHandler<GetUserHandlerRequest, string, IEnumerable<GetVsptSubjectPersoneDTO>>
+    internal sealed class GetUsersHandlerHandler : BaseRequestHandler<GetUserHandlerRequest, uint, IEnumerable<GetVsptSubjectPersoneDTO>>
     {
         private readonly IUsersRepository _usersRepository;
         private readonly IFlagmanApiClient _flagmanApiClient;
@@ -30,7 +30,7 @@ namespace Vspt.BackEnd.Application.features.GetUser
             _flagmanApiClient = flagmanApiClient;
         }
 
-        protected override async Task<IEnumerable<GetVsptSubjectPersoneDTO>> HandleData(string request, CancellationToken cancellationToken)
+        protected override async Task<IEnumerable<GetVsptSubjectPersoneDTO>> HandleData(uint request, CancellationToken cancellationToken)
         {
             var existUsers = await _usersRepository.GetAllUsers(cancellationToken);
             var existingUserFlagman = await _flagmanApiClient.GetVsptSubject(cancellationToken);

@@ -44,8 +44,8 @@ namespace Vspt.BackEnd.Application.Authentication.Auth
             string refreshToken = tokenApiDto.RefreshToken;
             
             var principal = GetPrincipalFromExpiriedToken(accessToken);
-            
-            var username = principal.Identity.Name;
+
+            uint username = uint.Parse(principal.Identity.Name);
             
 
             var user = await _usersRepository.GetByUserName(username, cancellationToken);

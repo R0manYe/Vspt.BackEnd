@@ -5,7 +5,7 @@ namespace Vspt.BackEnd.Domain.Contract
 {
     public interface IUsersRepository
     {
-        Task<IdentityUsers> GetByUserName(string userName, CancellationToken cancellationToken);
+        Task<IdentityUsers> GetByUserName(uint userName, CancellationToken cancellationToken);
         Task<IdentityUsers> GetByUserNamePsw(string userName, string userPsw, CancellationToken cancellationToken);
 
         Task<IdentityUsers> GetByToken(string token, CancellationToken cancellationToken);
@@ -15,7 +15,7 @@ namespace Vspt.BackEnd.Domain.Contract
 
         Task<List<IdentityUsers>> GetAllUsers(CancellationToken cancellationToken);
 
-        Task DeleteUser(string userId, CancellationToken cancellationToken);
+        Task DeleteUser(uint userId, CancellationToken cancellationToken);
         Task UpdateUser(IdentityUsers entity, CancellationToken cancellationToken);      
     }
 }
