@@ -18,7 +18,7 @@ public class RoleRepository : EntityRepository<PgContext, IdentityRoles>, IRoles
         return _entityDbSet.AddAndSave(entity, cancellationToken);
     }
 
-    public async Task DeleteRoles(Guid id, CancellationToken cancellationToken)
+    public async Task DeleteRoles(byte id, CancellationToken cancellationToken)
     {
         var item = await _entityDbSet.FirstOrDefaultAsync(x => x.Id == id, cancellationToken);
 

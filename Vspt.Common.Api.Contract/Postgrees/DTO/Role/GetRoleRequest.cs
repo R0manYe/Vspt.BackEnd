@@ -2,6 +2,7 @@
 
 public record GetRoleRequest
 {
+    public byte Id { get; set; }
     public string RoleName { get; set; }
 
 }

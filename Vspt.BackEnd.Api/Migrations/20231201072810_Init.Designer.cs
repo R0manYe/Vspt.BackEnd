@@ -12,7 +12,7 @@ using Vspt.BackEnd.Infrastructure.Database.EntityConfigurations;
 namespace Vspt.BackEnd.Api.Migrations
 {
     [DbContext(typeof(PgContext))]
-    [Migration("20231125015606_Init")]
+    [Migration("20231201072810_Init")]
     partial class Init
     {
         /// <inheritdoc />
@@ -479,9 +479,8 @@ namespace Vspt.BackEnd.Api.Migrations
 
             modelBuilder.Entity("Vspt.BackEnd.Domain.Entity.IdentityRoles", b =>
                 {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
+                    b.Property<byte>("Id")
+                        .HasColumnType("smallint");
 
                     b.Property<string>("RoleName")
                         .IsRequired()

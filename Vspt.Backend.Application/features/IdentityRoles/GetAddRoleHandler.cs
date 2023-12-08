@@ -25,7 +25,7 @@ namespace Vspt.BackEnd.Application.features.IdentityClaimes
 
         protected override async Task<Unit> HandleData(GetRoleRequest request, CancellationToken cancellationToken)
         {
-            var model=new IdentityRoles { Id=Guid.NewGuid(), RoleName=request.RoleName};
+            var model=new IdentityRoles { Id=request.Id, RoleName=request.RoleName};
             await _rolesRepository.AddRoles(model, cancellationToken);
             return Unit.Value;
         }

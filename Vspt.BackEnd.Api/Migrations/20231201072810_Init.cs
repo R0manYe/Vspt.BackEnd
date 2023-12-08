@@ -53,7 +53,7 @@ namespace Vspt.BackEnd.Api.Migrations
                 schema: "VSPT",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    Id = table.Column<byte>(type: "smallint", nullable: false),
                     RoleName = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false)
                 },
                 constraints: table =>

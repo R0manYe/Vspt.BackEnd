@@ -476,9 +476,8 @@ namespace Vspt.BackEnd.Api.Migrations
 
             modelBuilder.Entity("Vspt.BackEnd.Domain.Entity.IdentityRoles", b =>
                 {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
+                    b.Property<byte>("Id")
+                        .HasColumnType("smallint");
 
                     b.Property<string>("RoleName")
                         .IsRequired()

@@ -6,7 +6,7 @@ namespace Vspt.BackEnd.Domain.Contract
     {
         Task AddRoles(IdentityRoles entity, CancellationToken cancellationToken);
         Task UpdateRoles(IdentityRoles entity, CancellationToken cancellationToken);
-        Task DeleteRoles(Guid Id, CancellationToken cancellationToken);
+        Task DeleteRoles(byte Id, CancellationToken cancellationToken);
         Task<IReadOnlyList<IdentityRoles>> GetReadRoles(CancellationToken cancellationToken);
     }
 }

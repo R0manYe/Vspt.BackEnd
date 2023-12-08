@@ -2,7 +2,7 @@
 {
     public record GetDeleteRoleRequestDTO
     {
-        public required Guid Id { get; set; }
+        public required byte Id { get; set; }
 
     }
 

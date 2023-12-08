@@ -18,9 +18,7 @@ public class ClaimRepository : EntityRepository<PgContext, IdentityClaims>, IIde
     public Task AddIdentityClaim(IdentityClaims entity, CancellationToken cancellationToken)
     {
         return _entityDbSet.AddAndSave(entity, cancellationToken);
-    }
-
-    
+    }   
 
     public async Task DeleteClaim(Guid id, CancellationToken cancellationToken)
     {
@@ -47,8 +45,7 @@ public class ClaimRepository : EntityRepository<PgContext, IdentityClaims>, IIde
         return await _entityDbSet
             .Where(x => x.ClaimUser ==uint.Parse(username) && x.ClaimName == 2)
             .Select(x =>new GetFilterIdRequestDTO { Id=x.ClaimValue})
-            .ToListAsync(cancellationToken);
-        
+            .ToListAsync(cancellationToken);        
     }
     public async Task<IReadOnlyList<GetFilterIdRequestDTO>> GetFilialsClaim(string username, CancellationToken cancellationToken)
     {
@@ -56,7 +53,6 @@ public class ClaimRepository : EntityRepository<PgContext, IdentityClaims>, IIde
             .Where(x => x.ClaimUser == uint.Parse(username) && x.ClaimName == 1)
             .Select(x => new GetFilterIdRequestDTO { Id = x.ClaimValue })
             .ToListAsync(cancellationToken);
-
     }
 }
 
