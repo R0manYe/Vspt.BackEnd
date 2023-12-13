@@ -2,7 +2,6 @@
 using Vspt.BackEnd.Application.features.Authentication.Helpers;
 using Vspt.BackEnd.Domain.Contract;
 using Vspt.BackEnd.Infrastructure.Database.EntityConfigurations;
-using Vspt.Box.Data.EfCore.Entities;
 using Vspt.Box.MediatR;
 using Vspt.Common.Api.Contract.Postgrees.DTO.Auth;
 
@@ -24,7 +23,7 @@ namespace Vspt.BackEnd.Application.Authentication.Auth
          
         }
 
-        protected override async  Task<GetLoginResponse> HandleData(GetAutenticateRequest request, CancellationToken cancellationToken)
+        protected override async Task<GetLoginResponse> HandleData(GetAutenticateRequest request, CancellationToken cancellationToken)
         {
             if (request == null)
             {
@@ -50,7 +49,7 @@ namespace Vspt.BackEnd.Application.Authentication.Auth
             var newRefreshToken = CreateRefreshtoken();
             user.RefreshToken = newRefreshToken;
             user.RefreshTokenExpiryTime = DateTime.Now.AddDays(5);
-            await _usersRepository.GetBySaveToken(user, cancellationToken);
+            _usersRepository.GetBySaveToken(user, cancellationToken);
 
             return new GetLoginResponse
             {

@@ -33,7 +33,7 @@ namespace Vspt.BackEnd.Api.Controllers
             return _mediator.Send(new GetReadFilialsRequest { Data = Unit.Value });
         }
         [HttpGet("readDistricts")]
-        public Task<IReadOnlyList<GetFilterIdNameDTO>> ReadDistricts()
+        public Task<IReadOnlyList<GetFilterIdLongNameDTO>> ReadDistricts()
         {
             return _mediator.Send(new GetReadDistrictsRequest { Data = Unit.Value });
         }

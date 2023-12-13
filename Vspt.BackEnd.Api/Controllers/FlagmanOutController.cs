@@ -52,7 +52,7 @@ namespace Vspt.BackEnd.Api.Controllers
             return _dislokaciaService.GetDislokacia(cancellationToken);
         }
         [HttpPost("sprDislokaciaFiltr")]
-        public Task<IReadOnlyList<GetAllDislokacia>> GetDislokaciaStationFiltr(string userId,CancellationToken cancellationToken)
+        public Task<IReadOnlyList<GetAllDislokacia>> GetDislokaciaStationFiltr(uint userId,CancellationToken cancellationToken)
         {
             return _dislokaciaService.GetDislokaciaFilterStations(userId,cancellationToken);
         }

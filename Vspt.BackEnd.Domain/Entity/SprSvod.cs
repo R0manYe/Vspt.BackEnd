@@ -6,7 +6,7 @@ namespace Vspt.BackEnd.Domain.Entity;
 
 public sealed  class SprSvod
 {      
-    public byte claimname { get; set; }   
-    public string Id { get; set; }   
+    public byte spr { get; set; }   
+    public ulong Id { get; set; }   
     public string name { get; set; }   
 }

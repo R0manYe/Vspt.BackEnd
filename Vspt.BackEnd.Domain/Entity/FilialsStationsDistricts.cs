@@ -6,10 +6,10 @@ namespace Vspt.BackEnd.Domain.Entity;
 
 public sealed class FilialsStationsDistricts : IEntity
 {   
-    public string BuId { get; init; }
+    public byte BuId { get; init; }
     public SprFilials Filials { get; init; }
-    public string DistrictId { get; init; }
+    public ulong DistrictId { get; init; }
     public SprDistrict Districts { get; init; }
-    public string StationECPId { get; set; }
-    public string StationRZDId { get; set; }
+    public uint StationECPId { get; set; }
+    public uint StationRZDId { get; set; }
 }

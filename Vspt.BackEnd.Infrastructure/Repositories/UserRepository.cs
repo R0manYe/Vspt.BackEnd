@@ -39,9 +39,9 @@ public class UserRepository : EntityRepository<PgContext, IdentityUsers>, IUsers
        
     }
 
-    public  Task GetBySaveToken(IdentityUsers user, CancellationToken cancellationToken)
+    public Task GetBySaveToken(IdentityUsers user, CancellationToken cancellationToken)
     {
-         return _entityDbSet.UpdateAndSave(user,cancellationToken);
+          return _entityDbSet.UpdateAndSave(user,cancellationToken);
     }
 
     public async Task DeleteUser(uint userId, CancellationToken cancellationToken)

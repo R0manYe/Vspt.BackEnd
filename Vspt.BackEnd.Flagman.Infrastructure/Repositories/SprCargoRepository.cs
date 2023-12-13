@@ -18,7 +18,7 @@ internal sealed class SprCargoRepository : EntityRepository<FlagmanContext, Spr_
     {
         var result = await _entityDbSet.Select(x=>new GetFilterIdNameDTO 
         { 
-            Id=x.ID, 
+            Id= (uint)Convert.ToInt16(x.ID),
             Name=x.NAME
         })
             .ToListAsync();

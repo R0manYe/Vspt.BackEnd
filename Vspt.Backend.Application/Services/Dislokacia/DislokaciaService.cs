@@ -19,7 +19,7 @@ namespace Vspt.BackEnd.Application.Services.SprOrg
             return await _flagmanDislokaciaApiClient.GetDislokacia();
         }
 
-        public async Task<IReadOnlyList<GetAllDislokacia>> GetDislokaciaFilterStations(string userId,CancellationToken cancellationToken)
+        public async Task<IReadOnlyList<GetAllDislokacia>> GetDislokaciaFilterStations(uint userId,CancellationToken cancellationToken)
         {
             var exiistingStation=_filterFilialsStationsService.GetFilialsStationsId(userId,cancellationToken).Result;
 

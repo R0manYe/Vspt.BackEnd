@@ -333,9 +333,8 @@ namespace Vspt.BackEnd.Api.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
-                    b.Property<string>("FilialId")
-                        .IsRequired()
-                        .HasColumnType("text");
+                    b.Property<byte>("FilialId")
+                        .HasColumnType("smallint");
 
                     b.Property<string>("GruzGroupId")
                         .IsRequired()
@@ -426,21 +425,17 @@ namespace Vspt.BackEnd.Api.Migrations
 
             modelBuilder.Entity("Vspt.BackEnd.Domain.Entity.FilialsStationsDistricts", b =>
                 {
-                    b.Property<string>("BuId")
-                        .IsRequired()
-                        .HasColumnType("character varying(4)");
+                    b.Property<byte>("BuId")
+                        .HasColumnType("smallint");
 
-                    b.Property<string>("DistrictId")
-                        .IsRequired()
-                        .HasColumnType("character varying(12)");
+                    b.Property<long>("DistrictId")
+                        .HasColumnType("bigint");
 
-                    b.Property<string>("StationECPId")
-                        .IsRequired()
-                        .HasColumnType("text");
+                    b.Property<long>("StationECPId")
+                        .HasColumnType("bigint");
 
-                    b.Property<string>("StationRZDId")
-                        .IsRequired()
-                        .HasColumnType("text");
+                    b.Property<long>("StationRZDId")
+                        .HasColumnType("bigint");
 
                     b.HasIndex("BuId");
 
@@ -461,9 +456,8 @@ namespace Vspt.BackEnd.Api.Migrations
                     b.Property<long>("ClaimUser")
                         .HasColumnType("bigint");
 
-                    b.Property<string>("ClaimValue")
-                        .IsRequired()
-                        .HasColumnType("text");
+                    b.Property<long>("ClaimValue")
+                        .HasColumnType("bigint");
 
                     b.HasKey("Id");
 
@@ -525,13 +519,15 @@ namespace Vspt.BackEnd.Api.Migrations
 
             modelBuilder.Entity("Vspt.BackEnd.Domain.Entity.SprDistrict", b =>
                 {
-                    b.Property<string>("Id")
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasMaxLength(12)
-                        .HasColumnType("character varying(12)");
+                        .HasColumnType("bigint");
 
-                    b.Property<string>("Bu_id")
-                        .IsRequired()
-                        .HasColumnType("character varying(4)");
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
+
+                    b.Property<byte>("Bu_id")
+                        .HasColumnType("smallint");
 
                     b.Property<string>("District_id_txt")
                         .IsRequired()
@@ -550,9 +546,9 @@ namespace Vspt.BackEnd.Api.Migrations
 
             modelBuilder.Entity("Vspt.BackEnd.Domain.Entity.SprFilials", b =>
                 {
-                    b.Property<string>("Id")
+                    b.Property<byte>("Id")
                         .HasMaxLength(4)
-                        .HasColumnType("character varying(4)");
+                        .HasColumnType("smallint");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -569,8 +565,11 @@ namespace Vspt.BackEnd.Api.Migrations
 
             modelBuilder.Entity("Vspt.BackEnd.Domain.Entity.SprSvod", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("text");
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
 
                     b.Property<string>("name")
                         .IsRequired()

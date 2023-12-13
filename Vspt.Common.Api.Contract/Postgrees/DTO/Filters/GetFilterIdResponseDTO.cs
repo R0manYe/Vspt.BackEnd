@@ -2,6 +2,6 @@
 {
     public record GetFilterIdResponseDTO
     {       
-        public string Id { get; init; }
+        public uint Id { get; init; }
     }
 }

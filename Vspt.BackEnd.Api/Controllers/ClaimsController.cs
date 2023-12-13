@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Vspt.BackEnd.Application.features.IdentityClaimes;
 using Vspt.BackEnd.Domain.Entity;
 using Vspt.Common.Api.Contract.Postgrees.DTO.Claim;
+using Vspt.Common.Api.Contract.Postgrees.DTO.Filters;
 
 namespace Vspt.BackEnd.Api.Controllers
 {
@@ -27,7 +28,7 @@ namespace Vspt.BackEnd.Api.Controllers
         }
 
         [HttpPost("add")]
-        public Task AddIdentityClaims( GetIdentityClaimRequestDTO claimName)
+        public Task AddIdentityClaims(GetIdentityClaimRequestDTO claimName)
         {
             return _mediator.Send(new GetAddClaimRequest { Data = claimName });
         }      
@@ -42,6 +43,12 @@ namespace Vspt.BackEnd.Api.Controllers
         public Task<IReadOnlyList<TypeClaims>> ReadTypeClaims()
         {
             return _mediator.Send(new GetReadTypeClaimRequest { Data = Unit.Value });
+        }
+
+        [HttpPost("readMenuClaim")]
+        public Task<IReadOnlyList<GetFilterIdRequestDTO>> ReadTypeClaims(uint userId)
+        {
+            return _mediator.Send(new GetMenuRoleRequest { Data = userId });
         }
     }
 }

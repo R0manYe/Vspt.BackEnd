@@ -12,6 +12,6 @@ namespace Vspt.BackEnd.Application.Services.Filters.District
 {
     public interface IFilterUserDistrictsService
     {
-        Task<IReadOnlyList<GetFilterIdNameDTO>> GetDistricts(string Username, CancellationToken cancellationToken);
+        Task<IReadOnlyList<GetFilterIdLongNameDTO>> GetDistricts(uint Username, CancellationToken cancellationToken);
     }
 }

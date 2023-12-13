@@ -4,7 +4,7 @@
     {       
         public byte ClaimName { get; set; }      
         public uint ClaimUser { get; set; }
-        public string ClaimValue { get; set; }
+        public uint ClaimValue { get; set; }
     }
 
 }

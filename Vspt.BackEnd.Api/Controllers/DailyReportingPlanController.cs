@@ -23,7 +23,7 @@ namespace Vspt.BackEnd.Api.Controllers
         }
 
         [HttpGet("read")]
-        public Task<IReadOnlyList<DailyReportingPlanDetails>> ReadDailyReportingPlanDetails(string userId)
+        public Task<IReadOnlyList<DailyReportingPlanDetails>> ReadDailyReportingPlanDetails(uint userId)
         {
             return _mediator.Send(new GetReadRepotingPlanRequest { Data = userId });
         }
@@ -39,11 +39,6 @@ namespace Vspt.BackEnd.Api.Controllers
         {
             return _mediator.Send(new GetDeleteClaimRequest { Data = id } );
         }
-
-        [HttpGet("readClaimType")]
-        public Task<IReadOnlyList<TypeClaims>> ReadTypeClaims()
-        {
-            return _mediator.Send(new GetReadTypeClaimRequest { Data = Unit.Value });
-        }
+       
     }
 }

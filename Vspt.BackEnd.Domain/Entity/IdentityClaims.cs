@@ -11,5 +11,5 @@ public sealed  class IdentityClaims : IEntityWithId
     public TypeClaims  TypeClaim { get; set; }
     public IdentityUsers IdentityUser { get; set; }
     public uint ClaimUser { get; set; }    
-    public string ClaimValue { get; set; }    
+    public uint ClaimValue { get; set; }    
 }

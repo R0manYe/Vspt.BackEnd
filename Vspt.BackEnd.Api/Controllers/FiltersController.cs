@@ -1,17 +1,8 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Collections.Generic;
-using System.Globalization;
-using System.Security.Claims;
 using System.Threading.Tasks;
-using System.Windows.Markup;
 using Vspt.BackEnd.Application.features.Filters;
-using Vspt.BackEnd.Application.features.GetUser;
-using Vspt.BackEnd.Application.features.IdentityClaimes;
-using Vspt.BackEnd.Application.features.IdentityRolees;
-using Vspt.BackEnd.Domain.Entity;
-using Vspt.Common.Api.Contract.Postgrees.DTO.Claim;
 using Vspt.Common.Api.Contract.Postgrees.DTO.Filters;
 
 namespace Vspt.BackEnd.Api.Controllers
@@ -28,17 +19,17 @@ namespace Vspt.BackEnd.Api.Controllers
         }
 
         [HttpGet("filterUserDistrictsIdName")]
-        public Task<IReadOnlyList<GetFilterIdNameDTO>> ReadDistricts(string userId)
+        public Task<IReadOnlyList<GetFilterIdLongNameDTO>> ReadDistricts(uint userId)
         {
             return _mediator.Send(new GetDistrictFilterHandlerRequest { Data = userId });
         }
         [HttpGet("filterUserFilialsIdName")]
-        public Task<IReadOnlyList<GetFilterIdNameDTO>> ReadFilials(string userId)
+        public Task<IReadOnlyList<GetFilterIdLongNameDTO>> ReadFilials(uint userId)
         {
             return _mediator.Send(new GetFilialsFilterHandlerRequest { Data = userId });
         }
         [HttpGet("filterUserStationId")]
-        public Task<IReadOnlyList<GetFilterIdRequestDTO>> GetUserStation(string userId)
+        public Task<IReadOnlyList<GetFilterIdRequestDTO>> GetUserStation(uint userId)
         {
             return _mediator.Send(new GetUserFilialStationFilterHandlerRequest { Data = userId });
         }

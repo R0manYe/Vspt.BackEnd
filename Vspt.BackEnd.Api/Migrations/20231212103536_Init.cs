@@ -158,7 +158,7 @@ namespace Vspt.BackEnd.Api.Migrations
                 schema: "VSPT",
                 columns: table => new
                 {
-                    Id = table.Column<string>(type: "character varying(4)", maxLength: 4, nullable: false),
+                    Id = table.Column<byte>(type: "smallint", maxLength: 4, nullable: false),
                     Name = table.Column<string>(type: "text", nullable: false),
                     ShortName = table.Column<string>(type: "text", nullable: false)
                 },
@@ -172,7 +172,8 @@ namespace Vspt.BackEnd.Api.Migrations
                 schema: "VSPT",
                 columns: table => new
                 {
-                    Id = table.Column<string>(type: "text", nullable: false),
+                    Id = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     spr = table.Column<byte>(type: "smallint", nullable: false),
                     name = table.Column<string>(type: "text", nullable: false)
                 },
@@ -246,7 +247,7 @@ namespace Vspt.BackEnd.Api.Migrations
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
                     PlanId = table.Column<Guid>(type: "uuid", nullable: false),
-                    FilialId = table.Column<string>(type: "text", nullable: false),
+                    FilialId = table.Column<byte>(type: "smallint", nullable: false),
                     OrgId = table.Column<string>(type: "text", nullable: false),
                     GruzGroupId = table.Column<string>(type: "text", nullable: false),
                     LoadingPlan = table.Column<int>(type: "integer", nullable: true),
@@ -290,10 +291,11 @@ namespace Vspt.BackEnd.Api.Migrations
                 schema: "VSPT",
                 columns: table => new
                 {
-                    Id = table.Column<string>(type: "character varying(12)", maxLength: 12, nullable: false),
+                    Id = table.Column<long>(type: "bigint", maxLength: 12, nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Name = table.Column<string>(type: "text", nullable: false),
                     District_id_txt = table.Column<string>(type: "text", nullable: false),
-                    Bu_id = table.Column<string>(type: "character varying(4)", nullable: false)
+                    Bu_id = table.Column<byte>(type: "smallint", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -315,7 +317,7 @@ namespace Vspt.BackEnd.Api.Migrations
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
                     ClaimName = table.Column<byte>(type: "smallint", nullable: false),
                     ClaimUser = table.Column<long>(type: "bigint", nullable: false),
-                    ClaimValue = table.Column<string>(type: "text", nullable: false)
+                    ClaimValue = table.Column<long>(type: "bigint", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -341,10 +343,10 @@ namespace Vspt.BackEnd.Api.Migrations
                 schema: "VSPT",
                 columns: table => new
                 {
-                    BuId = table.Column<string>(type: "character varying(4)", nullable: false),
-                    DistrictId = table.Column<string>(type: "character varying(12)", nullable: false),
-                    StationECPId = table.Column<string>(type: "text", nullable: false),
-                    StationRZDId = table.Column<string>(type: "text", nullable: false)
+                    BuId = table.Column<byte>(type: "smallint", nullable: false),
+                    DistrictId = table.Column<long>(type: "bigint", nullable: false),
+                    StationECPId = table.Column<long>(type: "bigint", nullable: false),
+                    StationRZDId = table.Column<long>(type: "bigint", nullable: false)
                 },
                 constraints: table =>
                 {

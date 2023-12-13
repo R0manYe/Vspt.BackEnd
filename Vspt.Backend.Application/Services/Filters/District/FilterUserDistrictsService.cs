@@ -1,5 +1,6 @@
 ﻿using Vspt.BackEnd.Domain.Contract;
 using Vspt.Common.Api.Contract.Postgrees.DTO.Filters;
+using Vspt.Common.Api.Contract.Postgrees.ViewModels;
 
 namespace Vspt.BackEnd.Application.Services.Filters.District
 {
@@ -13,14 +14,16 @@ namespace Vspt.BackEnd.Application.Services.Filters.District
             _sprDistrictsRepository = sprDistrictsRepository;
         }
 
-        public async Task<IReadOnlyList<GetFilterIdNameDTO>> GetDistricts(string username, CancellationToken cancellationToken)
+        public async Task<IReadOnlyList<GetFilterIdLongNameDTO>> GetDistricts(uint username, CancellationToken cancellationToken)
         {
-            var existAviliableDistricts = await _identityClaimsRepository.GetDistrictsClaim(username, cancellationToken);
-            var checkAllFilial = existAviliableDistricts.Where(x => x.Id == "1").Count();
+
+            
+            var existAviliableDistricts = await _identityClaimsRepository.GetFilterClaim(username,(byte)TypeClaim.Districts, cancellationToken);
+            var checkAllDistricts = existAviliableDistricts.Where(x => x.Id == (uint)TypeClaim.Districts).Count();
             var avaliableDistricts = await _sprDistrictsRepository.GetAllDistricts(cancellationToken);
-            if (checkAllFilial == 0)
+            if (checkAllDistricts == 1)
             {
-                return existAviliableDistricts.Select(x => new GetFilterIdNameDTO
+                return existAviliableDistricts.Select(x => new GetFilterIdLongNameDTO
                 {
                     Id = avaliableDistricts.Where(y => y.Id == x.Id).Select(z => z.Id).First(),
                     Name = avaliableDistricts.Where(y => y.Id == x.Id).Select(z => z.Name).First()
@@ -28,7 +31,7 @@ namespace Vspt.BackEnd.Application.Services.Filters.District
             }
             else
             {
-                return avaliableDistricts.Where(s => s.Id.Length > 1).Select(x => new GetFilterIdNameDTO
+                return avaliableDistricts.Where(s => s.Id > 1).Select(x => new GetFilterIdLongNameDTO
                 {
                     Id = x.Id,
                     Name = x.Name

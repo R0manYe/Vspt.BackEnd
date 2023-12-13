@@ -22,7 +22,7 @@ internal sealed class DislokaciaRepository : EntityRepository<FlagmanContext, Ge
 
     public async Task<List<GetAllDislokacia>> GetDislokaciaFilter(IReadOnlyList<GetFilterIdRequestDTO> stations, CancellationToken cancellationToken)
     {
-        return await _entityDbSet.Where(c =>stations.Select(x=>x.Id).Contains(c.STAN_NAZN)).ToListAsync();
+        return await _entityDbSet.Where(c => stations.Select(x => Convert.ToInt32(x.Id)).Contains(Convert.ToInt32(c.STAN_NAZN))).ToListAsync();
     }
 }
 

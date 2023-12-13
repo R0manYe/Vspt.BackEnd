@@ -45,6 +45,6 @@ namespace Vspt.BackEnd.Api.Controllers
         public Task DeleteRole(byte id) 
         {
             return _mediator.Send(new GetDeleteRoleRequest { Data = new() { Id = id } });
-        }
+        }       
     }
 }
