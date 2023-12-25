@@ -25,7 +25,7 @@ namespace Vspt.BackEnd.Api.Controllers
         [HttpGet("read")]
         public Task<IReadOnlyList<IdentityClaims>> ReadClaims()
         {
-            return _mediator.Send(new GetReadClaimRequest { Data = Unit.Value });
+            return _mediator.Send(new ReadClaimRequest { Data = Unit.Value });
         }
         [HttpGet("readFilials")]
         public Task<IReadOnlyList<GetFilterIdNameDTO>> ReadFilials()

@@ -4,9 +4,9 @@ using Vspt.BackEnd.Domain.Entity;
 
 namespace Vspt.BackEnd.Infrastructure.Database.EntityConfigurations;
 
-internal sealed class DailyReportingPlanDetailsConfiguration : IEntityTypeConfiguration<DailyReportingPlanDetails>
+internal sealed class DailyReportingPlanDetailsConfiguration : IEntityTypeConfiguration<DailyReportingPlansDetails>
 {
-    public void Configure(EntityTypeBuilder<DailyReportingPlanDetails> builder)
+    public void Configure(EntityTypeBuilder<DailyReportingPlansDetails> builder)
     {
         builder
             .ToTable("DailyReportingPlanDetails");

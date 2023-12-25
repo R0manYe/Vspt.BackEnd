@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Vspt.BackEnd.Application.features.Filters;
+using Vspt.BackEnd.Application.features.Sources;
+using Vspt.BackEnd.Flagman.Domain.Entity;
 using Vspt.Common.Api.Contract.Postgrees.DTO.Filters;
 
 namespace Vspt.BackEnd.Api.Controllers
@@ -32,6 +34,11 @@ namespace Vspt.BackEnd.Api.Controllers
         public Task<IReadOnlyList<GetFilterIdRequestDTO>> GetUserStation(uint userId)
         {
             return _mediator.Send(new GetUserFilialStationFilterHandlerRequest { Data = userId });
+        }
+        [HttpPost("filterUserOrg")]
+        public Task<IReadOnlyList<Spr_org>> GetUserOrg(uint userId)
+        {
+            return _mediator.Send(new GetReadOrgRequest { Data = userId });
         }
     }
 }

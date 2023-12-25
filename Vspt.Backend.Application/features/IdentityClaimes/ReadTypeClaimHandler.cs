@@ -8,16 +8,16 @@ using Vspt.Common.Api.Contract.Postgrees.DTO.Claim;
 
 namespace Vspt.BackEnd.Application.features.IdentityClaimes;
 
-public sealed record GetReadTypeClaimRequest : BaseRequest<Unit,IReadOnlyList<TypeClaims>>
+public sealed record ReadTypeClaimRequest : BaseRequest<Unit,IReadOnlyList<TypeClaims>>
 {
 }
-internal sealed class GetReadTypeClaimHandler : BaseRequestHandler<GetReadTypeClaimRequest,Unit,IReadOnlyList<TypeClaims>>
+internal sealed class ReadTypeClaimHandler : BaseRequestHandler<ReadTypeClaimRequest,Unit,IReadOnlyList<TypeClaims>>
 {
     private readonly ITypeClaimsRepository _typeClaimsRepository;
     
 
 
-    public GetReadTypeClaimHandler(ITypeClaimsRepository typeClaimsRepository)
+    public ReadTypeClaimHandler(ITypeClaimsRepository typeClaimsRepository)
     {
         _typeClaimsRepository = typeClaimsRepository;
         

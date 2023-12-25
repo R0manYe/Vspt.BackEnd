@@ -1,15 +1,13 @@
-﻿using System.Security.Claims;
-using Vspt.Box.Data.Entities;
-using Vspt.Common.Api.Contract.Postgrees.DTO.Claim;
+﻿using Vspt.Box.Data.Entities;
 
 namespace Vspt.BackEnd.Domain.Entity;
 
-public sealed  class DailyReportingPlanDetails : IEntityWithId
+public sealed class DailyReportingPlansDetails : IEntityWithId
 {       
     public Guid Id { get; set; }
     public Guid PlanId { get; set; }
     public byte FilialId { get; set; }
-    public DailyReportingPlan DailyReportingPlan { get; set; }
+    public DailyReportingPlans DailyReportingPlan { get; set; }
     public string OrgId { get; set; }   
     public string GruzGroupId { get; set; }   
     //Погрузка

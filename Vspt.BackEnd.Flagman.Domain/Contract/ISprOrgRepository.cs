@@ -1,9 +1,10 @@
 ﻿using Vspt.BackEnd.Flagman.Domain.Entity;
+using Vspt.Common.Api.Contract.Postgrees.DTO.Filters;
 
 namespace Vspt.BackEnd.Flagman.Domain.Contract
 {
     public interface ISprOrgRepository
     {
-        Task<List<Spr_org>> GetSprOrg(CancellationToken cancellationToken);
+        Task<IReadOnlyList<Spr_org>> GetSprOrg(IReadOnlyList<GetFilterIdResponseDTO> stations, CancellationToken cancellationToken);
     }
 }

@@ -42,9 +42,9 @@ namespace Vspt.BackEnd.Api.Controllers
             return _subjectPersoneService.GetAllSubjectPersone();           
         }
         [HttpPost("sprOrg")]
-        public Task<IReadOnlyList<Spr_org>> GetSprOrg()
+        public Task<IReadOnlyList<Spr_org>> GetSprOrg(IReadOnlyList<GetFilterIdRequestDTO> stations, CancellationToken cancellationToken)
         {
-            return _sprOrgService.GetSprOrg(); 
+            return _sprOrgService.GetSprOrgResult(stations, cancellationToken); 
         }
         [HttpPost("sprDislokacia")]
         public Task<IReadOnlyList<GetAllDislokacia>> GetDislokacia(CancellationToken cancellationToken)

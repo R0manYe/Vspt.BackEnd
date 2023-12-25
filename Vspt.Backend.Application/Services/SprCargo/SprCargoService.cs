@@ -9,8 +9,9 @@ using Vspt.Common.Api.Contracts.Pagination;
 using Vspt.BackEnd.Flagman.ApiClients;
 using Vspt.Common.Api.Contract.Postgrees.DTO.Claim;
 using Vspt.Common.Api.Contract.Postgrees.DTO.Filters;
+using Vspt.BackEnd.Application.Services.SprOrg;
 
-namespace Vspt.BackEnd.Application.Services.SprOrg
+namespace Vspt.BackEnd.Application.Services.SprCargo
 {
     internal sealed class SprCargoService : ISprCargoService
     {

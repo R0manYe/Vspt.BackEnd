@@ -5,6 +5,7 @@ using System.Reflection;
 using Vspt.BackEnd.Application.Services.Filters.District;
 using Vspt.BackEnd.Application.Services.Filters.Filials;
 using Vspt.BackEnd.Application.Services.Filters.FilialsStations;
+using Vspt.BackEnd.Application.Services.SprCargo;
 using Vspt.BackEnd.Application.Services.SprOrg;
 using Vspt.BackEnd.Application.Services.SubjectPersone;
 using Vspt.BackEnd.Domain.Contract;
@@ -31,7 +32,9 @@ public static class ServiceCollectionExtensions
         services.AddScoped<IDislokaciaService, DislokaciaService>();
         services.AddScoped<ISprCargoService,SprCargoService>();
         services.AddScoped<ISprSvodRepository, SprSvodRepository>();
-        services.AddScoped<IDailyReportingPlanDetailsRepository, DailyReportingPlanDetailsRepository>();
+        services.AddScoped<IDailyReportingPlansDetailsRepository, DailyReportingPlanDetailsRepository>();
+        services.AddScoped<IDailyReportingPlansRepository, DailyReportingPlanRepository>();
+
 
         services.AddRefitClient<IFlagmanApiClient>().ConfigureHttpClient(c=>c.BaseAddress=new Uri("https://localhost:7201"));
         services.AddRefitClient<IFlagmanSprOrgApiClient>().ConfigureHttpClient(c=>c.BaseAddress=new Uri("https://localhost:7201"));

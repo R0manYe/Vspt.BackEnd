@@ -24,25 +24,25 @@ namespace Vspt.BackEnd.Api.Controllers
         [HttpGet("read")]
         public Task<IReadOnlyList<IdentityClaims>> ReadClaims()
         {
-            return _mediator.Send(new GetReadClaimRequest { Data = Unit.Value });
+            return _mediator.Send(new ReadClaimRequest { Data = Unit.Value });
         }
 
         [HttpPost("add")]
         public Task AddIdentityClaims(GetIdentityClaimRequestDTO claimName)
         {
-            return _mediator.Send(new GetAddClaimRequest { Data = claimName });
+            return _mediator.Send(new AddClaimRequest { Data = claimName });
         }      
 
         [HttpDelete("delete/{id}")]
         public Task DeleteClaims(Guid id) 
         {
-            return _mediator.Send(new GetDeleteClaimRequest { Data = id } );
+            return _mediator.Send(new DeleteClaimRequest { Data = id } );
         }
 
         [HttpGet("readClaimType")]
         public Task<IReadOnlyList<TypeClaims>> ReadTypeClaims()
         {
-            return _mediator.Send(new GetReadTypeClaimRequest { Data = Unit.Value });
+            return _mediator.Send(new ReadTypeClaimRequest { Data = Unit.Value });
         }
 
         [HttpPost("readMenuClaim")]

@@ -7,16 +7,16 @@ using Vspt.Common.Api.Contract.Postgrees.DTO.Claim;
 
 namespace Vspt.BackEnd.Application.features.IdentityClaimes
 {
-    public sealed record GetAddClaimRequest : BaseRequest<GetIdentityClaimRequestDTO, Unit>
+    public sealed record AddClaimRequest : BaseRequest<GetIdentityClaimRequestDTO, Unit>
     {
     }
-    internal sealed class GetAddClaimHandler : BaseRequestHandler<GetAddClaimRequest, GetIdentityClaimRequestDTO, Unit>
+    internal sealed class AddClaimHandler : BaseRequestHandler<AddClaimRequest, GetIdentityClaimRequestDTO, Unit>
     {
         private readonly IIdentityClaimsRepository _identityclaimsRepository;
         private readonly IMapper _mapper;
 
 
-        public GetAddClaimHandler(IMapper mapper, IIdentityClaimsRepository identityClaimsRepository)
+        public AddClaimHandler(IMapper mapper, IIdentityClaimsRepository identityClaimsRepository)
         {
             _identityclaimsRepository = identityClaimsRepository;
             _mapper = mapper;

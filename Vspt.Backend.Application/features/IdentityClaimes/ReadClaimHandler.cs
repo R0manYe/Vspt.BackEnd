@@ -5,16 +5,16 @@ using Vspt.Box.MediatR;
 
 namespace Vspt.BackEnd.Application.features.IdentityClaimes;
 
-public sealed record GetReadClaimRequest : BaseRequest<Unit, IReadOnlyList<IdentityClaims>>
+public sealed record ReadClaimRequest : BaseRequest<Unit, IReadOnlyList<IdentityClaims>>
 {
 }
-internal sealed class GetReadClaimHandler : BaseRequestHandler<GetReadClaimRequest, Unit, IReadOnlyList<IdentityClaims>>
+internal sealed class ReadClaimHandler : BaseRequestHandler<ReadClaimRequest, Unit, IReadOnlyList<IdentityClaims>>
 {
     private readonly IIdentityClaimsRepository _claimsRepository;
    
 
 
-    public GetReadClaimHandler( IIdentityClaimsRepository claimsRepository)
+    public ReadClaimHandler( IIdentityClaimsRepository claimsRepository)
     {
         _claimsRepository = claimsRepository;       
     }
