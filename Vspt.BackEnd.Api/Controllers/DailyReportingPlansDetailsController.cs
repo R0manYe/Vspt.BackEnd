@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Vspt.BackEnd.Application.features.DailyReportingPlan;
 using Vspt.BackEnd.Domain.Entity;
+using Vspt.Common.Api.Contract.Postgrees.DTO.Claim;
 
 namespace Vspt.BackEnd.Api.Controllers
 {
@@ -20,7 +21,7 @@ namespace Vspt.BackEnd.Api.Controllers
         }
 
         [HttpPost("read")]
-        public Task<IReadOnlyList<DailyReportingPlansDetails>> ReadDailyReportingPlanDetails(uint userId)
+        public Task<IReadOnlyList<DailyReportingPlansDetailsDTO>> ReadDailyReportingPlanDetails(uint userId)
         {
             return _mediator.Send(new ReadRepotingPlanDetailsRequest { Data = userId });
         }

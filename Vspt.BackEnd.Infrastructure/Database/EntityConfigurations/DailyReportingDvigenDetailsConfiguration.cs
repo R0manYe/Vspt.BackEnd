@@ -12,10 +12,6 @@ internal sealed class DailyReportingDvigenDetailsConfiguration : IEntityTypeConf
             .ToTable("DailyReportingDvigenDetails");
 
         builder
-            .HasKey(x =>x.Id);
-        builder
-           .HasOne(x => x.DailyReportingDvigens)
-           .WithMany()
-           .HasForeignKey(x => x.DvigenId);
+            .HasKey(x =>x.Id);       
     }
 }

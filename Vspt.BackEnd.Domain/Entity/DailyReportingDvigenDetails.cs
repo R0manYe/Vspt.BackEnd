@@ -7,8 +7,9 @@ namespace Vspt.BackEnd.Domain.Entity;
 public sealed  class DailyReportingDvigenDetails : IEntityWithId
 {
     public Guid Id { get; set; }
-    public Guid DvigenId { get; set; }
-    public DailyReportingDvigen DailyReportingDvigens { get; set; }
+    public DateOnly DateDvig { get; set; }
+    public byte BuId { get; set; }   
+    public SprFilials SprFilials { get; set; }
     public string OrgId { get; set; }
     public string GruzGroupId { get; set; }
     //Погрузка

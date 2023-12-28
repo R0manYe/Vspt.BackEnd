@@ -12,10 +12,6 @@ internal sealed class DailyReportingPlanDetailsConfiguration : IEntityTypeConfig
             .ToTable("DailyReportingPlanDetails");
 
         builder
-            .HasKey(x =>x.Id);
-        builder
-         .HasOne(x => x.DailyReportingPlan)
-         .WithMany()
-         .HasForeignKey(x => x.PlanId);
+            .HasKey(x =>x.Id);       
     }
 }

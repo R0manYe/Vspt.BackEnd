@@ -5,6 +5,7 @@ using Vspt.BackEnd.Domain.Entity;
 using Vspt.BackEnd.Infrastructure.Database.EntityConfigurations;
 using Vspt.Box.Data.EfCore.Entities;
 using Vspt.Box.EfCore;
+using Vspt.Common.Api.Contract.Postgrees.DTO.Claim;
 using Vspt.Common.Api.Contract.Postgrees.DTO.Filters;
 
 namespace Vspt.BackEnd.Infrastructure.Repositories;
@@ -17,7 +18,7 @@ public class DailyReportingPlanDetailsRepository : EntityRepository<PgContext, D
     
     public async Task<IReadOnlyList<DailyReportingPlansDetails>> GetReadDailyReportingPlanDetails(IReadOnlyList<GetFilterIdResponseDTO> Filials, CancellationToken cancellationToken)
     {        
-        return await _entityDbSet.Where(x=>Filials.Select(y=>y.Id).Contains(x.FilialId)).ToListAsync(cancellationToken);
+        return await _entityDbSet.Where(x=>Filials.Select(y=>y.Id).Contains((x.BuId))).ToListAsync(cancellationToken);
     }
     public Task AddDailyReportingPlanDetails(DailyReportingPlansDetails entity, CancellationToken cancellationToken)
     {

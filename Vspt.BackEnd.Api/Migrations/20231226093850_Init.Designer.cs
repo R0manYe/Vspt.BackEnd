@@ -12,7 +12,7 @@ using Vspt.BackEnd.Infrastructure.Database.EntityConfigurations;
 namespace Vspt.BackEnd.Api.Migrations
 {
     [DbContext(typeof(PgContext))]
-    [Migration("20231212103536_Init")]
+    [Migration("20231226093850_Init")]
     partial class Init
     {
         /// <inheritdoc />
@@ -221,8 +221,11 @@ namespace Vspt.BackEnd.Api.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
-                    b.Property<Guid>("DvigenId")
-                        .HasColumnType("uuid");
+                    b.Property<byte>("BuId")
+                        .HasColumnType("smallint");
+
+                    b.Property<DateOnly>("DateDvig")
+                        .HasColumnType("date");
 
                     b.Property<string>("GruzGroupId")
                         .IsRequired()
@@ -258,6 +261,9 @@ namespace Vspt.BackEnd.Api.Migrations
                     b.Property<string>("OrgId")
                         .IsRequired()
                         .HasColumnType("text");
+
+                    b.Property<byte>("SprFilialsId")
+                        .HasColumnType("smallint");
 
                     b.Property<int?>("UnloadingAccesptedFullTerm")
                         .HasColumnType("integer");
@@ -303,12 +309,12 @@ namespace Vspt.BackEnd.Api.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("DvigenId");
+                    b.HasIndex("SprFilialsId");
 
                     b.ToTable("DailyReportingDvigenDetails", "VSPT");
                 });
 
-            modelBuilder.Entity("Vspt.BackEnd.Domain.Entity.DailyReportingPlan", b =>
+            modelBuilder.Entity("Vspt.BackEnd.Domain.Entity.DailyReportingPlans", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -321,23 +327,28 @@ namespace Vspt.BackEnd.Api.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<string>("idFilial")
-                        .IsRequired()
-                        .HasColumnType("text");
+                    b.Property<byte>("idFilial")
+                        .HasColumnType("smallint");
 
                     b.HasKey("Id");
 
                     b.ToTable("DailyReportingPlan", "VSPT");
                 });
 
-            modelBuilder.Entity("Vspt.BackEnd.Domain.Entity.DailyReportingPlanDetails", b =>
+            modelBuilder.Entity("Vspt.BackEnd.Domain.Entity.DailyReportingPlansDetails", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
-                    b.Property<byte>("FilialId")
+                    b.Property<byte>("BuId")
                         .HasColumnType("smallint");
+
+                    b.Property<DateOnly>("DatePlan")
+                        .HasColumnType("date");
+
+                    b.Property<int?>("ExpectedLoading")
+                        .HasColumnType("integer");
 
                     b.Property<string>("GruzGroupId")
                         .IsRequired()
@@ -361,12 +372,6 @@ namespace Vspt.BackEnd.Api.Migrations
                     b.Property<int?>("LoadingSecuredTotal")
                         .HasColumnType("integer");
 
-                    b.Property<int?>("LoadingTotalTonns")
-                        .HasColumnType("integer");
-
-                    b.Property<int?>("LoadingTotalWagons")
-                        .HasColumnType("integer");
-
                     b.Property<int?>("Notations")
                         .HasColumnType("integer");
 
@@ -374,8 +379,8 @@ namespace Vspt.BackEnd.Api.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<Guid>("PlanId")
-                        .HasColumnType("uuid");
+                    b.Property<byte>("SprFilialsId")
+                        .HasColumnType("smallint");
 
                     b.Property<int?>("UnloadingAccesptedFullTerm")
                         .HasColumnType("integer");
@@ -389,10 +394,7 @@ namespace Vspt.BackEnd.Api.Migrations
                     b.Property<int?>("UnloadingAccesptedTotal")
                         .HasColumnType("integer");
 
-                    b.Property<int?>("UnloadingAccesptedTotalTonns")
-                        .HasColumnType("integer");
-
-                    b.Property<int?>("UnloadingAccesptedTotalWagons")
+                    b.Property<int?>("UnloadingExpectedLoading")
                         .HasColumnType("integer");
 
                     b.Property<int?>("UnloadingPlan")
@@ -421,7 +423,7 @@ namespace Vspt.BackEnd.Api.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("PlanId");
+                    b.HasIndex("SprFilialsId");
 
                     b.ToTable("DailyReportingPlanDetails", "VSPT");
                 });
@@ -431,8 +433,8 @@ namespace Vspt.BackEnd.Api.Migrations
                     b.Property<byte>("BuId")
                         .HasColumnType("smallint");
 
-                    b.Property<long>("DistrictId")
-                        .HasColumnType("bigint");
+                    b.Property<decimal>("DistrictId")
+                        .HasColumnType("numeric(20,0)");
 
                     b.Property<long>("StationECPId")
                         .HasColumnType("bigint");
@@ -522,12 +524,10 @@ namespace Vspt.BackEnd.Api.Migrations
 
             modelBuilder.Entity("Vspt.BackEnd.Domain.Entity.SprDistrict", b =>
                 {
-                    b.Property<long>("Id")
+                    b.Property<decimal>("Id")
                         .ValueGeneratedOnAdd()
                         .HasMaxLength(12)
-                        .HasColumnType("bigint");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
+                        .HasColumnType("numeric(20,0)");
 
                     b.Property<byte>("Bu_id")
                         .HasColumnType("smallint");
@@ -568,11 +568,9 @@ namespace Vspt.BackEnd.Api.Migrations
 
             modelBuilder.Entity("Vspt.BackEnd.Domain.Entity.SprSvod", b =>
                 {
-                    b.Property<long>("Id")
+                    b.Property<decimal>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
+                        .HasColumnType("numeric(20,0)");
 
                     b.Property<string>("name")
                         .IsRequired()
@@ -602,24 +600,24 @@ namespace Vspt.BackEnd.Api.Migrations
 
             modelBuilder.Entity("Vspt.BackEnd.Domain.Entity.DailyReportingDvigenDetails", b =>
                 {
-                    b.HasOne("Vspt.BackEnd.Domain.Entity.DailyReportingDvigen", "DailyReportingDvigens")
+                    b.HasOne("Vspt.BackEnd.Domain.Entity.SprFilials", "SprFilials")
                         .WithMany()
-                        .HasForeignKey("DvigenId")
+                        .HasForeignKey("SprFilialsId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("DailyReportingDvigens");
+                    b.Navigation("SprFilials");
                 });
 
-            modelBuilder.Entity("Vspt.BackEnd.Domain.Entity.DailyReportingPlanDetails", b =>
+            modelBuilder.Entity("Vspt.BackEnd.Domain.Entity.DailyReportingPlansDetails", b =>
                 {
-                    b.HasOne("Vspt.BackEnd.Domain.Entity.DailyReportingPlan", "DailyReportingPlan")
+                    b.HasOne("Vspt.BackEnd.Domain.Entity.SprFilials", "SprFilials")
                         .WithMany()
-                        .HasForeignKey("PlanId")
+                        .HasForeignKey("SprFilialsId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("DailyReportingPlan");
+                    b.Navigation("SprFilials");
                 });
 
             modelBuilder.Entity("Vspt.BackEnd.Domain.Entity.FilialsStationsDistricts", b =>

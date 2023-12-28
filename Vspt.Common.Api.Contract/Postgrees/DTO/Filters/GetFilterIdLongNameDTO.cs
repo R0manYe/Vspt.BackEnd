@@ -1,4 +1,6 @@
-﻿namespace Vspt.Common.Api.Contract.Postgrees.DTO.Filters
+﻿using System.Numerics;
+
+namespace Vspt.Common.Api.Contract.Postgrees.DTO.Filters
 {
     public record GetFilterIdLongNameDTO
     {

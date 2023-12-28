@@ -12,5 +12,6 @@ namespace Vspt.BackEnd.Domain.Entity
         public byte Id { get; set; }
         public string Name { get; set; }
         public string ShortName { get; set; }
+        public List<DailyReportingPlansDetails> DailysReportingPlansDetails { get; set;}
     }
 }

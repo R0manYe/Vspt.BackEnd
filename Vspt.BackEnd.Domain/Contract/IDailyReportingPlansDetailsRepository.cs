@@ -1,4 +1,5 @@
 ﻿using Vspt.BackEnd.Domain.Entity;
+using Vspt.Common.Api.Contract.Postgrees.DTO.Claim;
 using Vspt.Common.Api.Contract.Postgrees.DTO.Filters;
 
 namespace Vspt.BackEnd.Domain.Contract

@@ -40,7 +40,7 @@ namespace Vspt.BackEnd.Api.Migrations
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
                     DatePlanReporting = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
-                    idFilial = table.Column<string>(type: "text", nullable: false),
+                    idFilial = table.Column<byte>(type: "smallint", nullable: false),
                     idDistrict = table.Column<string>(type: "text", nullable: false)
                 },
                 constraints: table =>
@@ -172,8 +172,7 @@ namespace Vspt.BackEnd.Api.Migrations
                 schema: "VSPT",
                 columns: table => new
                 {
-                    Id = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Id = table.Column<decimal>(type: "numeric(20,0)", nullable: false),
                     spr = table.Column<byte>(type: "smallint", nullable: false),
                     name = table.Column<string>(type: "text", nullable: false)
                 },
@@ -201,7 +200,9 @@ namespace Vspt.BackEnd.Api.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
-                    DvigenId = table.Column<Guid>(type: "uuid", nullable: false),
+                    DateDvig = table.Column<DateOnly>(type: "date", nullable: false),
+                    BuId = table.Column<byte>(type: "smallint", nullable: false),
+                    SprFilialsId = table.Column<byte>(type: "smallint", nullable: false),
                     OrgId = table.Column<string>(type: "text", nullable: false),
                     GruzGroupId = table.Column<string>(type: "text", nullable: false),
                     LoadingPlan = table.Column<int>(type: "integer", nullable: true),
@@ -232,10 +233,10 @@ namespace Vspt.BackEnd.Api.Migrations
                 {
                     table.PrimaryKey("PK_DailyReportingDvigenDetails", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_DailyReportingDvigenDetails_DailyReportingDvigen_DvigenId",
-                        column: x => x.DvigenId,
+                        name: "FK_DailyReportingDvigenDetails_SprFilials_SprFilialsId",
+                        column: x => x.SprFilialsId,
                         principalSchema: "VSPT",
-                        principalTable: "DailyReportingDvigen",
+                        principalTable: "SprFilials",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -246,16 +247,16 @@ namespace Vspt.BackEnd.Api.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
-                    PlanId = table.Column<Guid>(type: "uuid", nullable: false),
-                    FilialId = table.Column<byte>(type: "smallint", nullable: false),
+                    DatePlan = table.Column<DateOnly>(type: "date", nullable: false),
+                    BuId = table.Column<byte>(type: "smallint", nullable: false),
+                    SprFilialsId = table.Column<byte>(type: "smallint", nullable: false),
                     OrgId = table.Column<string>(type: "text", nullable: false),
                     GruzGroupId = table.Column<string>(type: "text", nullable: false),
                     LoadingPlan = table.Column<int>(type: "integer", nullable: true),
                     LoadingApplication = table.Column<int>(type: "integer", nullable: true),
                     LoadingSecuredTotal = table.Column<int>(type: "integer", nullable: true),
                     LoadingSecuredLastDay = table.Column<int>(type: "integer", nullable: true),
-                    LoadingTotalWagons = table.Column<int>(type: "integer", nullable: true),
-                    LoadingTotalTonns = table.Column<int>(type: "integer", nullable: true),
+                    ExpectedLoading = table.Column<int>(type: "integer", nullable: true),
                     LoadingPPGT = table.Column<int>(type: "integer", nullable: true),
                     LoadingFirstHalfDay = table.Column<int>(type: "integer", nullable: true),
                     UnloadingPlan = table.Column<int>(type: "integer", nullable: true),
@@ -264,8 +265,7 @@ namespace Vspt.BackEnd.Api.Migrations
                     UnloadingAccesptedFullTerm = table.Column<int>(type: "integer", nullable: true),
                     UnloadingProduceTotal = table.Column<int>(type: "integer", nullable: true),
                     UnloadingProduceFullTerm = table.Column<int>(type: "integer", nullable: true),
-                    UnloadingAccesptedTotalWagons = table.Column<int>(type: "integer", nullable: true),
-                    UnloadingAccesptedTotalTonns = table.Column<int>(type: "integer", nullable: true),
+                    UnloadingExpectedLoading = table.Column<int>(type: "integer", nullable: true),
                     UnloadingAccesptedPPGT = table.Column<int>(type: "integer", nullable: true),
                     UnloadingAccesptedLastDayWagons = table.Column<int>(type: "integer", nullable: true),
                     UnloadingRemainsTotal = table.Column<int>(type: "integer", nullable: true),
@@ -278,10 +278,10 @@ namespace Vspt.BackEnd.Api.Migrations
                 {
                     table.PrimaryKey("PK_DailyReportingPlanDetails", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_DailyReportingPlanDetails_DailyReportingPlan_PlanId",
-                        column: x => x.PlanId,
+                        name: "FK_DailyReportingPlanDetails_SprFilials_SprFilialsId",
+                        column: x => x.SprFilialsId,
                         principalSchema: "VSPT",
-                        principalTable: "DailyReportingPlan",
+                        principalTable: "SprFilials",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -291,8 +291,7 @@ namespace Vspt.BackEnd.Api.Migrations
                 schema: "VSPT",
                 columns: table => new
                 {
-                    Id = table.Column<long>(type: "bigint", maxLength: 12, nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Id = table.Column<decimal>(type: "numeric(20,0)", maxLength: 12, nullable: false),
                     Name = table.Column<string>(type: "text", nullable: false),
                     District_id_txt = table.Column<string>(type: "text", nullable: false),
                     Bu_id = table.Column<byte>(type: "smallint", nullable: false)
@@ -344,7 +343,7 @@ namespace Vspt.BackEnd.Api.Migrations
                 columns: table => new
                 {
                     BuId = table.Column<byte>(type: "smallint", nullable: false),
-                    DistrictId = table.Column<long>(type: "bigint", nullable: false),
+                    DistrictId = table.Column<decimal>(type: "numeric(20,0)", nullable: false),
                     StationECPId = table.Column<long>(type: "bigint", nullable: false),
                     StationRZDId = table.Column<long>(type: "bigint", nullable: false)
                 },
@@ -367,16 +366,16 @@ namespace Vspt.BackEnd.Api.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_DailyReportingDvigenDetails_DvigenId",
+                name: "IX_DailyReportingDvigenDetails_SprFilialsId",
                 schema: "VSPT",
                 table: "DailyReportingDvigenDetails",
-                column: "DvigenId");
+                column: "SprFilialsId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_DailyReportingPlanDetails_PlanId",
+                name: "IX_DailyReportingPlanDetails_SprFilialsId",
                 schema: "VSPT",
                 table: "DailyReportingPlanDetails",
-                column: "PlanId");
+                column: "SprFilialsId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_FilialsStationsDistricts_BuId",
@@ -451,7 +450,15 @@ namespace Vspt.BackEnd.Api.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
+                name: "DailyReportingDvigen",
+                schema: "VSPT");
+
+            migrationBuilder.DropTable(
                 name: "DailyReportingDvigenDetails",
+                schema: "VSPT");
+
+            migrationBuilder.DropTable(
+                name: "DailyReportingPlan",
                 schema: "VSPT");
 
             migrationBuilder.DropTable(
@@ -484,14 +491,6 @@ namespace Vspt.BackEnd.Api.Migrations
 
             migrationBuilder.DropTable(
                 name: "SprSvod",
-                schema: "VSPT");
-
-            migrationBuilder.DropTable(
-                name: "DailyReportingDvigen",
-                schema: "VSPT");
-
-            migrationBuilder.DropTable(
-                name: "DailyReportingPlan",
                 schema: "VSPT");
 
             migrationBuilder.DropTable(

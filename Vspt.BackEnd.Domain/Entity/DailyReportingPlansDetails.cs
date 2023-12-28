@@ -3,20 +3,19 @@
 namespace Vspt.BackEnd.Domain.Entity;
 
 public sealed class DailyReportingPlansDetails : IEntityWithId
-{       
+{
     public Guid Id { get; set; }
-    public Guid PlanId { get; set; }
-    public byte FilialId { get; set; }
-    public DailyReportingPlans DailyReportingPlan { get; set; }
-    public string OrgId { get; set; }   
-    public string GruzGroupId { get; set; }   
+    public DateTime DatePlan { get; set; }
+    public byte BuId { get; set; }
+    public SprFilials SprFilials { get; set; }
+    public string OrgId { get; set; }
+    public string GruzGroupId { get; set; }
     //Погрузка
     public int? LoadingPlan { get; set; }   
     public int? LoadingApplication { get; set; }   
     public int? LoadingSecuredTotal { get; set; }   
     public int? LoadingSecuredLastDay { get; set; }   
-    public int? LoadingTotalWagons { get; set; }   
-    public int? LoadingTotalTonns { get; set; }   
+    public int? ExpectedLoading { get; set; }     
     public int? LoadingPPGT { get; set; }   
     public int? LoadingFirstHalfDay { get; set; }   
     //Выгрузка
@@ -26,8 +25,7 @@ public sealed class DailyReportingPlansDetails : IEntityWithId
     public int? UnloadingAccesptedFullTerm { get; set; }
     public int? UnloadingProduceTotal { get; set; }
     public int? UnloadingProduceFullTerm { get; set; }
-    public int? UnloadingAccesptedTotalWagons { get; set; }
-    public int? UnloadingAccesptedTotalTonns { get; set; }
+    public int? UnloadingExpectedLoading { get; set; }   
     public int? UnloadingAccesptedPPGT { get; set; }
     public int? UnloadingAccesptedLastDayWagons { get; set; }
     public int? UnloadingRemainsTotal { get; set; }
