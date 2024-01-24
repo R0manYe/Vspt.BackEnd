@@ -1,0 +1,5 @@
+#!/bin/bash
+set -Eeuo pipefail
+cd "$(dirname -- "$(realpath -- "${BASH_SOURCE[0]}")")"
+export COMPOSE_PROFILES=all
+./_internal/restart-docker-compose

@@ -1,0 +1,38 @@
+#!/bin/bash
+set -Eeuo pipefail
+cd "$(dirname -- "$(realpath -- "${BASH_SOURCE[0]}")")"
+no_build=false
+if [[ "${#}" -ne 0 ]]; then
+	if printf '%s\0' "${@}" | grep --fixed-strings --line-regexp --null-data --quiet -- '--help'; then
+		echo "Usage: bash ${0} [--no-build]..." >&2
+		exit 1
+	fi
+	if printf '%s\0' "${@}" | grep --fixed-strings --line-regexp --null-data --quiet -- '--no-build'; then
+		no_build=true
+	fi
+fi
+cd ..
+(
+	set -x
+	dotnet tool restore
+)
+if [[ "${no_build}" == false ]]; then
+	(
+		set -x
+		dotnet build --configuration=Debug
+	)
+fi
+(
+	cd ./src
+	command="$(cat <<'EOF'
+set -Eeuxo pipefail
+trap 'exit 255' ERR
+cd "./{}"
+dotnet tool run swagger tofile --output swagger.g.json bin/Debug/net7.0/{}.dll v1
+EOF
+)"
+	set -x
+	find . -maxdepth 1 -type d -regex '.*\.Api$' -print0 | cut --zero-terminated -c3- | \
+		xargs --null --no-run-if-empty --max-procs 0 --replace \
+			"${SHELL}" -c "${command}"
+)

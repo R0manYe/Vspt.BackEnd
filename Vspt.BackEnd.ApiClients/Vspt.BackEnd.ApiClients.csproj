@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+ <ItemGroup>
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
+    <PackageReference Include="Grotem.Box" Version="2.3.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Abstractions" Version="2.2.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="7.0.0" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.31.0" />
+    <PackageReference Include="System.Threading.Tasks" Version="4.3.0" />
+    <PackageReference Include="Grotem.Box.Application" Version="4.2.0" />
+    <PackageReference Include="Grotem.Box.AutoMapper" Version="1.2.0" />
+    <PackageReference Include="Grotem.Box.Notification.Sdk" Version="6.1.1" />
+  </ItemGroup>
+
+ <ItemGroup>
+   <ProjectReference Include="..\Vspt.BackEnd.Flagman.PublicModels\Vspt.BackEnd.Flagman.PublicModels.csproj" />
+   <ProjectReference Include="..\Vspt.Box.RefitApiClient\Vspt.Box.RefitApiClient.csproj" />
+ </ItemGroup>
+
+</Project>

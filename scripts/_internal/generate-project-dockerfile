@@ -1,0 +1,17 @@
+#!/bin/bash
+set -Eeuo pipefail
+if [[ "${#}" -ne 1 ]]; then
+	echo "Usage: bash ${0} PROJECT" >&2
+	exit 1
+fi
+base_path="$(dirname -- "$(realpath -- "${BASH_SOURCE[0]}")")"
+project_path="${1}"
+project_base_path="$(dirname -- "${project_path}")"
+project="$(basename -- "${project_path}")"
+api_project="${project}.Api"
+output_file="${project_path}.Dockerfile"
+echo "Generating ${output_file}"
+(
+	export TEMPLATE_ARG_API_PROJECT="${api_project}"
+	envsubst "$(printf '$%s ' "${!TEMPLATE_ARG_@}")" < "${project_base_path}/Tiss.Dockerfile.template" > "${output_file}"
+)

@@ -3,12 +3,19 @@
   <PropertyGroup>
     <TargetFramework>net7.0</TargetFramework>
     <Nullable>enable</Nullable>
-    <ImplicitUsings>enable</ImplicitUsings>
+   <!-- <ImplicitUsings>enable</ImplicitUsings>-->
+    <UserSecretsId>86145a7e-695f-484d-8939-0f0c35fce64a</UserSecretsId>   
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="EntityFramework" Version="6.4.4" />
+    <PackageReference Include="Grotem.Box" Version="2.3.1" />
     <PackageReference Include="MediatR" Version="12.0.1" />
+    <PackageReference Include="Microsoft.AspNet.WebApi.Cors" Version="5.2.9" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="7.0.7" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning" Version="5.1.0" />
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="7.0.5" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.7" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.7">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -17,8 +24,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Vspt.Backend.Application\Vspt.Backend.Application.csproj" />
+    <ProjectReference Include="..\Vspt.Backend.Application\Vspt.BackEnd.Application.csproj" />
+    <ProjectReference Include="..\Vspt.BackEnd.Domain\Vspt.BackEnd.Domain.csproj" />
     <ProjectReference Include="..\Vspt.BackEnd.Infrastructure\Vspt.BackEnd.Infrastructure.csproj" />
+    <ProjectReference Include="..\Vspt.Shared.MediatR\Vspt.Box.MediatR.csproj" />
   </ItemGroup>
 
 </Project>

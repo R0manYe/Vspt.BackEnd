@@ -1,0 +1,16 @@
+#!/bin/bash
+set -Eeuo pipefail
+base_path="$(dirname -- "$(realpath -- "${BASH_SOURCE[0]}")")"
+if [[ "${#}" -ne 0 ]]; then
+	if printf '%s\0' "${@}" | grep --fixed-strings --line-regexp --null-data --quiet -- '--help'; then
+		echo "Usage: bash ${0} [DIRECTORY_PATH]..." >&2
+		exit 1
+	fi
+	dir_paths=("${@}")
+else
+	cd "${base_path}"
+	dir_paths=(../src/*.Infrastructure/Migrations)
+fi
+while IFS= read -r -d '' file_path; do
+	"${base_path}/_internal/fix-migration" "${file_path}"
+done < <(find "${dir_paths[@]}" -type f -name '*.Designer.cs' -print0)

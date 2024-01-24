@@ -1,0 +1,57 @@
+#!/bin/bash
+set -Eeuo pipefail
+cd "$(dirname -- "$(realpath -- "${BASH_SOURCE[0]}")")"
+no_restore=false
+if [[ "${#}" -ne 0 ]]; then
+	if printf '%s\0' "${@}" | grep --fixed-strings --line-regexp --null-data --quiet -- '--help'; then
+		echo "Usage: bash ${0} [--no-restore]..." >&2
+		exit 1
+	fi
+	if printf '%s\0' "${@}" | grep --fixed-strings --line-regexp --null-data --quiet -- '--no-restore'; then
+		no_restore=true
+	fi
+fi
+cd ..
+time (
+	(
+		set -x
+		dotnet tool restore
+	)
+	if [[ "${no_restore}" == false ]]; then
+		(
+			set -x
+			dotnet restore
+		)
+	fi
+	(
+		set -x
+		dotnet build --no-restore --configuration=WithoutImplementation
+	)
+	projects=(
+		Catalog
+		Cross
+		Partner
+		Pricing
+	)
+	command="$(cat <<'EOF'
+set -Eeuo pipefail
+trap 'exit 255' ERR
+args=(
+	--add-cancellation-token
+	--environment Development
+	--namespace "Tiss.{}.ApiClients"
+	--out-path "./src/Tiss.{}.ApiClients"
+	--type-name-pattern "I{}[controller]ApiClient"
+)
+(
+	set -x
+	dotnet tool run dotnet-generate-client "./src/Tiss.{}.Api/bin/WithoutImplementation/net7.0/Tiss.{}.Api.dll" "${args[@]}"
+	dotnet format --verbosity normal --include-generated whitespace "./src/Tiss.{}.ApiClients"
+)
+EOF
+)"
+	printf "\n%s" "${projects[@]}" | \
+		xargs --max-procs 0 --replace \
+			"${SHELL}" -c "${command}"
+	true
+)

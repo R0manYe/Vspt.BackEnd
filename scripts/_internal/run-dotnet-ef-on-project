@@ -1,0 +1,24 @@
+#!/bin/bash
+set -Eeuo pipefail
+if [[ "${#}" -lt 1 ]]; then
+	echo "Usage: bash ${0} Project ..." >&2
+	exit 1
+fi
+cd "$(dirname -- "$(realpath -- "${BASH_SOURCE[0]}")")"
+cd ../../src
+project="${1}" && shift
+(
+	cd "Tiss.${project}.Api"
+	set -x;
+	dotnet tool restore
+	dotnet tool run dotnet-ef --project "../Tiss.${project}.Infrastructure" "${@}"
+)
+if [[ "${#}" -ge 3 && "${1}" == migrations && "${2}" == add ]]; then
+	echo -e '\e[1A\e[KDone. To undo this action, use Git'
+	(
+		cd "Tiss.${project}.Infrastructure"
+		set -x
+		../../scripts/fix-migrations .
+		dotnet format --verbosity normal --no-restore --diagnostics IDE0005 IDE0055 IDE0161
+	)
+fi

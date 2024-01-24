@@ -1,0 +1,11 @@
+# links
+- https://stackoverflow.com/questions/3685970/check-if-a-bash-array-contains-a-value/47541882#47541882
+- https://stackoverflow.com/questions/5859854/detect-if-bat-file-is-running-via-double-click-or-from-cmd-window/18501554#18501554
+- https://stackoverflow.com/questions/59683771/get-directory-name-from-array-in-batch/59684317#59684317
+- https://stackoverflow.com/questions/61456142/grep-p-supports-only-unibyte-and-utf-8-locales-in-jenkins/74304327#74304327
+- https://stackoverflow.com/questions/7427262/how-to-read-a-file-into-a-variable-in-shell/22607352#22607352
+- https://www.gnu.org/software/bash/manual/bash.html#Pattern-Matching
+- https://www.gnu.org/software/bash/manual/bash.html#Shell-Parameter-Expansion
+- https://www.gnu.org/software/grep/manual/grep.html
+- https://www.pcre.org/current/doc/html/pcre2syntax.html#SEC16
+- https://www.regular-expressions.info/freespacing.html

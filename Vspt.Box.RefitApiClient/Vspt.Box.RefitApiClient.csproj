@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Grotem.Box" Version="2.3.1" />
+    <PackageReference Include="Refit" Version="6.5.1" />
+    <PackageReference Include="Refit.HttpClientFactory" Version="6.5.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Vspt.Box.Security\Vspt.Box.Security.csproj" />
+  </ItemGroup>
+
+</Project>
