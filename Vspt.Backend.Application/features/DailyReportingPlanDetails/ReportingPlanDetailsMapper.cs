@@ -11,5 +11,7 @@ internal sealed class ReportingPlanDetailsMapper : Profile
     {
         CreateMap<DailyReportingPlansDetails, DailyReportingPlansDetailsDTO>();
         CreateMap<DailyReportingPlansDetailsDTO, DailyReportingPlansDetails>();
+        CreateMap<AddDailyReportingPlansDetailsDTO, DailyReportingPlansDetails>();
+        CreateMap<DailyReportingPlansDetails,AddDailyReportingPlansDetailsDTO>();
     }
 }

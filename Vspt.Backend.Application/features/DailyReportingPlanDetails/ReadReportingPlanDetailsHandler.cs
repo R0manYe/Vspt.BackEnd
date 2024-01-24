@@ -31,14 +31,14 @@ namespace Vspt.BackEnd.Application.features.DailyReportingPlan
         protected override async Task<IReadOnlyList<DailyReportingPlansDetailsDTO>> HandleData(uint userId, CancellationToken cancellationToken)
         {
             var filials = await _filterUserFilialsService.GetIdFilials(userId, cancellationToken);
+
             var exitingResult= await _dailyReportingPlanDetailsRepository.GetReadDailyReportingPlanDetails(filials, cancellationToken);
             
             var result=new List<DailyReportingPlansDetailsDTO>();
 
             _mapper.Map(exitingResult,result);
 
-            return result;
-         
+            return result;         
         }
     }
 }

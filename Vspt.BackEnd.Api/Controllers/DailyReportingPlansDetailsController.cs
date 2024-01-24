@@ -27,22 +27,54 @@ namespace Vspt.BackEnd.Api.Controllers
         }
 
         [HttpPost("add")]
-        public Task AddDailyReportingPlanDetails(DailyReportingPlansDetails reportingPlan )
+        public Task AddDailyReportingPlanDetails(AddDailyReportingPlansDetailsDTO reportingPlan)
         {
-            return _mediator.Send(new AddReportingPlanDetailsRequest { Data = reportingPlan});
+            return _mediator.Send(new AddReportingPlanDetailsRequest { Data = reportingPlan });
         }
 
-        [HttpPost("update")]
-        public Task UpdateDailyReportingPlansDetails(DailyReportingPlansDetails reportingPlan)
+        [HttpPut("update/{id}")]
+        public Task UpdateDailyReportingPlansDetails(Guid id, DailyReportingPlansDetailsDTO reportingPlan)
         {
-            return _mediator.Send(new UpdateReportingPlanDetailsRequest { Data = reportingPlan });
+
+            return _mediator.Send(new UpdateReportingPlanDetailsRequest
+            {
+                Data = new()
+                {
+                    Id = id,
+                    BuId = reportingPlan.BuId,
+                    DatePlan = reportingPlan.DatePlan,
+                    ExpectedLoading = reportingPlan.LoadingPlan,
+                    GruzGroupId = reportingPlan.GruzGroupId,
+                    LoadingApplication = reportingPlan.LoadingApplication,
+                    LoadingFirstHalfDay = reportingPlan.LoadingFirstHalfDay,
+                    LoadingPlan = reportingPlan.LoadingPlan,
+                    LoadingPPGT = reportingPlan.LoadingPPGT,
+                    LoadingSecuredLastDay = reportingPlan.LoadingSecuredLastDay,
+                    LoadingSecuredTotal = reportingPlan.LoadingSecuredTotal,
+                    Notations = reportingPlan.Notations,
+                    OrgId = reportingPlan.OrgId,
+                    UnloadingAccesptedFullTerm = reportingPlan.UnloadingAccesptedFullTerm,
+                    UnloadingAccesptedLastDayWagons = reportingPlan.UnloadingAccesptedLastDayWagons,
+                    UnloadingAccesptedPPGT = reportingPlan.UnloadingAccesptedPPGT,
+                    UnloadingAccesptedTotal = reportingPlan.UnloadingAccesptedTotal,
+                    UnloadingExpectedLoading = reportingPlan.UnloadingExpectedLoading,
+                    UnloadingPlan = reportingPlan.UnloadingPlan,
+                    UnloadingProduceFullTerm = reportingPlan.UnloadingProduceFullTerm,
+                    UnloadingProduceTotal = reportingPlan.UnloadingProduceTotal,
+                    UnloadingRemainsFullTerm = reportingPlan.UnloadingRemainsFullTerm,
+                    UnloadingRemainsGuiltConsignee = reportingPlan.UnloadingRemainsGuiltConsignee,
+                    UnloadingRemainsGuiltPPGT = reportingPlan.UnloadingRemainsGuiltPPGT,
+                    UnloadingRemainsLastDay = reportingPlan.UnloadingRemainsLastDay,
+                    UnloadingRemainsTotal = reportingPlan.UnloadingRemainsTotal
+                }
+            });
         }
 
         [HttpDelete("delete/{id}")]
-        public Task DeleteDailyReportingPlansDetails(Guid id) 
+        public Task DeleteDailyReportingPlansDetails(Guid id)
         {
-            return _mediator.Send(new DeleteReportingPlanDetailsRequest { Data = id } );
+            return _mediator.Send(new DeleteReportingPlanDetailsRequest { Data = id });
         }
-       
+
     }
 }

@@ -36,7 +36,7 @@ namespace Vspt.BackEnd.Api.Controllers
         }
 
         [HttpPut("update/{id}")]
-        public Task UpdateCRole( byte id,IdentityRoles request) 
+        public Task UpdateRole( byte id,IdentityRoles request) 
         {
             return _mediator.Send(new GetUpdateRoleRequest { Data = new() { Id = id, RoleName=request.RoleName }  } );
         }

@@ -22,7 +22,7 @@ namespace Vspt.BackEnd.Api.Controllers
         }
 
         [HttpGet("read")]
-        public Task<IReadOnlyList<IdentityClaims>> ReadClaims()
+        public Task<IReadOnlyList<GetIdentityClaimResponseDTO>> ReadClaims()
         {
             return _mediator.Send(new ReadClaimRequest { Data = Unit.Value });
         }
