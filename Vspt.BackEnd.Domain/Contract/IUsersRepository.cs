@@ -8,7 +8,7 @@ namespace Vspt.BackEnd.Domain.Contract
         Task<IdentityUsers> GetByUserName(uint userName, CancellationToken cancellationToken);
         Task<IdentityUsers> GetByUserNamePsw(string userName, string userPsw, CancellationToken cancellationToken);
 
-        Task<IdentityUsers> GetByToken(string token, CancellationToken cancellationToken);
+        Task<bool> GetByToken(string token, CancellationToken cancellationToken);
         Task GetBySaveToken(IdentityUsers user, CancellationToken cancellationToken);
 
         Task Add(IdentityUsers entity, CancellationToken cancellationToken);    
