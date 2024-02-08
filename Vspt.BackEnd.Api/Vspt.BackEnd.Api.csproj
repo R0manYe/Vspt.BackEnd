@@ -25,7 +25,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Vspt.Backend.Application\Vspt.BackEnd.Application.csproj" />
+    <ProjectReference Include="..\Vspt.BackEnd.Application\Vspt.BackEnd.Application.csproj" />
     <ProjectReference Include="..\Vspt.BackEnd.Domain\Vspt.BackEnd.Domain.csproj" />
     <ProjectReference Include="..\Vspt.BackEnd.Infrastructure\Vspt.BackEnd.Infrastructure.csproj" />
     <ProjectReference Include="..\Vspt.Shared.MediatR\Vspt.Box.MediatR.csproj" />
