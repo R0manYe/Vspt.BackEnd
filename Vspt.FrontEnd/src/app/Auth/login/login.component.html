@@ -1,0 +1,22 @@
+<div mat-dialog-content class=".form-control flex">  
+  <form [formGroup]="loginForm">
+    <h3>Авторизация</h3>    
+    <mat-form-field appearance="fill">
+          <mat-label>Fill form field</mat-label>
+          <input formControlName="username" width="800" matInput placeholder="Placeholder">
+          <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+          <mat-hint>Hint</mat-hint>
+        </mat-form-field>
+      
+      <div class="example-container">
+        <mat-form-field appearance="fill">
+          <mat-label>Enter your password</mat-label>
+          <input formControlName="password" matInput [type]="hide ? 'password' : 'text'">
+          <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+          </button>
+        </mat-form-field>
+    </div>   
+    <button mat-raised-button (click)="onLogin()" style="margin-right:20px" color="warn" mat-dialog-close>Вход</button>
+    <button mat-raised-button color="primary" style="margin-right:20px" mat-dialog-close>Отмена</button>  
+  </form>
