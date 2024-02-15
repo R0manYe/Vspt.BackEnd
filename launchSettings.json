@@ -1,0 +1,12 @@
+{
+  "profiles": {
+    "Docker Compose": {
+      "commandName": "DockerCompose",
+      "commandVersion": "1.0",
+      "serviceActions": {
+        "vspt.backend.api": "StartDebugging",
+        "vspt.backend.flagman.api": "StartDebugging"
+      }
+    }
+  }
+}
