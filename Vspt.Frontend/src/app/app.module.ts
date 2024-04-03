@@ -24,8 +24,6 @@ import { DxDataGridModule, DxBulletModule,  DxTemplateModule, DxSelectBoxModule,
 import {MatMenuModule} from '@angular/material/menu';
 import { SignupComponent } from './Auth/signup/signup.component';
 import {MatTabsModule} from '@angular/material/tabs';
-import { ToastrModule } from 'ngx-toastr';
-import { provideToastr } from 'ngx-toastr';
 import { ClaimComponent } from './Auth/claim/claim.component';
 import { RolesComponent } from './Auth/roles/roles.component';
 import { UsersComponent } from './Auth/users/users.component';
@@ -71,18 +69,11 @@ import { DailyReportingPlansDetailsComponent } from './Marketing/daily-reporting
     DxButtonModule,
     DxDropDownBoxModule,
     DxListModule,
-    DxDateBoxModule,  
-     
-       
-    ToastrModule.forRoot()  
+    DxDateBoxModule 
   ],
   providers: [{provide: HTTP_INTERCEPTORS,
     useClass:TokenInterceptor,
-    multi:true}, provideToastr({
-      timeOut: 1000,
-      positionClass: 'toast-bottom-right',
-      preventDuplicates: true,
-    }), ],
+    multi:true} ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
