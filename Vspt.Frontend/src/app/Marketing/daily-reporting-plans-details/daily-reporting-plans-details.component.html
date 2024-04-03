@@ -1,0 +1,87 @@
+<h2>Суточное планирование</h2>
+<div class="container-left">
+  <div class="row justify-content-start">
+    <div class="col-1">  
+ <h4>Филиал</h4>
+    </div>
+    <div class="col-2">   
+    <dx-select-box id="setFilial"
+  [name]="dataSource" 
+  placeholder="Выберите филиал"
+    [dataSource]="dataFilialsSourse" displayExpr="name" valueExpr="id"
+    [inputAttr]="{'aria-label':'Product With Placeholder'}"
+    [showClearButton]="true">
+  </dx-select-box>
+    </div>
+    <div class="col-1">  
+  <h4>Дата</h4>
+    </div>
+    <div class="col-2">
+      <dx-date-box
+      type="date"
+      [value]="now"
+      displayFormat="dd.MM.yyyy"
+      [inputAttr]="{ 'aria-label': 'Date' }"    >
+    </dx-date-box>
+    </div>
+</div>
+</div>
+<dx-data-grid
+id="gridContainer"
+keyExpr="id"
+[dataSource]="dataSource"
+[allowColumnReordering]="true"
+  [showBorders]="true"
+>
+<dxo-paging [pageSize]="10"></dxo-paging>
+<dxo-pager
+[visible]="true"
+[showPageSizeSelector]="true"
+    [showPageSizeSelector]="true"
+    [showInfo]="true"
+    [allowedPageSizes]="[10, 25, 50, 100]">
+  </dxo-pager>
+  <dxo-search-panel
+  [visible]="true"
+  [highlightCaseSensitive]="true"
+></dxo-search-panel>
+<dxo-filter-row [visible]="false"></dxo-filter-row>
+ 
+  <dxo-group-panel [visible]="true"></dxo-group-panel> 
+  <dxo-editing
+  mode="row" 
+  [allowAdding]="true" 
+  [allowUpdating]="true"
+  [allowDeleting]="true">
+  </dxo-editing>
+  <dxo-grouping [autoExpandAll]="false"></dxo-grouping>  
+   
+  <dxi-column dataField="orgId" caption ="Организация" [width]="200">
+    <dxo-lookup [dataSource]="lookupOgrSourse"  displayExpr="name" valueExpr="id"></dxo-lookup>
+  </dxi-column>   
+  <dxi-column dataField="gruzGroupId" caption ="Груз" [width]="200">
+    <dxo-lookup [dataSource]="lookupCargoSourse"  displayExpr="name" valueExpr="id"></dxo-lookup>
+  </dxi-column>
+  
+    <dxi-column dataField="loadingPlan" caption ="План"></dxi-column>  
+    <dxi-column dataField="loadingApplication" caption ="Заявка"></dxi-column>
+    <dxi-column dataField="LoadingSecuredTotal" [width]="100" caption ="Всего"></dxi-column>
+    <dxi-column dataField="loadingSecuredLastDay" caption ="Из них с пр. суток"></dxi-column>
+    <dxi-column dataField="ExpectedLoading" caption ="Ожидаемая погр."></dxi-column>  
+    <dxi-column dataField="loadingPPGT" caption ="ППЖТ"></dxi-column>
+    <dxi-column dataField="loadingFirstHalfDay" caption ="1 п сут. вагонов"></dxi-column>   
+
+    <dxi-column dataField="UnloadingPlan" caption ="План"></dxi-column>
+    <dxi-column dataField="UnloadingRemainsLastDay" caption ="Остаток с пр. суток"></dxi-column>
+    <dxi-column dataField="UnloadingAccesptedTotal" caption ="Всего"></dxi-column>
+    <dxi-column dataField="UnloadingAccesptedFullTerm" caption ="с полным сроком"></dxi-column>
+    <dxi-column dataField="UnloadingProduceTotal" caption ="Всего"></dxi-column>
+    <dxi-column dataField="UnloadingProduceFullTerm" caption ="с полным сроком"></dxi-column>
+    <dxi-column dataField="UnloadingExpectedLoading" caption ="Планируемая выгрузка"></dxi-column>
+    <dxi-column dataField="UnloadingAccesptedPPGT" caption ="ППЖТ"></dxi-column>
+    <dxi-column dataField="UnloadingAccesptedLastDayWagons" caption ="1 пол суток вагонов"></dxi-column>
+    <dxi-column dataField="UnloadingRemainsTotal" caption ="Всего"></dxi-column>
+    <dxi-column dataField="UnloadingRemainsFullTerm" caption ="С полным сроком"></dxi-column>
+    <dxi-column dataField="UnloadingRemainsGuiltPPGT" caption ="ППЖТ"></dxi-column>
+    <dxi-column dataField="UnloadingRemainsGuiltConsignee" caption ="Грузпол"></dxi-column>
+    <dxi-column dataField="Notations" caption ="Примечание"></dxi-column>
