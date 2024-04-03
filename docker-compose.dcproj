@@ -4,7 +4,7 @@
     <ProjectVersion>2.1</ProjectVersion>
     <DockerTargetOS>Linux</DockerTargetOS>
     <DockerPublishLocally>False</DockerPublishLocally>
-    <ProjectGuid>9cba8f3a-dd9f-4518-8d0b-c58daf624db5</ProjectGuid>
+    <ProjectGuid>c8da8894-8a69-4820-ad35-c1d12f5e11fa</ProjectGuid>
     <DockerLaunchAction>LaunchBrowser</DockerLaunchAction>
     <DockerServiceUrl>{Scheme}://localhost:{ServicePort}/swagger</DockerServiceUrl>
     <DockerServiceName>vspt.backend.api</DockerServiceName>

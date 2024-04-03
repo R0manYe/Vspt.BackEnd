@@ -13,5 +13,3 @@ services:
       context: .
       dockerfile: Vspt.BackEnd.Flagman.Api/Dockerfile
 
-
-
