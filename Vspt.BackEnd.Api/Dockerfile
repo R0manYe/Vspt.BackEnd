@@ -9,7 +9,7 @@ FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
 COPY ["Vspt.BackEnd.Api/Vspt.BackEnd.Api.csproj", "Vspt.BackEnd.Api/"]
-COPY ["Vspt.BackEnd.Application/Vspt.BackEnd.Application.csproj", "Vspt.BackEnd.Application/"]
+COPY ["Vspt.Backend.Application/Vspt.BackEnd.Application.csproj", "Vspt.Backend.Application/"]
 COPY ["Vspt.BackEnd.Domain/Vspt.BackEnd.Domain.csproj", "Vspt.BackEnd.Domain/"]
 COPY ["Vspt.BackEnd.Flagman.Domain/Vspt.BackEnd.Flagman.Domain.csproj", "Vspt.BackEnd.Flagman.Domain/"]
 COPY ["Vspt.Common.Api.Contract/Vspt.Common.Api.Contract.csproj", "Vspt.Common.Api.Contract/"]
@@ -34,5 +34,4 @@ RUN dotnet publish "./Vspt.BackEnd.Api.csproj" -c $BUILD_CONFIGURATION -o /app/p
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-
 ENTRYPOINT ["dotnet", "Vspt.BackEnd.Api.dll"]
