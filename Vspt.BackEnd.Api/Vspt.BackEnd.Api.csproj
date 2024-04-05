@@ -4,7 +4,9 @@
     <TargetFramework>net7.0</TargetFramework>
     <Nullable>enable</Nullable>
    <!-- <ImplicitUsings>enable</ImplicitUsings>-->
-    <UserSecretsId>86145a7e-695f-484d-8939-0f0c35fce64a</UserSecretsId>   
+    <UserSecretsId>86145a7e-695f-484d-8939-0f0c35fce64a</UserSecretsId>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+    <DockerComposeProjectPath>..\docker-compose.dcproj</DockerComposeProjectPath>   
   </PropertyGroup>
 
   <ItemGroup>
@@ -19,11 +21,13 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="Microsoft.IdentityModel.JsonWebTokens" Version="6.34.0" />
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.19.5" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Vspt.Backend.Application\Vspt.BackEnd.Application.csproj" />
+    <ProjectReference Include="..\Vspt.BackEnd.Application\Vspt.BackEnd.Application.csproj" />
     <ProjectReference Include="..\Vspt.BackEnd.Domain\Vspt.BackEnd.Domain.csproj" />
     <ProjectReference Include="..\Vspt.BackEnd.Infrastructure\Vspt.BackEnd.Infrastructure.csproj" />
     <ProjectReference Include="..\Vspt.Shared.MediatR\Vspt.Box.MediatR.csproj" />

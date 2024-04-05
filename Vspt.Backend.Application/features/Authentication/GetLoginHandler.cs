@@ -44,12 +44,12 @@ namespace Vspt.BackEnd.Application.Authentication.Auth
                 throw new ArgumentNullException("Password is incorrect!");
             }
 
-            user.Token = GeneratorGWT.CreateJWT(user);
+            user.Token =  GeneratorGWT.CreateJWT(user);
             var newAccessToken = user.Token;
             var newRefreshToken = CreateRefreshtoken();
             user.RefreshToken = newRefreshToken;
             user.RefreshTokenExpiryTime = DateTime.Now.AddDays(5);
-            _usersRepository.GetBySaveToken(user, cancellationToken);
+            await _usersRepository.GetBySaveToken(user, cancellationToken);
 
             return new GetLoginResponse
             {
