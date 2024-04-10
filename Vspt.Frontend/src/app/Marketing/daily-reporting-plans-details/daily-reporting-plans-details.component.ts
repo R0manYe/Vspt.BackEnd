@@ -13,7 +13,7 @@ import { DxDataGridModule,  DxDataGridComponent,  DxListComponent,DxSelectBoxMod
 
 
 
-let baseURL='https://localhost:7172/api/'
+let baseURL='http://backendapi:7172/api/'
 let sURL='DailyReportingPlansDetails'
 const UrlRead='/read?userId='
 const URL = baseURL+sURL;
@@ -56,7 +56,7 @@ export class DailyReportingPlansDetailsComponent {
    
     this.lookupOgrSourse = AspNetData.createStore({
       key: 'id', loadMode:'raw',loadMethod:'Post',
-      loadUrl: `${'https://localhost:7172/api/Filters/filterUserOrg?userId='+localStorage.getItem('username')}`,
+      loadUrl: `${'http://backendapi:7172/api/Filters/filterUserOrg?userId='+localStorage.getItem('username')}`,
       onBeforeSend(method, ajaxOptions) {
         ajaxOptions.xhrFields = { withCredentials: true };
       },
@@ -64,7 +64,7 @@ export class DailyReportingPlansDetailsComponent {
 
     this.lookupCargoSourse = AspNetData.createStore({
       key: 'id', loadMode:'raw',loadMethod:'Get',
-      loadUrl: `${'https://localhost:7201/api/Flagman/cargo/vspt_spr_cargo_group'}`,
+      loadUrl: `${'http://backendapi:7201/api/Flagman/cargo/vspt_spr_cargo_group'}`,
       onBeforeSend(method, ajaxOptions) {
         ajaxOptions.xhrFields = { withCredentials: true };
       },
@@ -72,7 +72,7 @@ export class DailyReportingPlansDetailsComponent {
 
     this.dataFilialsSourse = AspNetData.createStore({ 
       key: 'id', loadMode:'raw',loadMethod:'Post',
-      loadUrl: `${'https://localhost:7172/api/Filters/filterUserFilialsIdName?userId='+localStorage.getItem('username')}`,
+      loadUrl: `${'http://backendapi:7172/api/Filters/filterUserFilialsIdName?userId='+localStorage.getItem('username')}`,
       onBeforeSend(method, ajaxOptions) {
         ajaxOptions.xhrFields = { withCredentials: true };
       },

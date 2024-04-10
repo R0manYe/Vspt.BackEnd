@@ -8,7 +8,7 @@ import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CustomStore } from 'devextreme-aspnet-data-nojquery';
 import { SharedApiService } from './services/shared-api.service';
 
-let baseURL='https://localhost:7172/api/Claims/readMenuClaim?userId=';
+let baseURL='http://backendapi:7172/api/Claims/readMenuClaim?userId=';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',

@@ -70,7 +70,7 @@ export class SharedApiService {
     }
 
     getSprCargo(URL:string){
-      return this.http.post('https://localhost:7201/api/Flagman/cargo/vspt_spr_cargo/', {
+      return this.http.post('http://backendapi:7201/api/Flagman/cargo/vspt_spr_cargo/', {
         headers: new HttpHeaders({
           'Accept': '',
           'Content-Type': ' application/json; charset=utf-8'

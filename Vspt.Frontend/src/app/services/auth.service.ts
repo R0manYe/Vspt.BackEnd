@@ -10,7 +10,7 @@ import { TokenApiModel } from '../models/token-api.model';
 })
 export class AuthService {
   
-  private baseUrl:string="https://localhost:7172/api/User/";
+  private baseUrl:string="http://backendapi:7172/api/User/";
   private userPlayload : any;
   constructor(private http : HttpClient,private router: Router) {
     this.userPlayload=this.decodeToken();
