@@ -4,7 +4,7 @@ import CustomStore from 'devextreme/data/custom_store';
 import { SharedApiService } from 'src/app/services/shared-api.service';
 import * as AspNetData from 'devextreme-aspnet-data-nojquery';
 
-let baseURL='https://localhost:7172/api/'
+let baseURL='http://backendapi:7172/api/'
 let sURL='User/'
 const URL = baseURL+sURL;
 
@@ -33,7 +33,7 @@ export class UsersComponent {
     
     this.lookupUserSource = AspNetData.createStore({
       key: 'id', loadMode:'raw',
-      loadUrl: `${'https://localhost:7201/api/Flagman/vspt_subject_persone_id_name'}`,
+      loadUrl: `${'http://backendapi:7201/api/Flagman/vspt_subject_persone_id_name'}`,
       onBeforeSend(method, ajaxOptions) {
         ajaxOptions.xhrFields = { withCredentials: true };
       },

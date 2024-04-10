@@ -11,7 +11,7 @@ import * as AspNetData from 'devextreme-aspnet-data-nojquery';
 if (!/localhost/.test(document.location.host)) {
   enableProdMode();
 }
-let baseURL='https://localhost:7172/api/'
+let baseURL='http://backendapi:7172/api/'
 let sURL='Roles/'
 const URL = baseURL+sURL;
 

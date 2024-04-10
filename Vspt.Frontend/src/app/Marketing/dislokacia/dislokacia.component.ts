@@ -11,7 +11,7 @@ import { Column } from 'devextreme/ui/data_grid';
 if (!/localhost/.test(document.location.host)) {
   enableProdMode();
 }
-let baseURL='https://localhost:7172/v1/vspt-flagman/sprDislokaciaFiltr?userId='
+let baseURL='http://backendapi:7172/v1/vspt-flagman/sprDislokaciaFiltr?userId='
 
 @Component({
   selector: 'app-dislokacia',
