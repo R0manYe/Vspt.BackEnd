@@ -35,11 +35,15 @@ public static class ServiceCollectionExtensions
         services.AddScoped<IDailyReportingPlansDetailsRepository, DailyReportingPlanDetailsRepository>();
         services.AddScoped<IDailyReportingPlansRepository, DailyReportingPlanRepository>();
 
+#if DEBUG
+        string apiUrl = "http://flagmanapi";
+#else
+        string apiUrl = "https://localhost";
+        #endif
 
-        services.AddRefitClient<IFlagmanApiClient>().ConfigureHttpClient(c=>c.BaseAddress=new Uri("https://localhost:7201"));
-        services.AddRefitClient<IFlagmanSprOrgApiClient>().ConfigureHttpClient(c=>c.BaseAddress=new Uri("https://localhost:7201"));
-        services.AddRefitClient<IFlagmanDislokaciaApiClient>().ConfigureHttpClient(c => c.BaseAddress = new Uri("https://localhost:7201"));
-
+        services.AddRefitClient<IFlagmanApiClient>().ConfigureHttpClient(c=>c.BaseAddress=new Uri($"{apiUrl}:7201"));
+        services.AddRefitClient<IFlagmanSprOrgApiClient>().ConfigureHttpClient(c=>c.BaseAddress=new Uri($"{apiUrl}:7201"));
+        services.AddRefitClient<IFlagmanDislokaciaApiClient>().ConfigureHttpClient(c => c.BaseAddress = new Uri($"{apiUrl}:7201"));
         return services;
     }
 }

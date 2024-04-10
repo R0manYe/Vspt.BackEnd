@@ -4,10 +4,10 @@
     <ProjectVersion>2.1</ProjectVersion>
     <DockerTargetOS>Linux</DockerTargetOS>
     <DockerPublishLocally>False</DockerPublishLocally>
-    <ProjectGuid>c8da8894-8a69-4820-ad35-c1d12f5e11fa</ProjectGuid>
+    <ProjectGuid>310d9d1b-57a2-4e7e-946a-fbd2b467436d</ProjectGuid>
     <DockerLaunchAction>LaunchBrowser</DockerLaunchAction>
     <DockerServiceUrl>{Scheme}://localhost:{ServicePort}/swagger</DockerServiceUrl>
-    <DockerServiceName>vspt.backend.api</DockerServiceName>
+    <DockerServiceName>vspt.backend.flagman.api</DockerServiceName>
   </PropertyGroup>
   <ItemGroup>
     <None Include="docker-compose.override.yml">

@@ -1,7 +1,6 @@
 using Refit;
 using Vspt.BackEnd.Flagman.Domain.Entity;
 using Vspt.Common.Api.Contract.Postgrees.DTO.Filters;
-using Vspt.Common.Api.Contracts.Pagination;
 
 namespace Vspt.BackEnd.Flagman.ApiClients;
 
