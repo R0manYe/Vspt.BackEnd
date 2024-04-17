@@ -2,12 +2,12 @@ version: '3.4'
 
 services:
   backendapi:
-    image: ${DOCKER_REGISTRY-}vsptbackendapi    
-    
+    image: ${DOCKER_REGISTRY-}vsptbackendapi
     build:
       context: .
       dockerfile: Vspt.BackEnd.Api/Dockerfile
-    
+      
+   
 
   flagmanapi:
     image: ${DOCKER_REGISTRY-}vsptbackendflagmanapi    
@@ -18,9 +18,14 @@ services:
 
   frontend:
     image: ${DOCKER_REGISTRY-}vspt-frontend
+  
     build:
       context: .
       dockerfile: Vspt.Frontend/Dockerfile
+
     
 
+   
+
+  
   

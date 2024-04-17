@@ -21,12 +21,13 @@ internal class Program
         {
             option.AddPolicy("MyPolicy", builder =>
             {
-                builder .WithOrigins("http://localhost:4200")
+                builder.WithOrigins("http://localhost:80", "http://localhost:4200", "http://192.168.1.121", "http://app.vspt.org")
                        .AllowAnyMethod()
                        .AllowAnyHeader()
                        .AllowCredentials();
-                ;
+
             });
+
         });
         builder.Services.AddDbContext<FlagmanContext>(options =>
         {
@@ -37,6 +38,7 @@ internal class Program
         app.UseSwagger();
         app.UseSwaggerUI();
         app.UseHttpsRedirection();
+        app.UseRouting();
         app.UseCors("MyPolicy");
         app.UseAuthentication();
 

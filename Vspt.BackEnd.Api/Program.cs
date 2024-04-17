@@ -22,22 +22,22 @@ internal class Program
         builder.Services.AddControllers(options => options.SuppressImplicitRequiredAttributeForNonNullableReferenceTypes = true);
         // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
         builder.Services.AddEndpointsApiExplorer();
-        builder.Services.AddSwaggerGen();        
+        builder.Services.AddSwaggerGen();
         builder.Services.AddInfrastructureReferences(builder.Configuration);
-        builder.Services.AddApplicationReferences(builder.Configuration);      
+        builder.Services.AddApplicationReferences(builder.Configuration);
         builder.Services.AddCors(option =>
         {
             option.AddPolicy("MyPolicy", builder =>
             {
-                builder.WithOrigins("http://localhost:4200")                
+                builder.WithOrigins("http://localhost:4200", "http://192.168.1.121", "http://app.vspt.org")
                        .AllowAnyMethod()
                        .AllowAnyHeader()
                        .AllowCredentials();
-              
+
             });
-        
-        });    
-        
+
+        });
+
         builder.Services.AddDbContext<PgContext>(options =>
         {
             options.UseNpgsql(builder.Configuration.GetConnectionString("PgServerConnStr"), b => b.MigrationsAssembly("Vspt.BackEnd.Api"));
@@ -59,9 +59,15 @@ internal class Program
                 ClockSkew = TimeSpan.Zero
             };
         });
-        var app = builder.Build(); 
-        app.UseSwagger();
-        app.UseSwaggerUI();
+        var app = builder.Build();
+
+        // Configure the HTTP request pipeline.
+        if (app.Environment.IsDevelopment())
+        {
+            app.UseSwagger();
+            app.UseSwaggerUI();
+        }
+
         app.UseHttpsRedirection();
         app.UseHttpLogging();
         app.UseCors("MyPolicy");

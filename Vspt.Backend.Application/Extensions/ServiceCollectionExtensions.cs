@@ -35,10 +35,10 @@ public static class ServiceCollectionExtensions
         services.AddScoped<IDailyReportingPlansDetailsRepository, DailyReportingPlanDetailsRepository>();
         services.AddScoped<IDailyReportingPlansRepository, DailyReportingPlanRepository>();
 
-#if DEBUG
+#if RELEASE
         string apiUrl = "http://flagmanapi";
 #else
-        string apiUrl = "https://localhost";
+        string apiUrl = "http://localhost";
         #endif
 
         services.AddRefitClient<IFlagmanApiClient>().ConfigureHttpClient(c=>c.BaseAddress=new Uri($"{apiUrl}:7201"));

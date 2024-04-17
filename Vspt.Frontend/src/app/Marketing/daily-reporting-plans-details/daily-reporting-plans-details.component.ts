@@ -64,7 +64,7 @@ export class DailyReportingPlansDetailsComponent {
 
     this.lookupCargoSourse = AspNetData.createStore({
       key: 'id', loadMode:'raw',loadMethod:'Get',
-      loadUrl: `${'http://backendapi:7201/api/Flagman/cargo/vspt_spr_cargo_group'}`,
+      loadUrl: `${'https://localhost:7201/api/Flagman/cargo/vspt_spr_cargo_group'}`,
       onBeforeSend(method, ajaxOptions) {
         ajaxOptions.xhrFields = { withCredentials: true };
       },
