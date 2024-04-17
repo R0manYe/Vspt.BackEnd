@@ -10,10 +10,10 @@ import { ClaimApiModel,ClaimModel } from 'src/app/models/claim-api.models';
 if (!/backendapi/.test(document.location.host)) {
   enableProdMode();
 }
-let baseURL='https://backendapi:7172/api/'
+let baseURL='http://backendapi:7172/api/'
 let sURL='Claims/'
 const URL = baseURL+sURL;
-const bURL='https://backendapi:7172/api/Claims/readClaimType';
+const bURL='http://backendapi:7172/api/Claims/readClaimType';
 @Component({
   selector: 'claim',
   templateUrl: './claim.component.html',
@@ -55,14 +55,14 @@ export class ClaimComponent {
 
     this.lookupClaimType = AspNetData.createStore({
       key: 'id', loadMode:'raw',
-      loadUrl: `${'https://backendapi:7172/api/Claims/readClaimType'}`,
+      loadUrl: `${'http://backendapi:7172/api/Claims/readClaimType'}`,
       onBeforeSend(method, ajaxOptions) {
         ajaxOptions.xhrFields = { withCredentials: true };
       },
     })
     this.lookupSprSvod = AspNetData.createStore({
       key: 'id', loadMode:'raw',
-      loadUrl: `${'https://backendapi:7172/api/Source/readSprSvod'}`,
+      loadUrl: `${'http://backendapi:7172/api/Source/readSprSvod'}`,
       onBeforeSend(method, ajaxOptions) {
         ajaxOptions.xhrFields = { withCredentials: true };
       },

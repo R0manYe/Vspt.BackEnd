@@ -33,7 +33,7 @@ export class UsersComponent {
     
     this.lookupUserSource = AspNetData.createStore({
       key: 'id', loadMode:'raw',
-      loadUrl: `${'http://backendapi:7201/api/Flagman/vspt_subject_persone_id_name'}`,
+      loadUrl: `${'http://localhost:7201/api/Flagman/vspt_subject_persone_id_name'}`,
       onBeforeSend(method, ajaxOptions) {
         ajaxOptions.xhrFields = { withCredentials: true };
       },

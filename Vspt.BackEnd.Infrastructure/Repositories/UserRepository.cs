@@ -23,9 +23,9 @@ public class UserRepository : EntityRepository<PgContext, IdentityUsers>, IUsers
         return await _entityDbSet.AsNoTracking().Where(x => x.Username == uint.Parse(userName) && x.Password == userPsw).FirstAsync();       
     }
 
-    public async Task<IdentityUsers> GetByToken(string token, CancellationToken cancellationToken)
+    public async Task<bool> GetByToken(string token, CancellationToken cancellationToken)
     {
-        return await _entityDbSet.AsNoTracking().FirstAsync(x => x.RefreshToken == token);
+        return await _entityDbSet.AsNoTracking().AnyAsync(x => x.RefreshToken == token);
     }
 
     public Task Add(IdentityUsers entity, CancellationToken cancellationToken)
