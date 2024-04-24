@@ -1,11 +1,14 @@
+import { DataSource } from '@angular/cdk/collections';
 import { AuthService } from './services/auth.service';
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { LoginComponent } from './Auth/login/login.component';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { CustomStore } from 'devextreme-aspnet-data-nojquery';
 import { SharedApiService } from './services/shared-api.service';
 
-let baseURL='http://backendapi:7172/api/Claims/readMenuClaim?userId=';
+let baseURL='https://localhost:7172/api/Claims/readMenuClaim?userId=';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',

@@ -1,5 +1,6 @@
 import { HttpClient ,HttpHeaders} from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -70,7 +71,7 @@ export class SharedApiService {
     }
 
     getSprCargo(URL:string){
-      return this.http.post('https://localhost:7201/api/Flagman/cargo/vspt_spr_cargo/', {
+      return this.http.post(environment.api+'5051/api/Flagman/cargo/vspt_spr_cargo/', {
         headers: new HttpHeaders({
           'Accept': '',
           'Content-Type': ' application/json; charset=utf-8'

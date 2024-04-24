@@ -1,17 +1,16 @@
-import { UserStoreService } from './../../services/user-store.service';
-
-import { DataSource } from '@angular/cdk/collections';
 import { __values } from 'tslib';
 import {Component, enableProdMode} from '@angular/core';
-import {HttpClient, HttpClientModule, HttpHeaders, HttpParams} from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
 import CustomStore from 'devextreme/data/custom_store';
 import { SharedApiService} from 'src/app/services/shared-api.service';
 import { Column } from 'devextreme/ui/data_grid';
+import { environment } from 'src/environments/environment';
+
 
 if (!/localhost/.test(document.location.host)) {
   enableProdMode();
 }
-let baseURL='http://backendapi:7172/v1/vspt-flagman/sprDislokaciaFiltr?userId='
+let baseURL=environment.api+':5050/v1/vspt-flagman/sprDislokaciaFiltr?userId='
 
 @Component({
   selector: 'app-dislokacia',
