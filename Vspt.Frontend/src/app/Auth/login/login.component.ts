@@ -2,7 +2,7 @@
 import { MatDialog } from '@angular/material/dialog';
 import { Component, OnInit } from '@angular/core';
 import{FormBuilder,FormControl,FormGroup, Validators } from '@angular/forms';
-import { Router,ActivatedRoute,Data } from '@angular/router';
+import { Router,ActivatedRoute } from '@angular/router';
 
 import ValidateForm from 'src/app/helpers/validateform';
 import { AuthService } from 'src/app/services/auth.service';

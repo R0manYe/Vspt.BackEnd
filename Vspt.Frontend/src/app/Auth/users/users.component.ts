@@ -3,10 +3,9 @@ import {HttpClient} from '@angular/common/http';
 import CustomStore from 'devextreme/data/custom_store';
 import { SharedApiService } from 'src/app/services/shared-api.service';
 import * as AspNetData from 'devextreme-aspnet-data-nojquery';
+import { environment } from 'src/environments/environment';
 
-let baseURL='http://backendapi:7172/api/'
-let sURL='User/'
-const URL = baseURL+sURL;
+const URL = environment.api+':5050/api/User/';
 
 @Component({
   selector: 'app-users',
@@ -33,7 +32,7 @@ export class UsersComponent {
     
     this.lookupUserSource = AspNetData.createStore({
       key: 'id', loadMode:'raw',
-      loadUrl: `${'http://localhost:7201/api/Flagman/vspt_subject_persone_id_name'}`,
+      loadUrl: `${environment.api+':5051/api/Flagman/vspt_subject_persone_id_name'}`,
       onBeforeSend(method, ajaxOptions) {
         ajaxOptions.xhrFields = { withCredentials: true };
       },

@@ -6,14 +6,12 @@ import CustomStore from 'devextreme/data/custom_store';
 import { SharedApiService } from 'src/app/services/shared-api.service';
 import {  DxDataGridComponent} from 'devextreme-angular';
 import { ClaimApiModel,ClaimModel } from 'src/app/models/claim-api.models';
+import { environment } from 'src/environments/environment';
 
-if (!/backendapi/.test(document.location.host)) {
+if (!/localhost/.test(document.location.host)) {
   enableProdMode();
 }
-let baseURL='http://backendapi:7172/api/'
-let sURL='Claims/'
-const URL = baseURL+sURL;
-const bURL='http://backendapi:7172/api/Claims/readClaimType';
+const URL =environment.api+':5050/api/Claims/';
 @Component({
   selector: 'claim',
   templateUrl: './claim.component.html',
@@ -47,7 +45,7 @@ export class ClaimComponent {
   
   this.lookupUserSource = AspNetData.createStore({
       key: 'id', loadMode:'raw',
-      loadUrl: `${'https://backendapi:7201/api/Flagman/vspt_subject_persone_id_name'}`,
+      loadUrl: `${environment.api+':5051/api/Flagman/vspt_subject_persone_id_name'}`,
       onBeforeSend(method, ajaxOptions) {
         ajaxOptions.xhrFields = { withCredentials: true };
       },
@@ -55,14 +53,14 @@ export class ClaimComponent {
 
     this.lookupClaimType = AspNetData.createStore({
       key: 'id', loadMode:'raw',
-      loadUrl: `${'http://backendapi:7172/api/Claims/readClaimType'}`,
+      loadUrl: `${environment.api+':5050/api/Claims/readClaimType'}`,
       onBeforeSend(method, ajaxOptions) {
         ajaxOptions.xhrFields = { withCredentials: true };
       },
     })
     this.lookupSprSvod = AspNetData.createStore({
       key: 'id', loadMode:'raw',
-      loadUrl: `${'http://backendapi:7172/api/Source/readSprSvod'}`,
+      loadUrl: `${environment.api+':5050/api/Source/readSprSvod'}`,
       onBeforeSend(method, ajaxOptions) {
         ajaxOptions.xhrFields = { withCredentials: true };
       },

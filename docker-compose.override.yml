@@ -1,32 +1,41 @@
 version: '3.7'
 
 services:
-  backendapi: 
-    container_name: backendapi   
+  backendapi:  
+    container_name: backendapi
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:80:5050
     ports:
-      - "7172:7172"     
+      - "5050:5050"
+    networks:
+    - mynet
     volumes:
       - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
       - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
   
   flagmanapi:
+    container_name: backendflagmanapi
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
-      - ASPNETCORE_URLS=http://+:80:7201
+      - ASPNETCORE_URLS=http://+:80:5051
     ports:
-      - "7201:7201"
-   
+      - "5051:5051"   
     
     volumes:
       - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
       - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
 
-  frontend:   
+  frontend: 
+    container_name: frontend
     ports:
-      - "4200:80"   
-    
+      - "4200:80"  
+    networks:
+    - mynet
     volumes:
       - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
       - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
-    
+networks:
+    mynet:
+      driver: bridge
 

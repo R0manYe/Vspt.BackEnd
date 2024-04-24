@@ -3,6 +3,8 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from"@angular/common/http";
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { TokenApiModel } from '../models/token-api.model';
+import { environment } from 'src/environments/environment';
+
 
 
 @Injectable({
@@ -10,7 +12,7 @@ import { TokenApiModel } from '../models/token-api.model';
 })
 export class AuthService {
   
-  private baseUrl:string="http://backendapi:7172/api/User/";
+  private baseUrl:string=environment.api+":5050/api/User/";
   private userPlayload : any;
   constructor(private http : HttpClient,private router: Router) {
     this.userPlayload=this.decodeToken();

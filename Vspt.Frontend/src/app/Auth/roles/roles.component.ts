@@ -1,17 +1,15 @@
-import { DataSource } from '@angular/cdk/collections';
 import { __values } from 'tslib';
 import {Component, ViewChild, enableProdMode} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import CustomStore from 'devextreme/data/custom_store';
 import { SharedApiService } from 'src/app/services/shared-api.service';
-import { RoleModel } from 'src/app/models/role.models';
-import { DxDataGridComponent } from 'devextreme-angular';
-import * as AspNetData from 'devextreme-aspnet-data-nojquery';
+import { environment } from 'src/environments/environment';
+
 
 if (!/localhost/.test(document.location.host)) {
   enableProdMode();
 }
-let baseURL='http://backendapi:7172/api/'
+let baseURL=environment.api+':5050/api/'
 let sURL='Roles/'
 const URL = baseURL+sURL;
 
