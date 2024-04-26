@@ -1,4 +1,4 @@
 export const environment = {
     production: false,
-    api: 'http://localhost'
+    api: 'http://app.vspt.org'
   };
