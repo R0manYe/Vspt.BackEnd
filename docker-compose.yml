@@ -4,7 +4,6 @@ services:
   backendapi:
     image: ${DOCKER_REGISTRY-}vsptbackendapi
     build:
-
       context: .
       dockerfile: Vspt.BackEnd.Api/Dockerfile
       

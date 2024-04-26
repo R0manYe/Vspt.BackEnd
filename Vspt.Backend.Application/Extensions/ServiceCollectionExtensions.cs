@@ -36,9 +36,9 @@ public static class ServiceCollectionExtensions
         services.AddScoped<IDailyReportingPlansRepository, DailyReportingPlanRepository>();
 
 #if DEBUG
-        string apiUrl = "http://app.vspt.org";
-#else
         string apiUrl = "http://localhost";
+#else
+        string apiUrl = "http://app.vspt.org";
         #endif
 
         services.AddRefitClient<IFlagmanApiClient>().ConfigureHttpClient(c=>c.BaseAddress=new Uri($"{apiUrl}:5051"));
